@@ -1,0 +1,264 @@
+Unity Editor version:    2021.3.27f1 (ca3ffb99bcc6)
+Branch:                  2021.3/release
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 13.0.1 (Build 22A400)
+Darwin version:          22.1.0
+Architecture:            x86_64
+Running under Rosetta:   NO
+Available memory:        8192 MB
+Using pre-set license
+Pro License: YES
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/2021.3.27f1/Unity.app/Contents/MacOS/Unity
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+/Users/jiseong/Documents/GitHub/Ditto/Ditto
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+49367
+Successfully changed project path to: /Users/jiseong/Documents/GitHub/Ditto/Ditto
+/Users/jiseong/Documents/GitHub/Ditto/Ditto
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [140704578405568] Host "[IP] 172.18.153.191 [Port] 0 [Flags] 2 [Guid] 1199144541 [EditorId] 1199144541 [Version] 1048832 [Id] OSXEditor(0,MetaHandongui-iMac.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [140704578405568] Host "[IP] 172.18.153.191 [Port] 0 [Flags] 2 [Guid] 1199144541 [EditorId] 1199144541 [Version] 1048832 [Id] OSXEditor(0,MetaHandongui-iMac.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+Refreshing native plugins compatible for Editor in 108.78 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.27f1 (ca3ffb99bcc6)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/2021.3.27f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/jiseong/Documents/GitHub/Ditto/Ditto/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+iMac preferred device: AMD Radeon Pro 570 (high power)
+Metal devices available: 1
+0: AMD Radeon Pro 570 (high power)
+Using device AMD Radeon Pro 570 (high power)
+Initializing Metal device caps: AMD Radeon Pro 570
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/2021.3.27f1/Unity.app/Contents/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/2021.3.27f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/2021.3.27f1/Unity.app/Contents/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56662
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: /Applications/Unity/Hub/Editor/2021.3.27f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/2021.3.27f1/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Registered in 0.005127 seconds.
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 132 ms
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 88.66 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.165 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1165ms)
+		BeginReloadAssembly (243ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (803ms)
+			LoadAssemblies (259ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (158ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (39ms)
+			SetupLoadedEditorAssemblies (527ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (274ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (89ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (104ms)
+				ProcessInitializeOnLoadMethodAttributes (58ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.047800 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image /Users/jiseong/Documents/GitHub/Ditto/Ditto/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image /Users/jiseong/Documents/GitHub/Ditto/Ditto/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Core/Dependencies/DotNetZip/Unity.VisualScripting.IonicZip.dll
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 0.61 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.725 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1725ms)
+		BeginReloadAssembly (275ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (8ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (36ms)
+		EndReloadAssembly (1261ms)
+			LoadAssemblies (491ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (375ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (69ms)
+			SetupLoadedEditorAssemblies (398ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (25ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (88ms)
+				ProcessInitializeOnLoadAttributes (257ms)
+				ProcessInitializeOnLoadMethodAttributes (24ms)
+				AfterProcessingInitializeOnLoad (2ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launching external process: /Applications/Unity/Hub/Editor/2021.3.27f1/Unity.app/Contents/Tools/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.09 seconds
+Refreshing native plugins compatible for Editor in 0.61 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3524 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 27 unused Assets / (158.2 KB). Loaded Objects now: 3989.
+Memory consumption went from 128.1 MB to 128.0 MB.
+Total: 6.172622 ms (FindLiveObjects: 0.775350 ms CreateObjectMapping: 0.426813 ms MarkObjects: 4.637317 ms  DeleteObjects: 0.328102 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:framework-osx-AVFoundation: e770b220cccbd017edd2c1fefb359320 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 363743.197963 seconds.
+  path: Assets/MaterialsUsed/New Material.mat
+  artifactKey: Guid(2ca1ed0c3b7864595919ba37a6090bb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MaterialsUsed/New Material.mat using Guid(2ca1ed0c3b7864595919ba37a6090bb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b4718ec70f0bf1f2a186d32bc7443cc9') in 0.851972 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 77.520391 seconds.
+  path: Assets/ProBuilder Data/Default Material Palette.asset
+  artifactKey: Guid(22b8350c473ff429ebe6ddf868b157da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ProBuilder Data/Default Material Palette.asset using Guid(22b8350c473ff429ebe6ddf868b157da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2218d4420cabf6288a9a9575df17ebc') in 0.131119 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.569379 seconds.
+  path: Assets/NextGen Furniture Pack/Materials
+  artifactKey: Guid(c54a3ca15b8354a86827b1e9098f4c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials using Guid(c54a3ca15b8354a86827b1e9098f4c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c04074e6f3711c36cc0b680bfa885361') in 0.001034 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.124860 seconds.
+  path: Assets/NextGen Furniture Pack/Materials/chair_1.mat
+  artifactKey: Guid(97933af72b7eba344be487a50766fe95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials/chair_1.mat using Guid(97933af72b7eba344be487a50766fe95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b6f5583eca1543e04faefe35de755a19') in 0.278398 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000133 seconds.
+  path: Assets/NextGen Furniture Pack/Materials/chair_4.mat
+  artifactKey: Guid(e941b3577588fcf4387a6a9a1e028e4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials/chair_4.mat using Guid(e941b3577588fcf4387a6a9a1e028e4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cccd22fd5803a624a056d33be313fff2') in 0.131495 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000069 seconds.
+  path: Assets/NextGen Furniture Pack/Materials/sofa_1.mat
+  artifactKey: Guid(2ebd8de1f5e036842b827e438cd9405d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials/sofa_1.mat using Guid(2ebd8de1f5e036842b827e438cd9405d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '53d3ff3fe0d17852db7f4089fc5465a2') in 0.118571 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000179 seconds.
+  path: Assets/NextGen Furniture Pack/Materials/chair_5.mat
+  artifactKey: Guid(1baa373d26915b94d97dea63cd9681cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials/chair_5.mat using Guid(1baa373d26915b94d97dea63cd9681cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae6d73bfbd897064568e630f759b2c13') in 0.114256 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000170 seconds.
+  path: Assets/NextGen Furniture Pack/Materials/table_4.mat
+  artifactKey: Guid(e78a8f0f9123cbc4ab8d8a1c49c32dce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials/table_4.mat using Guid(e78a8f0f9123cbc4ab8d8a1c49c32dce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '294eca2e6f6a0ba61096b9d22f168abb') in 0.138394 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000066 seconds.
+  path: Assets/NextGen Furniture Pack/Materials/chair_3.mat
+  artifactKey: Guid(078299efa295cf847ae6cc56c98b4836) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials/chair_3.mat using Guid(078299efa295cf847ae6cc56c98b4836) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e926633e0de62647e1228819aa3c802') in 0.176608 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000132 seconds.
+  path: Assets/NextGen Furniture Pack/Materials/chair_2.mat
+  artifactKey: Guid(7783e66ae44e4d44288384e06349733a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials/chair_2.mat using Guid(7783e66ae44e4d44288384e06349733a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c53fe53828bad5c4a26a88cbe8042df') in 0.118625 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000145 seconds.
+  path: Assets/NextGen Furniture Pack/Materials/chair_6.mat
+  artifactKey: Guid(b725436e57528fd4d93122fb0738b708) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials/chair_6.mat using Guid(b725436e57528fd4d93122fb0738b708) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '34bfa6b90acbed44503f5661ee95c9f5') in 0.113664 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000069 seconds.
+  path: Assets/NextGen Furniture Pack/Materials/sofa_2.mat
+  artifactKey: Guid(5ee8ba9de374e974e933b3510cad26c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials/sofa_2.mat using Guid(5ee8ba9de374e974e933b3510cad26c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd231051138341eb2b0a22a9d0fc52ce2') in 0.119039 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000144 seconds.
+  path: Assets/NextGen Furniture Pack/Materials/commode_2.mat
+  artifactKey: Guid(2c1e9c1109a730a47ac6cf2f2f07fd21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials/commode_2.mat using Guid(2c1e9c1109a730a47ac6cf2f2f07fd21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '548222ae0484328b66845c008a9d6a8e') in 0.141392 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000127 seconds.
+  path: Assets/NextGen Furniture Pack/Materials/commode_1.mat
+  artifactKey: Guid(26e3d1035f269c44ca50c14d06f1d377) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials/commode_1.mat using Guid(26e3d1035f269c44ca50c14d06f1d377) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6221d5f76ba681f76d0dc01c0b9472cb') in 0.125655 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000156 seconds.
+  path: Assets/NextGen Furniture Pack/Materials/chair_7.mat
+  artifactKey: Guid(02e4f76ac4423c34ba9c36033aae764b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NextGen Furniture Pack/Materials/chair_7.mat using Guid(02e4f76ac4423c34ba9c36033aae764b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '88d533357d691bd1f205d233a4955915') in 0.121756 seconds 
