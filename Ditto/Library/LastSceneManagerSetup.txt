@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/XR_Studio/XR_Studio.unity
+- path: Assets/Scenes/XR_Studio.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
