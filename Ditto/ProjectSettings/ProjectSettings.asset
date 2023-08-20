@@ -707,7 +707,12 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: GLTFAST;READY_PLAYER_ME
+    Standalone: GLTFAST;READY_PLAYER_ME
+    WebGL: GLTFAST;READY_PLAYER_ME
+    Windows Store Apps: GLTFAST;READY_PLAYER_ME
+    iPhone: GLTFAST;READY_PLAYER_ME
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
