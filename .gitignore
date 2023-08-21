@@ -74,4 +74,12 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+ArtifactDB
+
+libburst-llvm-10.dylib
+libburst-llvm-11.dylib
+libburst-llvm-11.so
+lld
+dsymutil
+
 # End of https://www.toptal.com/developers/gitignore/api/unity
