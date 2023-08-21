@@ -5,6 +5,7 @@ using UnityEngine;
 public class IKManager : MonoBehaviour
 {
     public IKTargetFollowVRRig[] ikScripts; // Assign the IKTargetFollowVRRig scripts from GameObjects here
+    
     private int currentActiveIndex = 0;
 
     private void Start()
@@ -32,6 +33,7 @@ public class IKManager : MonoBehaviour
     private void DisableScript(int index)
     {
         ikScripts[index].enabled = false;
+        //이전 캐릭터 돌아갈 위치 설정
     }
 
     private void DisableAllScripts()
