@@ -565,7 +565,7 @@ SkinnedMeshRenderer:
   m_AABB:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+  m_DirtyAABB: 0
 --- !u!1 &699586085218940948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,7 +1003,7 @@ SkinnedMeshRenderer:
   m_AABB:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+  m_DirtyAABB: 0
 --- !u!1 &1980320831227734300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,7 +1251,7 @@ SkinnedMeshRenderer:
   m_AABB:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+  m_DirtyAABB: 0
 --- !u!1 &2740998520347228577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,7 +1723,7 @@ SkinnedMeshRenderer:
   m_AABB:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+  m_DirtyAABB: 0
 --- !u!1 &3848780061592888246
 GameObject:
   m_ObjectHideFlags: 0
@@ -3127,7 +3127,7 @@ SkinnedMeshRenderer:
   m_AABB:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+  m_DirtyAABB: 0
 --- !u!1 &6230347845235178542
 GameObject:
   m_ObjectHideFlags: 0
@@ -3535,7 +3535,7 @@ SkinnedMeshRenderer:
   m_AABB:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+  m_DirtyAABB: 0
 --- !u!1 &6804083889357374776
 GameObject:
   m_ObjectHideFlags: 0
@@ -3974,7 +3974,7 @@ SkinnedMeshRenderer:
   m_AABB:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+  m_DirtyAABB: 0
 --- !u!1 &8086947812216039270
 GameObject:
   m_ObjectHideFlags: 0
@@ -4188,7 +4188,7 @@ SkinnedMeshRenderer:
   m_AABB:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+  m_DirtyAABB: 0
 --- !u!1 &8604670357951163061
 GameObject:
   m_ObjectHideFlags: 0
@@ -4408,7 +4408,7 @@ SkinnedMeshRenderer:
   m_AABB:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+  m_DirtyAABB: 0
 --- !u!1 &8986431962950999360
 GameObject:
   m_ObjectHideFlags: 0
