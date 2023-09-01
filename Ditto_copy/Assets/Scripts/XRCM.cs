@@ -9,6 +9,9 @@ public class XRCM : MonoBehaviour
     private Vector3 FirstPosition; // 이전 프레임의 위치
     private Quaternion FirstRotation; // 이전 프레임의 회전
 
+     public Camera firstPersonCamera;
+    public Camera XRCamera;
+
 
     private void Start()
     {
@@ -27,6 +30,33 @@ public class XRCM : MonoBehaviour
         LockRotation();
     }
 
+    void OnCollisionStay(Collision other)
+    {
+        if(other.gameObject.CompareTag("PlayerHand"))
+        {
+            ChangeViewToXRCM();
+        }
+    }
+
+    void OnCollisionExit(Collision other)
+    {
+        if(other.gameObject.CompareTag("PlayerHand"))
+        {
+            ChangeViewToFirstPersonCM();
+        }
+    }
+
+    public void ChangeViewToXRCM()
+    {
+        firstPersonCamera.enabled = false;
+        XRCamera.enabled = true;
+    }
+
+    public void ChangeViewToFirstPersonCM()
+    {
+        firstPersonCamera.enabled = true;
+        XRCamera.enabled = false;
+    }
 
     private void MovingInSceneCM()
     {
