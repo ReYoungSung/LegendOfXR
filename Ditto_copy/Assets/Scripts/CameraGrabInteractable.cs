@@ -19,6 +19,8 @@ public class CameraGrabInteractable : XRGrabInteractable
 
     protected override void OnSelectEntered(XRBaseInteractor interactor)
     {
+        Debug.Log("잡았다!!");
+
         if(interactor.CompareTag("RightHand"))
         {
             this.attachTransform = right_grab_transform;
@@ -46,6 +48,7 @@ public class CameraGrabInteractable : XRGrabInteractable
 
     public void ChangeViewToXRCM()
     {
+        Debug.Log("바꿨다!!");
         firstPersonCamera.enabled = false;
         XRCamera.enabled = true;
     }

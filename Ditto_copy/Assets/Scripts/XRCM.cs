@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class XRCM : MonoBehaviour
 {
-    public Transform target; // ´Ù¸¥ GameObjectÀÇ TransformÀ» ÂüÁ¶ÇÏ±â À§ÇÑ º¯¼ö
-    private Vector3 lastPosition; // ÀÌÀü ÇÁ·¹ÀÓÀÇ À§Ä¡
-    private Quaternion lastRotation; // ÀÌÀü ÇÁ·¹ÀÓÀÇ È¸Àü
+    public Transform target; // ï¿½Ù¸ï¿½ GameObjectï¿½ï¿½ Transformï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private Vector3 lastPosition; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
+    private Quaternion lastRotation; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½
 
-    private Vector3 FirstPosition; // ÀÌÀü ÇÁ·¹ÀÓÀÇ À§Ä¡
-    private Quaternion FirstRotation; // ÀÌÀü ÇÁ·¹ÀÓÀÇ È¸Àü
+    private Vector3 FirstPosition; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
+    private Quaternion FirstRotation; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½
 
 
     private void Start()
@@ -29,19 +29,19 @@ public class XRCM : MonoBehaviour
 
     private void MovingInSceneCM()
     {
-        // ÇöÀç ÇÁ·¹ÀÓÀÇ À§Ä¡¿Í È¸Àü °ªÀ» ÀúÀå
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Vector3 currentPosition = transform.position; 
         Quaternion currentRotation = transform.localRotation; 
 
-        // º¯È­°ª °è»ê
+        // ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½
         Vector3 positionDelta = currentPosition - lastPosition; 
         Quaternion rotationDelta = currentRotation * Quaternion.Inverse(lastRotation); 
 
-        // ´Ù¸¥ GameObject¿¡ º¯È­°ª Àû¿ë
+        // ï¿½Ù¸ï¿½ GameObjectï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         target.position += positionDelta; 
         target.rotation *= rotationDelta; 
 
-        // ÀÌÀü ÇÁ·¹ÀÓÀÇ À§Ä¡¿Í È¸Àü °ªÀ» ¾÷µ¥ÀÌÆ®
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         lastPosition = currentPosition; 
         lastRotation = currentRotation; 
     } 
