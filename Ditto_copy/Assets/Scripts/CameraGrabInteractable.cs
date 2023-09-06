@@ -14,13 +14,12 @@ public class CameraGrabInteractable : XRGrabInteractable
     // Start is called before the first frame update
     void Start()
     {
-        
+        firstPersonCamera.enabled = true;
+        XRCamera.enabled = false;
     }
 
     protected override void OnSelectEntered(XRBaseInteractor interactor)
     {
-        Debug.Log("잡았다!!");
-
         if(interactor.CompareTag("RightHand"))
         {
             this.attachTransform = right_grab_transform;
