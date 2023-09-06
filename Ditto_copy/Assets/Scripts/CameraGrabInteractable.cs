@@ -20,14 +20,7 @@ public class CameraGrabInteractable : XRGrabInteractable
 
     protected override void OnSelectEntered(XRBaseInteractor interactor)
     {
-        if(interactor.CompareTag("RightHand"))
-        {
-            this.attachTransform = right_grab_transform;
-        }
-        else if(interactor.CompareTag("LeftHand"))
-        {
-            this.attachTransform = left_grab_transform;
-        }
+
     }
 
     protected override void OnSelectExited(XRBaseInteractor interactor)
