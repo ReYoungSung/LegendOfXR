@@ -44,7 +44,7 @@ public class BlinkOn : MonoBehaviour
 	public void blinkActiveTrue()
 	{
 		imageToToggle.SetActive(true);
-		
+
 	}
 
 }
