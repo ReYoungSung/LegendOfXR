@@ -9,41 +9,42 @@ public class BlinkOn : MonoBehaviour
 {
     // Start is called before the first frame update
  
-        public MaskableGraphic imageToToggle;
-        public float interval = 1f;
-        public float startDelay = 0.5f;
-        public bool currentState = true;
-        public bool defaultState = true;
-        bool isBlinking = false;
+        public GameObject imageToToggle;
+        private float interval = 2f;
+        private float startDelay = 0f;
         
-        public AudioClip clip;
-
-        void Start()
+        // public AudioClip clip;
+		
+    void Start()
 	{
-		imageToToggle.enabled = defaultState;
+		imageToToggle.SetActive(true);								
 		StartBlink();
 	}
 
-        public void StartBlink()
+    public void StartBlink()
 	{
-		// do not invoke the blink twice - needed if you need to start the blink from an external object
-		if (isBlinking)
-			return;
-
-		if (imageToToggle !=null)
-		{
-			isBlinking = true;
-			InvokeRepeating("ToggleState", startDelay, interval);
-		}
+		InvokeRepeating("ToggleState", startDelay, interval);		
 	}
 
 	public void ToggleState()
 	{
-		imageToToggle.enabled = !imageToToggle.enabled;
-
+		Invoke("blinkActiveFalse", 1f); 
 		// plays the clip at (0,0,0)
-		if (clip)
-			AudioSource.PlayClipAtPoint(clip,Vector3.zero);
+		// if (clip)
+		// 	AudioSource.PlayClipAtPoint(clip,Vector3.zero); 
 	}
 	
+	public void blinkActiveFalse()
+	{
+		imageToToggle.SetActive(false);
+
+		Invoke("blinkActiveTrue", 1f); 
+	}
+
+	public void blinkActiveTrue()
+	{
+		imageToToggle.SetActive(true);
+		
+	}
+
 }
