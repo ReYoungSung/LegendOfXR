@@ -8,9 +8,6 @@ public class CameraGrabInteractable : XRGrabInteractable
     public Camera firstPersonCamera;
     public Camera XRCamera;
 
-    public Transform left_grab_transform;
-    public Transform right_grab_transform;
-
     public AudioClip clip;
     public GameObject XRCameraUI;
 
