@@ -21,16 +21,6 @@ public class CameraGrabInteractable : XRGrabInteractable
         
     }
 
-    protected override void OnSelectEntered(XRBaseInteractor interactor)
-    {
-
-    }
-
-    protected override void OnSelectExited(XRBaseInteractor interactor)
-    {
-        
-    }
-
     protected override void OnActivate(XRBaseInteractor interactor)
     {
         ChangeViewToXRCM();
