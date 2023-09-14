@@ -8,7 +8,7 @@ public class XRCMPostionController : XRGrabInteractable
     public GameObject XRCM;
     private Rigidbody XRCMRigidbody;
 
-    public float moveSpeed = 20.0f; // ÀÌµ¿ ¼Óµµ Á¶Àý¿ë º¯¼ö
+    public float moveSpeed = 20.0f; // ï¿½Ìµï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private Quaternion originRotation;
 
@@ -20,23 +20,24 @@ public class XRCMPostionController : XRGrabInteractable
 
     private void Update()
     {
-        // °¡»ó Á¶ÀÌ½ºÆ½ÀÇ ·ÎÄÃ Z È¸Àü °ªÀ» °¡Á®¿É´Ï´Ù.
+        // ï¿½ï¿½ï¿½â¿¡ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½. 
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½Æ½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Z È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É´Ï´ï¿½.
         float rotationInput = originRotation.z - this.transform.localRotation.z;
 
-        Vector3 moveDirection = new Vector3(0, 0, 0);
+            Vector3 moveDirection = new Vector3(0, 0, 0);
 
-        if (rotationInput > 5)
-            moveDirection = new Vector3(1, 0, 0);
-        else if(rotationInput < -5)
-            moveDirection = new Vector3(-1, 0, 0);
-
-        // transform.positionÀ» »ç¿ëÇÏ¿© À§Ä¡¸¦ º¯°æÇÕ´Ï´Ù.
-        XRCMRigidbody.MovePosition(XRCMRigidbody.position + moveDirection * moveSpeed * Time.deltaTime);
+            if (rotationInput > 5)
+                moveDirection = new Vector3(1, 0, 0);
+            else if(rotationInput < -5)
+                moveDirection = new Vector3(-1, 0, 0);
+            
+            // transform.positionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+            XRCMRigidbody.MovePosition(XRCMRigidbody.position + moveDirection * moveSpeed * Time.deltaTime);
 
         // Check if the object is currently grabbed
         if (isSelected) 
         {
-            // ¿©±â¿¡¼­ Ãß°¡ µ¿ÀÛÀ» ¼öÇàÇÒ ¼ö ÀÖ½À´Ï´Ù. 
+            
         }
     }
 

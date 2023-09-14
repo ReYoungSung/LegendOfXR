@@ -13,12 +13,12 @@ public class XRCMRotationController : MonoBehaviour
         Right
     }
 
-    public ButtonType buttonType = ButtonType.Left; // ¿ÞÂÊ ¹öÆ°À» ³ªÅ¸³»´Â Enum º¯¼ö
+    public ButtonType buttonType = ButtonType.Left; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ Enum ï¿½ï¿½ï¿½ï¿½
     
-    public float rotationSpeed = 30.0f; // È¸Àü ¼Óµµ
+    public float rotationSpeed = 30.0f; // È¸ï¿½ï¿½ ï¿½Óµï¿½
 
-    private bool isLeftButtonPressed = false; // ¿ÞÂÊ ¹öÆ°ÀÌ ´­·È´ÂÁö ¿©ºÎ
-    private bool isRightButtonPressed = false; // ¿À¸¥ÂÊ ¹öÆ°ÀÌ ´­·È´ÂÁö ¿©ºÎ
+    private bool isLeftButtonPressed = false; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private bool isRightButtonPressed = false; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private void Start()
     {
@@ -27,30 +27,32 @@ public class XRCMRotationController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        SetButtonState(true);
+        if(other.CompareTag("PlayerHand"))
+            SetButtonState(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        SetButtonState(false);
+        if(other.CompareTag("PlayerHand"))
+            SetButtonState(false);
     }
 
     private void Update()
     {
-        // ¿ÞÂÊ ¹öÆ°°ú ¿À¸¥ÂÊ ¹öÆ°ÀÌ ´­·ÈÀ» ¶§ÀÇ µ¿ÀÛÀ» ¼öÇàÇÕ´Ï´Ù.
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         if (isLeftButtonPressed)
         {
-            // ¿ÞÂÊ ¹öÆ° µ¿ÀÛ ¼öÇà
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             RotateLeft();
         }
         else if (isRightButtonPressed)
         {
-            // ¿À¸¥ÂÊ ¹öÆ° µ¿ÀÛ ¼öÇà
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             RotateRight();
         }
     }
 
-    // ¿ÞÂÊ ¹öÆ°°ú ¿À¸¥ÂÊ ¹öÆ°ÀÌ ¼Õ°ú Á¢ÃËÇßÀ» ¶§ È£ÃâÇÒ ¸Þ¼­µå
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½Õ°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void SetButtonState(bool isPressed)
     {
         if (buttonType == ButtonType.Left)
@@ -63,17 +65,17 @@ public class XRCMRotationController : MonoBehaviour
         }
     }
 
-    // ¿ÞÂÊ ¹öÆ°À» ´­·¶À» ¶§ È£ÃâÇÒ ¸Þ¼­µå
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     void RotateLeft()
     {
-        // ¿ÞÂÊÀ¸·Î È¸ÀüÇÏ´Â ÄÚµå¸¦ ¿©±â¿¡ ÀÛ¼º
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Úµå¸¦ ï¿½ï¿½ï¿½â¿¡ ï¿½Û¼ï¿½
         XRCM.transform.Rotate(Vector3.up * Time.deltaTime * -rotationSpeed);
     }
 
-    // ¿À¸¥ÂÊ ¹öÆ°À» ´­·¶À» ¶§ È£ÃâÇÒ ¸Þ¼­µå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     void RotateRight()
     {
-        // ¿À¸¥ÂÊÀ¸·Î È¸ÀüÇÏ´Â ÄÚµå¸¦ ¿©±â¿¡ ÀÛ¼º
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Úµå¸¦ ï¿½ï¿½ï¿½â¿¡ ï¿½Û¼ï¿½
         XRCM.transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
     }
 }
