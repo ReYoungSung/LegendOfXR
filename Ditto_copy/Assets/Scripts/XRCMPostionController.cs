@@ -8,41 +8,38 @@ public class XRCMPostionController : XRGrabInteractable
     public GameObject XRCM;
     private Rigidbody XRCMRigidbody;
 
-    public float moveSpeed = 20.0f; // �̵� �ӵ� ������ ����
+    public float moveSpeed = 20.0f;
 
-    private Quaternion originRotation;
+    private float initialZRotation;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         XRCMRigidbody = XRCM.GetComponent<Rigidbody>();
-        originRotation = XRCM.transform.localRotation;
+        initialZRotation = transform.localEulerAngles.z;
     }
 
     private void Update()
     {
-        // ���⿡�� �߰� ������ ������ �� �ֽ��ϴ�. 
-        // ���� ���̽�ƽ�� ���� Z ȸ�� ���� �����ɴϴ�.
-        float rotationInput = originRotation.z - this.transform.localRotation.z;
+        if (isSelected)
+        {
+            float currentZRotation = transform.localEulerAngles.z;
+            float rotationDifference = Mathf.DeltaAngle(initialZRotation, currentZRotation);
 
             Vector3 moveDirection = new Vector3(0, 0, 0);
 
-            if (rotationInput > 5)
+            if (rotationDifference > 5)
                 moveDirection = new Vector3(1, 0, 0);
-            else if(rotationInput < -5)
+            else if (rotationDifference < -5)
                 moveDirection = new Vector3(-1, 0, 0);
-            
-            // transform.position�� ����Ͽ� ��ġ�� �����մϴ�.
-            XRCMRigidbody.MovePosition(XRCMRigidbody.position + moveDirection * moveSpeed * Time.deltaTime);
 
-        // Check if the object is currently grabbed
-        if (isSelected) 
-        {
-            
+            XRCM.transform.position += moveDirection * moveSpeed * Time.deltaTime;
         }
     }
 
     protected override void OnSelectExited(XRBaseInteractor interactor)
     {
-        this.transform.localRotation = originRotation;
+        base.OnSelectExited(interactor);
+        transform.localRotation = Quaternion.Euler(0, 0, initialZRotation);
     }
 }
