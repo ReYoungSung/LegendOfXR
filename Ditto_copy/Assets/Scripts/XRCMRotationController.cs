@@ -13,12 +13,15 @@ public class XRCMRotationController : MonoBehaviour
         Right
     }
 
-    public ButtonType buttonType = ButtonType.Left; // ���� ��ư�� ��Ÿ���� Enum ����
+    public ButtonType buttonType = ButtonType.Left;
     
-    public float rotationSpeed = 30.0f; // ȸ�� �ӵ�
+    public float rotationSpeed = 30.0f;
 
-    private bool isLeftButtonPressed = false; // ���� ��ư�� ���ȴ��� ����
-    private bool isRightButtonPressed = false; // ������ ��ư�� ���ȴ��� ����
+    private bool isLeftButtonPressed = false;
+    private bool isRightButtonPressed = false;
+
+    public Transform button;
+    public float pressDepth = 0.01f;
 
     private void Start()
     {
@@ -27,32 +30,34 @@ public class XRCMRotationController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("PlayerHand"))
+        if (other.CompareTag("PlayerHand"))
+        {
             SetButtonState(true);
+            AnimateButtonPress();
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("PlayerHand"))
+        if (other.CompareTag("PlayerHand"))
+        {
             SetButtonState(false);
+            AnimateButtonRelease();
+        }
     }
 
     private void Update()
     {
-        // ���� ��ư�� ������ ��ư�� ������ ���� ������ �����մϴ�.
         if (isLeftButtonPressed)
         {
-            // ���� ��ư ���� ����
             RotateLeft();
         }
         else if (isRightButtonPressed)
         {
-            // ������ ��ư ���� ����
             RotateRight();
         }
     }
 
-    // ���� ��ư�� ������ ��ư�� �հ� �������� �� ȣ���� �޼���
     public void SetButtonState(bool isPressed)
     {
         if (buttonType == ButtonType.Left)
@@ -65,17 +70,27 @@ public class XRCMRotationController : MonoBehaviour
         }
     }
 
-    // ���� ��ư�� ������ �� ȣ���� �޼���
     void RotateLeft()
     {
-        // �������� ȸ���ϴ� �ڵ带 ���⿡ �ۼ�
         XRCM.transform.Rotate(Vector3.up * Time.deltaTime * -rotationSpeed);
     }
 
-    // ������ ��ư�� ������ �� ȣ���� �޼���
     void RotateRight()
     {
-        // ���������� ȸ���ϴ� �ڵ带 ���⿡ �ۼ�
         XRCM.transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
+    }
+
+    void AnimateButtonPress()
+    {
+        Vector3 newPosition = button.localPosition;
+        newPosition.y -= pressDepth;
+        button.localPosition = newPosition;
+    }
+
+    void AnimateButtonRelease()
+    {
+        Vector3 newPosition = button.localPosition;
+        newPosition.y += pressDepth;
+        button.localPosition = newPosition;
     }
 }
