@@ -16,22 +16,22 @@ public class XRCMPostionController : XRGrabInteractable
     {
         base.Awake();
         XRCMRigidbody = XRCM.GetComponent<Rigidbody>();
-        initialZRotation = transform.localEulerAngles.z;
+        initialZRotation = transform.localEulerAngles.x;
     }
 
     private void Update()
     {
         if (isSelected)
         {
-            float currentZRotation = transform.localEulerAngles.z;
+            float currentZRotation = transform.localEulerAngles.x;
             float rotationDifference = Mathf.DeltaAngle(initialZRotation, currentZRotation);
 
             Vector3 moveDirection = new Vector3(0, 0, 0);
 
             if (rotationDifference > 5)
-                moveDirection = new Vector3(1, 0, 0);
+            moveDirection = new Vector3(1, 0, 0);
             else if (rotationDifference < -5)
-                moveDirection = new Vector3(-1, 0, 0);
+            moveDirection = new Vector3(-1, 0, 0);
 
             XRCM.transform.position += moveDirection * moveSpeed * Time.deltaTime;
         }
