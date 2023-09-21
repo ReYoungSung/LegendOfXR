@@ -72,12 +72,24 @@ public class XRCMRotationController : MonoBehaviour
 
     void RotateLeft()
     {
-        XRCM.transform.Rotate(Vector3.up * Time.deltaTime * -rotationSpeed);
+        float rotationAmount = -rotationSpeed * Time.deltaTime;
+        float targetRotation = XRCM.transform.eulerAngles.y + rotationAmount;
+
+        if (targetRotation >= 300.0f || targetRotation <= 60.0f)
+        {
+            XRCM.transform.Rotate(Vector3.up * rotationAmount);
+        }
     }
 
     void RotateRight()
     {
-        XRCM.transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
+        float rotationAmount = rotationSpeed * Time.deltaTime;
+        float targetRotation = XRCM.transform.eulerAngles.y + rotationAmount;
+
+        if (targetRotation <= 60.0f || targetRotation >= 300.0f)
+        {
+            XRCM.transform.Rotate(Vector3.up * rotationAmount);
+        }
     }
 
     void AnimateButtonPress()

@@ -29,13 +29,19 @@ public class XRCMPostionController : XRGrabInteractable
             Vector3 moveDirection = new Vector3(0, 0, 0);
 
             if (rotationDifference > 5)
-            moveDirection = new Vector3(1, 0, 0);
+                moveDirection = new Vector3(1, 0, 0);
             else if (rotationDifference < -5)
-            moveDirection = new Vector3(-1, 0, 0);
+                moveDirection = new Vector3(-1, 0, 0);
 
-            XRCM.transform.position += moveDirection * moveSpeed * Time.deltaTime;
+            Vector3 newPosition = XRCM.transform.position + moveDirection * moveSpeed * Time.deltaTime;
+
+            // Clamp the x position to the desired range
+            newPosition.x = Mathf.Clamp(newPosition.x, -30, 30);
+
+            XRCM.transform.position = newPosition;
         }
-    }
+}
+
 
     protected override void OnSelectExited(XRBaseInteractor interactor)
     {
