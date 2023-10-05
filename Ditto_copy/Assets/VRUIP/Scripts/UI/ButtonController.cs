@@ -11,9 +11,9 @@ namespace VRUIP
     public class ButtonController : A_UIIntercations
     {
         // NORMAL COLORS
-        [SerializeField] private Color buttonNormalColor = Color.gray;
-        [SerializeField] private Color borderNormalColor = Color.gray;
-        [SerializeField] private Color textNormalColor = Color.black;
+        [SerializeField] private Color buttonNormalColor = Color.red;
+        [SerializeField] private Color borderNormalColor = Color.red;
+        [SerializeField] private Color textNormalColor = Color.red;
 
         // HOVER COLORS
         [SerializeField] private Color buttonHoverColor = Color.gray;

@@ -355,7 +355,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &8241012896828140521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1021,6 +1021,10 @@ PrefabInstance:
       propertyPath: buttonHoverColor.r
       value: 0.72156864
       objectReference: {fileID: 0}
+    - target: {fileID: 8898402167261675361, guid: 26f2e64900c53ae4e859b89a85e5ea0b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26f2e64900c53ae4e859b89a85e5ea0b, type: 3}
 --- !u!224 &1185488964214449368 stripped
@@ -1323,6 +1327,10 @@ PrefabInstance:
     - target: {fileID: 5689597527466255805, guid: 26f2e64900c53ae4e859b89a85e5ea0b, type: 3}
       propertyPath: buttonHoverColor.r
       value: 0.72156864
+      objectReference: {fileID: 0}
+    - target: {fileID: 8898402167261675361, guid: 26f2e64900c53ae4e859b89a85e5ea0b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26f2e64900c53ae4e859b89a85e5ea0b, type: 3}
