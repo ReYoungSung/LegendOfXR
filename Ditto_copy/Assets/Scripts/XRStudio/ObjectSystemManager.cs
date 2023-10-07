@@ -9,24 +9,27 @@ public class ObjectSystemManager : MonoBehaviour
     private Vector3 originalPosition;
     [SerializeField] private GameObject[] objectsToRotate;
     [SerializeField] private GameObject CMScreen;
+    [SerializeField] private GameObject XRCM;
     [SerializeField] private GameObject StudioLight;
 
+
     [SerializeField] private Transform targetTransform;
-    private Vector3 originalScale;
 
     private bool isScaling = false;
     private bool isRotating = false;
 
-    private float scaleSpeed = 0.5f; // 크기 변환 속도
     private float rotationSpeed = 90f; // 회전 속도
     private float moveSpeed = 0.5f; // 이동 속도
-    private float scaleDuration = 2f; // 스케일링 지속 시간
     private float rotationDuration = 2f; // 회전 지속 시간
 
-    public bool test1 = false;
-    public bool test2 = false;
-    public bool test3 = false;
-    public bool test4 = false;
+    private Coroutine moveCoroutine;
+    private Coroutine rotateCoroutine;
+    private Coroutine scaleCoroutine;
+
+    [SerializeField] private AudioSource moveAudioSource;
+    [SerializeField] private AudioSource rotateAudioSource;
+    [SerializeField] private AudioSource activateAudioSource;
+    [SerializeField] private AudioSource activateLightoSource;
 
     void Start()
     {
@@ -34,7 +37,6 @@ public class ObjectSystemManager : MonoBehaviour
 
         // CMScreen 게임 오브젝트 초기 설정
         CMScreen = GameObject.Find("CMScreen");
-        originalScale = CMScreen.transform.localScale;
         CMScreen.SetActive(false);
 
         StudioLight.SetActive(false);
@@ -45,53 +47,62 @@ public class ObjectSystemManager : MonoBehaviour
 
     void Update()
     {
-        if(test1)
+        if (Input.GetKey(KeyCode.Q))
         {
             MoveXRScreenToTargetPosition();
         }
-        else
+        else if (Input.GetKey(KeyCode.A))
         {
             MoveXRScreenToOriginalPosition();
         }
 
-        if (test2)
+        if (Input.GetKey(KeyCode.W))
         {
             RotateObjects();
         }
-        else
+        else if (Input.GetKey(KeyCode.S))
         {
             ResetObjectRotation();
         }
 
-        if (test3)
+        if (Input.GetKey(KeyCode.E))
         {
-            ScaleUpCMScreen();
+            ActivateCMScreen();
         }
-        else
+        else if (Input.GetKey(KeyCode.D))
         {
-            ScaleDownCMScreen();
+            DeactivateCMScreen();
         }
 
-        if (test4)
+        if (Input.GetKey(KeyCode.R))
         {
             ActivateStudioLight();
         }
-        else
+        else if (Input.GetKey(KeyCode.F))
         {
-            DeactivateStudioLight(); 
+            DeactivateStudioLight();
         }
     }
+
 
     // XRScreen을 목표 위치로 천천히 이동하는 메서드
     public void MoveXRScreenToTargetPosition()
     {
-        StartCoroutine(MoveToTargetPosition(targetTransform.position));
+        if (moveCoroutine == null)
+        {
+            moveCoroutine = StartCoroutine(MoveToTargetPosition(targetTransform.position));
+            StartCoroutine(ACtivateXRCMwithDelay());
+        }
     }
 
     // XRScreen을 원래 위치로 천천히 되돌리는 메서드
     public void MoveXRScreenToOriginalPosition()
     {
-        StartCoroutine(MoveToTargetPosition(originalPosition));
+        if (moveCoroutine == null)
+        {
+            moveCoroutine = StartCoroutine(MoveToTargetPosition(originalPosition));
+            XRCM.SetActive(false);
+        }
     }
 
     private IEnumerator MoveToTargetPosition(Vector3 target)
@@ -99,6 +110,7 @@ public class ObjectSystemManager : MonoBehaviour
         float journeyLength = Vector3.Distance(XRScreenTransform.position, target);
         float startTime = Time.time;
 
+        moveAudioSource.Play();
         while (XRScreenTransform.position != target)
         {
             float distanceCovered = (Time.time - startTime) * moveSpeed;
@@ -108,92 +120,95 @@ public class ObjectSystemManager : MonoBehaviour
 
             yield return null;
         }
+        moveAudioSource.Stop();
+        moveCoroutine = null;
+    }
+
+    private IEnumerator ACtivateXRCMwithDelay()
+    {
+        yield return new WaitForSeconds(3);
+        XRCM.SetActive(true);
     }
 
     // 모든 객체를 180도 회전시키는 메서드
     public void RotateObjects()
     {
-        StartCoroutine(RotateObjectsCoroutine(180f));
+        if (rotateCoroutine == null)
+        {
+            rotateCoroutine = StartCoroutine(RotateObjectsCoroutine(180f));
+        }
     }
 
     // 모든 객체의 회전을 초기 상태로 되돌리는 메서드
     public void ResetObjectRotation()
     {
-        StartCoroutine(RotateObjectsCoroutine(0f));
+        if (rotateCoroutine == null)
+        {
+            rotateCoroutine = StartCoroutine(RotateObjectsCoroutine(180f));
+        }
     }
 
     // 모든 객체를 천천히 회전시키는 Coroutine
     private IEnumerator RotateObjectsCoroutine(float targetRotation)
     {
         float rotationTime = 0f;
-        float startRotation = objectsToRotate[0].transform.rotation.eulerAngles.y;
+        Quaternion[] currentRotations = new Quaternion[objectsToRotate.Length];
 
+        for (int i = 0; i < objectsToRotate.Length; i++)
+        {
+            currentRotations[i] = objectsToRotate[i].transform.rotation;
+        }
+
+        rotateAudioSource.Play();
         while (rotationTime < rotationDuration)
         {
-            float newRotation = Mathf.LerpAngle(startRotation, targetRotation, rotationTime / rotationDuration);
-            foreach (var obj in objectsToRotate)
+            float t = rotationTime / rotationDuration;
+            for (int i = 0; i < objectsToRotate.Length; i++)
             {
-                obj.transform.rotation = Quaternion.Euler(0f, newRotation, 0f); 
+                objectsToRotate[i].transform.rotation = Quaternion.Slerp(currentRotations[i], Quaternion.Euler(0f, currentRotations[i].eulerAngles.y + targetRotation, 0f), t);
             }
             rotationTime += Time.deltaTime;
             yield return null;
         }
+        rotateAudioSource.Stop();
 
-        foreach (var obj in objectsToRotate)
+        for (int i = 0; i < objectsToRotate.Length; i++)
         {
-            obj.transform.rotation = Quaternion.Euler(0f, targetRotation, 0f); 
+            objectsToRotate[i].transform.rotation = Quaternion.Euler(0f, currentRotations[i].eulerAngles.y + targetRotation, 0f);
         }
 
         isRotating = false;
+
+        rotateCoroutine = null;
     }
 
-    // CMScreen 확대 및 활성화 메서드
-    public void ScaleUpCMScreen()
+
+
+    // CMScreen을 활성화하는 메서드
+    public void ActivateCMScreen()
     {
-        StartCoroutine(ScaleCMScreen(Vector3.one * 3f));
+        activateAudioSource.Play();
+        CMScreen.SetActive(true);
     }
 
-    // CMScreen 축소 및 비활성화 메서드
-    public void ScaleDownCMScreen()
+    // CMScreen을 비활성화하는 메서드
+    public void DeactivateCMScreen()
     {
-        StartCoroutine(ScaleCMScreen(Vector3.one * 0.5f)); 
-    }
-
-    // CMScreen을 천천히 스케일링하는 Coroutine
-    private IEnumerator ScaleCMScreen(Vector3 targetScale)
-    {
-        float scaleTime = 0f;
-        Vector3 startScale = CMScreen.transform.localScale;
-
-        while (scaleTime < scaleDuration)
-        {
-            CMScreen.transform.localScale = Vector3.Lerp(startScale, targetScale, scaleTime / scaleDuration);
-            scaleTime += Time.deltaTime;
-            yield return null;
-        }
-
-        CMScreen.transform.localScale = targetScale;
-
-        if (targetScale == Vector3.one * 3f)
-        {
-            isScaling = false;
-        }
-        else
-        {
-            isScaling = false;
-            CMScreen.SetActive(false);
-        }
+        activateAudioSource.Play();
+        CMScreen.SetActive(false);
     }
 
     // StudioLight를 활성화하는 메서드
     public void ActivateStudioLight()
     {
+        activateLightoSource.Play();
         StudioLight.SetActive(true);
     }
 
     // StudioLight를 비활성화하는 메서드
     public void DeactivateStudioLight()
     {
+        activateLightoSource.Play();
         StudioLight.SetActive(false);
     }
 }
