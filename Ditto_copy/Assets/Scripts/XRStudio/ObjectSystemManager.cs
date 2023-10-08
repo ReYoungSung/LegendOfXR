@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ObjectSystemManager : MonoBehaviour
 {
-    [SerializeField] private Transform XRScreenTransform;
-    private Quaternion originalRotation;
-    private Vector3 originalPosition;
-    [SerializeField] private GameObject[] objectsToRotate;
-    [SerializeField] private GameObject CMScreen;
-    [SerializeField] private GameObject XRCM;
-    [SerializeField] private GameObject StudioLight;
+    [SerializeField] private Transform XRScreenTransform; 
+    private Quaternion originalRotation;  
+    private Vector3 originalPosition;  
+    [SerializeField] private GameObject[] objectsToRotate; 
+    [SerializeField] private GameObject CMScreen; 
+    [SerializeField] private GameObject BlackDome; 
+    [SerializeField] private GameObject XRCM; 
+    [SerializeField] private GameObject StudioLight; 
 
 
     [SerializeField] private Transform targetTransform;
@@ -18,9 +19,9 @@ public class ObjectSystemManager : MonoBehaviour
     private bool isScaling = false;
     private bool isRotating = false;
 
-    private float rotationSpeed = 90f; // È¸Àü ¼Óµµ
-    private float moveSpeed = 0.5f; // ÀÌµ¿ ¼Óµµ
-    private float rotationDuration = 2f; // È¸Àü Áö¼Ó ½Ã°£
+    private float rotationSpeed = 90f; // È¸ï¿½ï¿½ ï¿½Óµï¿½
+    private float moveSpeed = 0.5f; // ï¿½Ìµï¿½ ï¿½Óµï¿½
+    private float rotationDuration = 2f; // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 
     private Coroutine moveCoroutine;
     private Coroutine rotateCoroutine;
@@ -35,13 +36,13 @@ public class ObjectSystemManager : MonoBehaviour
     {
         originalPosition = XRScreenTransform.position;
 
-        // CMScreen °ÔÀÓ ¿ÀºêÁ§Æ® ÃÊ±â ¼³Á¤
+        // CMScreen ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½
         CMScreen = GameObject.Find("CMScreen");
         CMScreen.SetActive(false);
 
         StudioLight.SetActive(false);
 
-        // ¿ø·¡ÀÇ È¸Àü »óÅÂ ÀúÀå
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         originalRotation = objectsToRotate[0].transform.rotation;
     }
 
@@ -85,7 +86,7 @@ public class ObjectSystemManager : MonoBehaviour
     }
 
 
-    // XRScreenÀ» ¸ñÇ¥ À§Ä¡·Î ÃµÃµÈ÷ ÀÌµ¿ÇÏ´Â ¸Þ¼­µå
+    // XRScreenï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ÃµÃµï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void MoveXRScreenToTargetPosition()
     {
         if (moveCoroutine == null)
@@ -95,13 +96,14 @@ public class ObjectSystemManager : MonoBehaviour
         }
     }
 
-    // XRScreenÀ» ¿ø·¡ À§Ä¡·Î ÃµÃµÈ÷ µÇµ¹¸®´Â ¸Þ¼­µå
+    // XRScreenï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ÃµÃµï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void MoveXRScreenToOriginalPosition()
     {
         if (moveCoroutine == null)
         {
             moveCoroutine = StartCoroutine(MoveToTargetPosition(originalPosition));
             XRCM.SetActive(false);
+            BlackDome.SetActive(false);
         }
     }
 
@@ -127,10 +129,11 @@ public class ObjectSystemManager : MonoBehaviour
     private IEnumerator ACtivateXRCMwithDelay()
     {
         yield return new WaitForSeconds(3);
+        BlackDome.SetActive(true); 
         XRCM.SetActive(true);
     }
 
-    // ¸ðµç °´Ã¼¸¦ 180µµ È¸Àü½ÃÅ°´Â ¸Þ¼­µå
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ 180ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void RotateObjects()
     {
         if (rotateCoroutine == null)
@@ -139,7 +142,7 @@ public class ObjectSystemManager : MonoBehaviour
         }
     }
 
-    // ¸ðµç °´Ã¼ÀÇ È¸ÀüÀ» ÃÊ±â »óÅÂ·Î µÇµ¹¸®´Â ¸Þ¼­µå
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void ResetObjectRotation()
     {
         if (rotateCoroutine == null)
@@ -148,7 +151,7 @@ public class ObjectSystemManager : MonoBehaviour
         }
     }
 
-    // ¸ðµç °´Ã¼¸¦ ÃµÃµÈ÷ È¸Àü½ÃÅ°´Â Coroutine
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ÃµÃµï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ Coroutine
     private IEnumerator RotateObjectsCoroutine(float targetRotation)
     {
         float rotationTime = 0f;
@@ -184,28 +187,28 @@ public class ObjectSystemManager : MonoBehaviour
 
 
 
-    // CMScreenÀ» È°¼ºÈ­ÇÏ´Â ¸Þ¼­µå
+    // CMScreenï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void ActivateCMScreen()
     {
         activateAudioSource.Play();
         CMScreen.SetActive(true);
     }
 
-    // CMScreenÀ» ºñÈ°¼ºÈ­ÇÏ´Â ¸Þ¼­µå
+    // CMScreenï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void DeactivateCMScreen()
     {
         activateAudioSource.Play();
         CMScreen.SetActive(false);
     }
 
-    // StudioLight¸¦ È°¼ºÈ­ÇÏ´Â ¸Þ¼­µå
+    // StudioLightï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void ActivateStudioLight()
     {
         activateLightoSource.Play();
         StudioLight.SetActive(true);
     }
 
-    // StudioLight¸¦ ºñÈ°¼ºÈ­ÇÏ´Â ¸Þ¼­µå
+    // StudioLightï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void DeactivateStudioLight()
     {
         activateLightoSource.Play();
