@@ -83,8 +83,33 @@ public class ObjectSystemManager : MonoBehaviour
         {
             DeactivateStudioLight();
         }
+
+        if (Input.GetKey(KeyCode.T))
+        {
+            ActiveXRSetting();
+        }
+        else if (Input.GetKey(KeyCode.G))
+        {
+            DeActiveXRSetting();
+        }
     }
 
+
+    public void ActiveXRSetting()
+    {
+        MoveXRScreenToTargetPosition(); 
+        RotateObjects(); 
+        DeactivateStudioLight(); 
+        ActivateCMScreen(); 
+    }
+
+    public void DeActiveXRSetting()
+    {
+        MoveXRScreenToOriginalPosition();  
+        ResetObjectRotation();  
+        ActivateStudioLight();  
+        DeactivateCMScreen();  
+    }
 
     // XRScreen�� ��ǥ ��ġ�� õõ�� �̵��ϴ� �޼���
     public void MoveXRScreenToTargetPosition()
