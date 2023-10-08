@@ -40,7 +40,7 @@ public class ObjectSystemManager : MonoBehaviour
         CMScreen = GameObject.Find("CMScreen");
         CMScreen.SetActive(false);
 
-        StudioLight.SetActive(false);
+        StudioLight.SetActive(true);
 
         // ������ ȸ�� ���� ����
         originalRotation = objectsToRotate[0].transform.rotation;
