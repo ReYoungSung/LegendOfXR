@@ -114,7 +114,11 @@ public class SoundManager : MonoBehaviour
             if (!source.isPlaying)
                 return source;
         }
-        return null;
+
+        // If no available AudioSource is found, create a new one
+        AudioSource newSource = gameObject.AddComponent<AudioSource>();
+        audioSources.Add(newSource);
+        return newSource;
     }
 }
 

@@ -122,9 +122,9 @@ public class ObjectSystemManager : MonoBehaviour
             {
                 moveCoroutine = StartCoroutine(MoveToTargetPosition(targetTransform.position));
                 StartCoroutine(ACtivateXRCMwithDelay());
+                // Set isActive to true since XRScreen is active
+                isActiveXRScreen = true;
             }
-            // Set isActive to true since XRScreen is active
-            isActiveXRScreen = true;
         }
     }
 
@@ -138,9 +138,9 @@ public class ObjectSystemManager : MonoBehaviour
                 moveCoroutine = StartCoroutine(MoveToTargetPosition(originalPosition));
                 XRCM.SetActive(false);
                 BlackDome.SetActive(false);
+                // Set isActive to false since XRScreen is deactivated
+                isActiveXRScreen = false;
             }
-            // Set isActive to false since XRScreen is deactivated
-            isActiveXRScreen = false;
         }
     }
 
@@ -178,9 +178,9 @@ public class ObjectSystemManager : MonoBehaviour
             if (rotateCoroutine == null)
             {
                 rotateCoroutine = StartCoroutine(RotateBookshelfsCoroutine(180f));
+                // Set isActive to true since bookshelves are active
+                isActiveBookshelfs = true;
             }
-            // Set isActive to true since bookshelves are active
-            isActiveBookshelfs = true;
         }
     }
 
@@ -191,10 +191,10 @@ public class ObjectSystemManager : MonoBehaviour
         {
             if (rotateCoroutine == null)
             {
-                rotateCoroutine = StartCoroutine(RotateBookshelfsCoroutine(180f));
+                rotateCoroutine = StartCoroutine(RotateBookshelfsCoroutine(180f)); 
+                // Set isActive to false since bookshelves are deactivated
+                isActiveBookshelfs = false;
             }
-            // Set isActive to false since bookshelves are deactivated
-            isActiveBookshelfs = false;
         }
     }
 
