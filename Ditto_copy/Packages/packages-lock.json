@@ -13,23 +13,23 @@
       "hash": "76f76584a113b240a4ec11f324b17302bde9a53a"
     },
     "com.readyplayerme.core": {
-      "version": "https://github.com/readyplayerme/rpm-unity-sdk-core.git#v3.2.2",
+      "version": "https://github.com/readyplayerme/rpm-unity-sdk-core.git#v3.3.0",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.0.2"
       },
-      "hash": "75623c9cce2fb7fd877debc00619fabbacdf0313"
+      "hash": "ae826a85a11f40e6997390deb8db310543e5851b"
     },
     "com.readyplayerme.webview": {
-      "version": "https://github.com/readyplayerme/rpm-unity-sdk-webview.git#v1.2.1",
+      "version": "https://github.com/readyplayerme/rpm-unity-sdk-webview.git#v2.0.0",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.ugui": "1.0.0",
         "com.unity.nuget.newtonsoft-json": "3.0.2"
       },
-      "hash": "e58ef3690d9f4e13c4be58cd73a52c71f1bce5d9"
+      "hash": "253c84e09ae4c9622eca5b945ac84a8d8bb914ad"
     },
     "com.unity.animation.rigging": {
       "version": "1.1.1",
@@ -272,6 +272,15 @@
         "com.unity.modules.vr": "1.0.0",
         "com.unity.modules.xr": "1.0.0",
         "com.unity.xr.legacyinputhelpers": "2.1.7"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.xr.oculus": {
+      "version": "3.3.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.xr.management": "4.2.0"
       },
       "url": "https://packages.unity.com"
     },
