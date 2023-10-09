@@ -8,6 +8,7 @@ public class AudioData
     public string title;
     public AudioClip clip;
     [Range(0f, 1f)] public float volume = 1f; // Volume for each audio clip
+    [HideInInspector] public AudioSource audioSource; // Reference to AudioSource
 }
 
 public class SoundManager : MonoBehaviour
@@ -16,12 +17,11 @@ public class SoundManager : MonoBehaviour
 
     public List<AudioData> bgmList;
     public List<AudioData> sfxList;
-
-    private AudioSource bgmSource;
-    private AudioSource sfxSource;
+    [HideInInspector] public List<AudioSource> audioSources; // List of AudioSources for concurrent playback
 
     private Dictionary<string, AudioClip> bgmClips = new Dictionary<string, AudioClip>();
     private Dictionary<string, AudioClip> sfxClips = new Dictionary<string, AudioClip>();
+
 
     private void Awake()
     {
@@ -30,17 +30,16 @@ public class SoundManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            bgmSource = gameObject.AddComponent<AudioSource>();
-            sfxSource = gameObject.AddComponent<AudioSource>();
-
             foreach (AudioData bgmData in bgmList)
             {
                 bgmClips[bgmData.title] = bgmData.clip;
+                bgmData.audioSource = gameObject.AddComponent<AudioSource>();
             }
 
             foreach (AudioData sfxData in sfxList)
             {
                 sfxClips[sfxData.title] = sfxData.clip;
+                sfxData.audioSource = gameObject.AddComponent<AudioSource>();
             }
         }
         else
@@ -58,10 +57,18 @@ public class SoundManager : MonoBehaviour
         }
 
         AudioData bgmData = bgmList.Find(data => data.title == bgmTitle);
-        bgmSource.clip = bgmClips[bgmTitle];
-        bgmSource.volume = bgmData.volume;
-        bgmSource.loop = true;
-        bgmSource.Play();
+        AudioSource availableSource = GetAvailableAudioSource();
+        if (availableSource != null)
+        {
+            availableSource.clip = bgmClips[bgmTitle];
+            availableSource.volume = bgmData.volume;
+            availableSource.loop = true;
+            availableSource.Play();
+        }
+        else
+        {
+            Debug.LogError("No available AudioSource for BGM playback");
+        }
     }
 
     public void PlaySFX(string sfxTitle)
@@ -73,6 +80,41 @@ public class SoundManager : MonoBehaviour
         }
 
         AudioData sfxData = sfxList.Find(data => data.title == sfxTitle);
-        sfxSource.PlayOneShot(sfxClips[sfxTitle], sfxData.volume);
+        AudioSource availableSource = GetAvailableAudioSource();
+        if (availableSource != null)
+        {
+            availableSource.PlayOneShot(sfxClips[sfxTitle], sfxData.volume);
+        }
+        else
+        {
+            Debug.LogError("No available AudioSource for SFX playback");
+        }
+    }
+
+    public void StopAudio(string audioTitle)
+    {
+        if (bgmClips.ContainsKey(audioTitle))
+        {
+            bgmList.Find(data => data.title == audioTitle).audioSource.Stop();
+        }
+        else if (sfxClips.ContainsKey(audioTitle))
+        {
+            sfxList.Find(data => data.title == audioTitle).audioSource.Stop();
+        }
+        else
+        {
+            Debug.LogError("Invalid audio title");
+        }
+    }
+
+    private AudioSource GetAvailableAudioSource()
+    {
+        foreach (var source in audioSources)
+        {
+            if (!source.isPlaying)
+                return source;
+        }
+        return null;
     }
 }
+

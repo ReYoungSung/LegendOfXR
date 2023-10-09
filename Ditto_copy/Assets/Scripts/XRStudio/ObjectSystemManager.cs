@@ -13,11 +13,12 @@ public class ObjectSystemManager : MonoBehaviour
     [SerializeField] private GameObject XRCM; 
     [SerializeField] private GameObject StudioLight; 
 
-
     [SerializeField] private Transform targetTransform;
 
-    private bool isScaling = false;
-    private bool isRotating = false;
+    [HideInInspector] public bool isActiveXRScreen = false;
+    [HideInInspector] public bool isActiveBookshelfs = false;
+    [HideInInspector] public bool isActiveCMScreen = false;
+    [HideInInspector] public bool isActiveStudioLight = false;
 
     private float rotationSpeed = 90f; // ȸ�� �ӵ�
     private float moveSpeed = 0.5f; // �̵� �ӵ�
@@ -27,13 +28,14 @@ public class ObjectSystemManager : MonoBehaviour
     private Coroutine rotateCoroutine;
     private Coroutine scaleCoroutine;
 
-    [SerializeField] private AudioSource moveAudioSource;
-    [SerializeField] private AudioSource rotateAudioSource;
-    [SerializeField] private AudioSource activateAudioSource;
-    [SerializeField] private AudioSource activateLightoSource;
+    private SoundManager soundManager;    
+
+
 
     void Start()
     {
+        soundManager = this.GetComponent<SoundManager>();
+        
         originalPosition = XRScreenTransform.position;
 
         // CMScreen ���� ������Ʈ �ʱ� ����
@@ -59,11 +61,11 @@ public class ObjectSystemManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            RotateObjects();
+            RotateBookshelfs();
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            ResetObjectRotation();
+            ResetBookshelfsRotation();
         }
 
         if (Input.GetKey(KeyCode.E))
@@ -98,7 +100,7 @@ public class ObjectSystemManager : MonoBehaviour
     public void ActiveXRSetting()
     {
         MoveXRScreenToTargetPosition(); 
-        RotateObjects(); 
+        RotateBookshelfs(); 
         DeactivateStudioLight(); 
         ActivateCMScreen(); 
     }
@@ -106,7 +108,7 @@ public class ObjectSystemManager : MonoBehaviour
     public void DeActiveXRSetting()
     {
         MoveXRScreenToOriginalPosition();  
-        ResetObjectRotation();  
+        ResetBookshelfsRotation();  
         ActivateStudioLight();  
         DeactivateCMScreen();  
     }
@@ -114,21 +116,31 @@ public class ObjectSystemManager : MonoBehaviour
     // XRScreen�� ��ǥ ��ġ�� õõ�� �̵��ϴ� �޼���
     public void MoveXRScreenToTargetPosition()
     {
-        if (moveCoroutine == null)
+        if (!isActiveXRScreen)
         {
-            moveCoroutine = StartCoroutine(MoveToTargetPosition(targetTransform.position));
-            StartCoroutine(ACtivateXRCMwithDelay());
+            if (moveCoroutine == null)
+            {
+                moveCoroutine = StartCoroutine(MoveToTargetPosition(targetTransform.position));
+                StartCoroutine(ACtivateXRCMwithDelay());
+            }
+            // Set isActive to true since XRScreen is active
+            isActiveXRScreen = true;
         }
     }
 
     // XRScreen�� ���� ��ġ�� õõ�� �ǵ����� �޼���
     public void MoveXRScreenToOriginalPosition()
     {
-        if (moveCoroutine == null)
+        if (isActiveXRScreen)
         {
-            moveCoroutine = StartCoroutine(MoveToTargetPosition(originalPosition));
-            XRCM.SetActive(false);
-            BlackDome.SetActive(false);
+            if (moveCoroutine == null)
+            {
+                moveCoroutine = StartCoroutine(MoveToTargetPosition(originalPosition));
+                XRCM.SetActive(false);
+                BlackDome.SetActive(false);
+            }
+            // Set isActive to false since XRScreen is deactivated
+            isActiveXRScreen = false;
         }
     }
 
@@ -137,7 +149,7 @@ public class ObjectSystemManager : MonoBehaviour
         float journeyLength = Vector3.Distance(XRScreenTransform.position, target);
         float startTime = Time.time;
 
-        moveAudioSource.Play();
+        soundManager.PlaySFX("XRScreenSFX");
         while (XRScreenTransform.position != target)
         {
             float distanceCovered = (Time.time - startTime) * moveSpeed;
@@ -147,7 +159,7 @@ public class ObjectSystemManager : MonoBehaviour
 
             yield return null;
         }
-        moveAudioSource.Stop();
+        soundManager.StopAudio("XRScreenSFX");
         moveCoroutine = null;
     }
 
@@ -159,25 +171,36 @@ public class ObjectSystemManager : MonoBehaviour
     }
 
     // ��� ��ü�� 180�� ȸ����Ű�� �޼���
-    public void RotateObjects()
+    public void RotateBookshelfs()
     {
-        if (rotateCoroutine == null)
+        if (!isActiveBookshelfs)
         {
-            rotateCoroutine = StartCoroutine(RotateObjectsCoroutine(180f));
+            if (rotateCoroutine == null)
+            {
+                rotateCoroutine = StartCoroutine(RotateBookshelfsCoroutine(180f));
+            }
+            // Set isActive to true since bookshelves are active
+            isActiveBookshelfs = true;
         }
     }
 
     // ��� ��ü�� ȸ���� �ʱ� ���·� �ǵ����� �޼���
-    public void ResetObjectRotation()
+    public void ResetBookshelfsRotation()
     {
-        if (rotateCoroutine == null)
+        if (isActiveBookshelfs)
         {
-            rotateCoroutine = StartCoroutine(RotateObjectsCoroutine(180f));
+            if (rotateCoroutine == null)
+            {
+                rotateCoroutine = StartCoroutine(RotateBookshelfsCoroutine(180f));
+            }
+            // Set isActive to false since bookshelves are deactivated
+            isActiveBookshelfs = false;
         }
     }
 
+
     // ��� ��ü�� õõ�� ȸ����Ű�� Coroutine
-    private IEnumerator RotateObjectsCoroutine(float targetRotation)
+    private IEnumerator RotateBookshelfsCoroutine(float targetRotation)
     {
         float rotationTime = 0f;
         Quaternion[] currentRotations = new Quaternion[objectsToRotate.Length];
@@ -187,7 +210,7 @@ public class ObjectSystemManager : MonoBehaviour
             currentRotations[i] = objectsToRotate[i].transform.rotation;
         }
 
-        rotateAudioSource.Play();
+        soundManager.PlaySFX("BookshelfSFX");
         while (rotationTime < rotationDuration)
         {
             float t = rotationTime / rotationDuration;
@@ -198,46 +221,62 @@ public class ObjectSystemManager : MonoBehaviour
             rotationTime += Time.deltaTime;
             yield return null;
         }
-        rotateAudioSource.Stop();
+        soundManager.StopAudio("BookshelfSFX");
 
         for (int i = 0; i < objectsToRotate.Length; i++)
         {
             objectsToRotate[i].transform.rotation = Quaternion.Euler(0f, currentRotations[i].eulerAngles.y + targetRotation, 0f);
         }
 
-        isRotating = false;
-
         rotateCoroutine = null;
-    }
+    } 
 
-
-
-    // CMScreen�� Ȱ��ȭ�ϴ� �޼���
+    // CMScreen�� Ȱ��ȭ�ϴ� �޼��� 
     public void ActivateCMScreen()
     {
-        activateAudioSource.Play();
-        CMScreen.SetActive(true);
+        if (!isActiveCMScreen)
+        {
+            soundManager.PlaySFX("CMScreenSFX");
+            CMScreen.SetActive(true);
+            // Set isActive to true since CMScreen is active
+            isActiveCMScreen = true;
+        }
     }
 
     // CMScreen�� ��Ȱ��ȭ�ϴ� �޼���
     public void DeactivateCMScreen()
     {
-        activateAudioSource.Play();
-        CMScreen.SetActive(false);
+        if (isActiveCMScreen)
+        {
+            soundManager.PlaySFX("CMScreenSFX");
+            CMScreen.SetActive(false);
+            // Set isActive to false since CMScreen is deactivated
+            isActiveCMScreen = false;
+        }
     }
 
     // StudioLight�� Ȱ��ȭ�ϴ� �޼���
     public void ActivateStudioLight()
     {
-        activateLightoSource.Play();
-        StudioLight.SetActive(true);
+        if (!isActiveStudioLight)
+        {
+            soundManager.PlaySFX("LightSFX");
+            StudioLight.SetActive(true);
+            // Set isActive to true since StudioLight is active
+            isActiveStudioLight = true;
+        }
     }
 
     // StudioLight�� ��Ȱ��ȭ�ϴ� �޼���
     public void DeactivateStudioLight()
     {
-        activateLightoSource.Play();
-        StudioLight.SetActive(false);
+        if (isActiveStudioLight)
+        {
+            soundManager.PlaySFX("LightSFX");
+            StudioLight.SetActive(false);
+            // Set isActive to false since StudioLight is deactivated
+            isActiveStudioLight = false;
+        }
     }
 }
 
