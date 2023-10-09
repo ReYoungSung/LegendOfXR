@@ -20,7 +20,7 @@ public class SoundManager : MonoBehaviour
     [HideInInspector] public List<AudioSource> audioSources; // List of AudioSources for concurrent playback
 
     private Dictionary<string, AudioClip> bgmClips = new Dictionary<string, AudioClip>();
-    private Dictionary<string, AudioClip> sfxClips = new Dictionary<string, AudioClip>();
+    public Dictionary<string, AudioClip> sfxClips = new Dictionary<string, AudioClip>();
 
 
     private void Awake()
@@ -95,17 +95,28 @@ public class SoundManager : MonoBehaviour
     {
         if (bgmClips.ContainsKey(audioTitle))
         {
-            bgmList.Find(data => data.title == audioTitle).audioSource.Stop();
+            AudioData bgmData = bgmList.Find(data => data.title == audioTitle);
+            if (bgmData != null && bgmData.audioSource != null)
+            {
+                bgmData.audioSource.Stop();
+                Debug.Log("Stopped BGM: " + audioTitle);
+            }
         }
         else if (sfxClips.ContainsKey(audioTitle))
         {
-            sfxList.Find(data => data.title == audioTitle).audioSource.Stop();
+            AudioData sfxData = sfxList.Find(data => data.title == audioTitle);
+            if (sfxData != null && sfxData.audioSource != null)
+            {
+                sfxData.audioSource.Stop();
+                Debug.Log("Stopped SFX: " + audioTitle);
+            }
         }
         else
         {
-            Debug.LogError("Invalid audio title");
+            Debug.LogError("Invalid audio title: " + audioTitle);
         }
     }
+
 
     private AudioSource GetAvailableAudioSource()
     {
@@ -118,7 +129,8 @@ public class SoundManager : MonoBehaviour
         // If no available AudioSource is found, create a new one
         AudioSource newSource = gameObject.AddComponent<AudioSource>();
         audioSources.Add(newSource);
-        return newSource;
+        return newSource; 
     }
+
 }
 

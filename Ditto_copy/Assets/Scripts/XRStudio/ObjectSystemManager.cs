@@ -18,7 +18,7 @@ public class ObjectSystemManager : MonoBehaviour
     [HideInInspector] public bool isActiveXRScreen = false;
     [HideInInspector] public bool isActiveBookshelfs = false;
     [HideInInspector] public bool isActiveCMScreen = false;
-    [HideInInspector] public bool isActiveStudioLight = false;
+    [HideInInspector] public bool isActiveStudioLight = true;
 
     private float rotationSpeed = 90f; // ȸ�� �ӵ�
     private float moveSpeed = 0.5f; // �̵� �ӵ�
@@ -29,7 +29,6 @@ public class ObjectSystemManager : MonoBehaviour
     private Coroutine scaleCoroutine;
 
     private SoundManager soundManager;    
-
 
 
     void Start()
@@ -210,7 +209,7 @@ public class ObjectSystemManager : MonoBehaviour
             currentRotations[i] = objectsToRotate[i].transform.rotation;
         }
 
-        soundManager.PlaySFX("BookshelfSFX");
+        soundManager.PlaySFX("BookshelfSFX"); 
         while (rotationTime < rotationDuration)
         {
             float t = rotationTime / rotationDuration;
@@ -221,7 +220,7 @@ public class ObjectSystemManager : MonoBehaviour
             rotationTime += Time.deltaTime;
             yield return null;
         }
-        soundManager.StopAudio("BookshelfSFX");
+        soundManager.StopAudio("BookshelfSFX"); 
 
         for (int i = 0; i < objectsToRotate.Length; i++)
         {
