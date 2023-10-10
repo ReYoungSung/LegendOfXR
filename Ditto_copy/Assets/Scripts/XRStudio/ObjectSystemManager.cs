@@ -170,7 +170,7 @@ public class ObjectSystemManager : MonoBehaviour
     }
 
     // ��� ��ü�� 180�� ȸ����Ű�� �޼���
-    public void RotateBookshelfs()
+    public void RotateBookshelfs()   
     {
         if (!isActiveBookshelfs)
         {
@@ -184,7 +184,7 @@ public class ObjectSystemManager : MonoBehaviour
     }
 
     // ��� ��ü�� ȸ���� �ʱ� ���·� �ǵ����� �޼���
-    public void ResetBookshelfsRotation()
+    public void ResetBookshelfsRotation()   
     {
         if (isActiveBookshelfs)
         {
@@ -231,7 +231,7 @@ public class ObjectSystemManager : MonoBehaviour
     } 
 
     // CMScreen�� Ȱ��ȭ�ϴ� �޼��� 
-    public void ActivateCMScreen()
+    public void ActivateCMScreen()   
     {
         if (!isActiveCMScreen)
         {
@@ -241,9 +241,9 @@ public class ObjectSystemManager : MonoBehaviour
             isActiveCMScreen = true;
         }
     }
-
+        
     // CMScreen�� ��Ȱ��ȭ�ϴ� �޼���
-    public void DeactivateCMScreen()
+    public void DeactivateCMScreen()   
     {
         if (isActiveCMScreen)
         {
@@ -255,7 +255,7 @@ public class ObjectSystemManager : MonoBehaviour
     }
 
     // StudioLight�� Ȱ��ȭ�ϴ� �޼���
-    public void ActivateStudioLight()
+    public void ActivateStudioLight()  
     {
         if (!isActiveStudioLight)
         {
@@ -267,14 +267,14 @@ public class ObjectSystemManager : MonoBehaviour
     }
 
     // StudioLight�� ��Ȱ��ȭ�ϴ� �޼���
-    public void DeactivateStudioLight()
+    public void DeactivateStudioLight()  
     {
-        if (isActiveStudioLight)
+        if (isActiveStudioLight) 
         {
-            soundManager.PlaySFX("LightSFX");
-            StudioLight.SetActive(false);
+            soundManager.PlaySFX("LightSFX"); 
+            StudioLight.SetActive(false); 
             // Set isActive to false since StudioLight is deactivated
-            isActiveStudioLight = false;
+            isActiveStudioLight = false; 
         }
     }
 }
