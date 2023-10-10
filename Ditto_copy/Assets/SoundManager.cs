@@ -3,134 +3,130 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class AudioData
+public class AudioSourceInfo
 {
-    public string title;
-    public AudioClip clip;
-    [Range(0f, 1f)] public float volume = 1f; // Volume for each audio clip
-    [HideInInspector] public AudioSource audioSource; // Reference to AudioSource
+    public string name;
+    public AudioSource source;
 }
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
-    public List<AudioData> bgmList;
-    public List<AudioData> sfxList;
-    [HideInInspector] public List<AudioSource> audioSources; // List of AudioSources for concurrent playback
+    [SerializeField] List<AudioSourceInfo> audioSourcesInfo = new List<AudioSourceInfo>();
 
-    private Dictionary<string, AudioClip> bgmClips = new Dictionary<string, AudioClip>();
-    public Dictionary<string, AudioClip> sfxClips = new Dictionary<string, AudioClip>();
+    private Dictionary<string, AudioSource> bgmAudioSources = new Dictionary<string, AudioSource>();
+    private Dictionary<string, AudioSource> sfxAudioSources = new Dictionary<string, AudioSource>();
 
+    private void Start()
+    {
+        
+    }
 
     private void Awake()
     {
-        if (instance == null)
+        instance = this;
+        InitializeAudioSources();
+    }
+
+    private void InitializeAudioSources()
+    {
+        foreach (var audioSourceInfo in audioSourcesInfo)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-
-            foreach (AudioData bgmData in bgmList)
+            if (!audioSourceInfo.source)
             {
-                bgmClips[bgmData.title] = bgmData.clip;
-                bgmData.audioSource = gameObject.AddComponent<AudioSource>();
+                Debug.LogError("AudioSource in SoundManager is not assigned for: " + audioSourceInfo.name);
+                continue;
             }
 
-            foreach (AudioData sfxData in sfxList)
+            if (!string.IsNullOrEmpty(audioSourceInfo.name))
             {
-                sfxClips[sfxData.title] = sfxData.clip;
-                sfxData.audioSource = gameObject.AddComponent<AudioSource>();
+                if (!bgmAudioSources.ContainsKey(audioSourceInfo.name))
+                {
+                    bgmAudioSources[audioSourceInfo.name] = audioSourceInfo.source;
+                }
+                else
+                {
+                    Debug.LogError("Duplicate AudioSource name found: " + audioSourceInfo.name);
+                }
             }
+        }
+    }
+
+    public void PlayBGM(string bgmTitle, float volume = 1f)
+    {
+        if (bgmAudioSources.ContainsKey(bgmTitle))
+        {
+            AudioSource bgmSource = bgmAudioSources[bgmTitle];
+            bgmSource.volume = volume;
+            bgmSource.loop = true;
+            bgmSource.Play();
         }
         else
         {
-            Destroy(gameObject);
+            Debug.LogError("Invalid BGM title: " + bgmTitle);
         }
     }
 
-    public void PlayBGM(string bgmTitle)
+    public void PlaySFX(string sfxTitle, float volume = 1f)
     {
-        if (!bgmClips.ContainsKey(bgmTitle))
+        if (sfxAudioSources.ContainsKey(sfxTitle))
         {
-            Debug.LogError("Invalid BGM title");
-            return;
-        }
-
-        AudioData bgmData = bgmList.Find(data => data.title == bgmTitle);
-        AudioSource availableSource = GetAvailableAudioSource();
-        if (availableSource != null)
-        {
-            availableSource.clip = bgmClips[bgmTitle];
-            availableSource.volume = bgmData.volume;
-            availableSource.loop = true;
-            availableSource.Play();
+            AudioSource sfxSource = sfxAudioSources[sfxTitle];
+            sfxSource.volume = volume;
+            sfxSource.Play();
         }
         else
         {
-            Debug.LogError("No available AudioSource for BGM playback");
+            Debug.LogError("Invalid SFX title: " + sfxTitle);
         }
     }
 
-    public void PlaySFX(string sfxTitle)
+    public void StopBGM(string bgmTitle)
     {
-        if (!sfxClips.ContainsKey(sfxTitle))
+        if (bgmAudioSources.ContainsKey(bgmTitle))
         {
-            Debug.LogError("Invalid SFX title");
-            return;
-        }
-
-        AudioData sfxData = sfxList.Find(data => data.title == sfxTitle);
-        AudioSource availableSource = GetAvailableAudioSource();
-        if (availableSource != null)
-        {
-            availableSource.PlayOneShot(sfxClips[sfxTitle], sfxData.volume);
+            AudioSource bgmSource = bgmAudioSources[bgmTitle];
+            bgmSource.Stop();
         }
         else
         {
-            Debug.LogError("No available AudioSource for SFX playback");
+            Debug.LogError("Invalid BGM title: " + bgmTitle);
         }
     }
 
-    public void StopAudio(string audioTitle)
+    public void StopSFX(string sfxTitle)
     {
-        if (bgmClips.ContainsKey(audioTitle))
+        if (sfxAudioSources.ContainsKey(sfxTitle))
         {
-            AudioData bgmData = bgmList.Find(data => data.title == audioTitle);
-            if (bgmData != null && bgmData.audioSource != null)
-            {
-                bgmData.audioSource.Stop();
-                Debug.Log("Stopped BGM: " + audioTitle);
-            }
-        }
-        else if (sfxClips.ContainsKey(audioTitle))
-        {
-            AudioData sfxData = sfxList.Find(data => data.title == audioTitle);
-            if (sfxData != null && sfxData.audioSource != null)
-            {
-                sfxData.audioSource.Stop();
-                Debug.Log("Stopped SFX: " + audioTitle);
-            }
+            AudioSource sfxSource = sfxAudioSources[sfxTitle];
+            sfxSource.Stop();
         }
         else
         {
-            Debug.LogError("Invalid audio title: " + audioTitle);
+            Debug.LogError("Invalid SFX title: " + sfxTitle);
         }
     }
 
-
-    private AudioSource GetAvailableAudioSource()
+    public void StopAllBGM()
     {
-        foreach (var source in audioSources)
+        foreach (var bgmSource in bgmAudioSources.Values)
         {
-            if (!source.isPlaying)
-                return source;
+            bgmSource.Stop();
         }
-
-        // If no available AudioSource is found, create a new one
-        AudioSource newSource = gameObject.AddComponent<AudioSource>();
-        audioSources.Add(newSource);
-        return newSource; 
     }
 
+    public void StopAllSFX()
+    {
+        foreach (var sfxSource in sfxAudioSources.Values)
+        {
+            sfxSource.Stop();
+        }
+    }
+
+    public void StopAllAudio()
+    {
+        StopAllBGM();
+        StopAllSFX();
+    }
 }
-

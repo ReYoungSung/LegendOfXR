@@ -158,7 +158,7 @@ public class ObjectSystemManager : MonoBehaviour
 
             yield return null;
         }
-        soundManager.StopAudio("XRScreenSFX");
+        soundManager.StopSFX("XRScreenSFX");
         moveCoroutine = null;
     }
 
@@ -220,7 +220,7 @@ public class ObjectSystemManager : MonoBehaviour
             rotationTime += Time.deltaTime;
             yield return null;
         }
-        soundManager.StopAudio("BookshelfSFX"); 
+        soundManager.StopSFX("BookshelfSFX"); 
 
         for (int i = 0; i < objectsToRotate.Length; i++)
         {
