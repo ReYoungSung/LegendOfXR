@@ -13,25 +13,27 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
-    [SerializeField] List<AudioSourceInfo> audioSourcesInfo = new List<AudioSourceInfo>();
+    [SerializeField] List<AudioSourceInfo> BGMList = new List<AudioSourceInfo>();
+    [SerializeField] List<AudioSourceInfo> SFXList = new List<AudioSourceInfo>();
 
     private Dictionary<string, AudioSource> bgmAudioSources = new Dictionary<string, AudioSource>();
     private Dictionary<string, AudioSource> sfxAudioSources = new Dictionary<string, AudioSource>();
-
-    private void Start()
-    {
-        
-    }
 
     private void Awake()
     {
         instance = this;
         InitializeAudioSources();
-    }
+    } 
 
     private void InitializeAudioSources()
     {
-        foreach (var audioSourceInfo in audioSourcesInfo)
+        InitializeAudioSourceList(BGMList, bgmAudioSources); 
+        InitializeAudioSourceList(SFXList, sfxAudioSources); 
+    }
+
+    private void InitializeAudioSourceList(List<AudioSourceInfo> sourceList, Dictionary<string, AudioSource> targetDictionary)
+    {
+        foreach (var audioSourceInfo in sourceList)
         {
             if (!audioSourceInfo.source)
             {
@@ -41,19 +43,19 @@ public class SoundManager : MonoBehaviour
 
             if (!string.IsNullOrEmpty(audioSourceInfo.name))
             {
-                if (!bgmAudioSources.ContainsKey(audioSourceInfo.name))
+                if (!targetDictionary.ContainsKey(audioSourceInfo.name))
                 {
-                    bgmAudioSources[audioSourceInfo.name] = audioSourceInfo.source;
+                    targetDictionary[audioSourceInfo.name] = audioSourceInfo.source; 
                 }
                 else
                 {
-                    Debug.LogError("Duplicate AudioSource name found: " + audioSourceInfo.name);
+                    Debug.LogError("Duplicate AudioSource name found: " + audioSourceInfo.name); 
                 }
             }
-        }
+        } 
     }
 
-    public void PlayBGM(string bgmTitle, float volume = 1f)
+    public void PlayBGM(string bgmTitle, float volume = 0.75f)
     {
         if (bgmAudioSources.ContainsKey(bgmTitle))
         {
