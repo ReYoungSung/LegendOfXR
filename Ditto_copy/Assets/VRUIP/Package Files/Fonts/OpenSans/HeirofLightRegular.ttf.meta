@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 0e15b3f772448544ebb9da356272a895
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Heir of Light Regular
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: cedf140ea02ed3b489a3732fe1882d39, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

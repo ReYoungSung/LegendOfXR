@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: edd86380b72cee44fabee115b4790615
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - OKMAN FONT
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: c85d0ba9b4fc27049b7385f25b1ba21d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
