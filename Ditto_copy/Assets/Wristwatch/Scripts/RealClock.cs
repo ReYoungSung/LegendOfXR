@@ -11,10 +11,34 @@ public class RealClock : MonoBehaviour {
 	public Transform Minutes;
 	public Transform Seconds;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+	public GameObject UIObject;
+
+	private bool canToggleUI = true;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))  // Assuming you want to activate when the "Player" enters the trigger
+        {
+			canToggleUI = false; 
+
+			if (!UIObject.activeSelf) // If UIObject is not active, make it active
+			{
+				UIObject.SetActive(true);
+			}
+			else
+			{
+	    	    UIObject.SetActive(false);
+			}
+        }
+    } 
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            canToggleUI = true; // Enable toggling when the player exits the trigger
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {

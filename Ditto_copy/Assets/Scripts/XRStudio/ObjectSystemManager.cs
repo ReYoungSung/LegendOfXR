@@ -14,7 +14,7 @@ public class ObjectSystemManager : MonoBehaviour
     [SerializeField] private GameObject StudioLight; 
 
     [SerializeField] private Transform targetTransform;
-
+     
     [HideInInspector] public bool isActiveXRScreen = false;
     [HideInInspector] public bool isActiveBookshelfs = false;
     [HideInInspector] public bool isActiveCMScreen = false;
@@ -29,11 +29,13 @@ public class ObjectSystemManager : MonoBehaviour
     private Coroutine scaleCoroutine;
 
     private SoundManager soundManager;    
+    private XRScreenManager xrScreenManager;
 
 
     void Start()
     {
         soundManager = this.GetComponent<SoundManager>();
+        xrScreenManager = this.GetComponent<XRScreenManager>();
         
         originalPosition = XRScreenTransform.position;
 
@@ -93,7 +95,6 @@ public class ObjectSystemManager : MonoBehaviour
         }
     }
 
-
     public void ActiveXRSetting()
     {
         MoveXRScreenToTargetPosition(); 
@@ -130,6 +131,7 @@ public class ObjectSystemManager : MonoBehaviour
     {
         if (isActiveXRScreen)
         {
+            soundManager.StopAllBGM();
             if (moveCoroutine == null)
             {
                 moveCoroutine = StartCoroutine(MoveToTargetPosition(originalPosition));
