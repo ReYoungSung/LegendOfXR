@@ -20,10 +20,10 @@ public class ObjectSystemManager : MonoBehaviour
     [HideInInspector] public bool isActiveCMScreen = false;
     [HideInInspector] public bool isActiveStudioLight = true;
 
-    private float rotationSpeed = 90f; // ȸ�� �ӵ�
-    private float moveSpeed = 0.5f; // �̵� �ӵ�
-    private float rotationDuration = 2f; // ȸ�� ���� �ð�
-
+    private float rotationSpeed = 90f; // ȸ�� �ӵ� 
+    private float moveSpeed = 0.5f; // �̵� �ӵ� 
+    private float rotationDuration = 2f; // ȸ�� ���� �ð� 
+ 
     private Coroutine moveCoroutine;
     private Coroutine rotateCoroutine;
     private Coroutine scaleCoroutine;
@@ -40,8 +40,6 @@ public class ObjectSystemManager : MonoBehaviour
         // CMScreen ���� ������Ʈ �ʱ� ����
         CMScreen = GameObject.Find("CMScreen");
         CMScreen.SetActive(false);
-
-        StudioLight.SetActive(true);
 
         // ������ ȸ�� ���� ����
         originalRotation = objectsToRotate[0].transform.rotation;

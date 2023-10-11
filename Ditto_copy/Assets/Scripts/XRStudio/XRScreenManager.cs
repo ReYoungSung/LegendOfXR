@@ -39,22 +39,28 @@ public class XRScreenManager : MonoBehaviour
 
     void ActiveMission1Screen()
     {
-        soundManager.PlaySFX("CMScreenSFX");
-        XRCM.transform.position = Mission1CMTransform.position;
-        XRFloorCM.transform.position = Mission1FloorCMTransform.position;
+        soundManager.StopAllBGM();  
+        soundManager.PlaySFX("CMScreenSFX"); 
+        soundManager.PlayBGM("QUEST1"); 
+        XRCM.transform.position = Mission1CMTransform.position; 
+        XRFloorCM.transform.position = Mission1FloorCMTransform.position; 
     }
 
     void ActiveMission2Screen()
     {
-        soundManager.PlaySFX("CMScreenSFX");
-        XRCM.transform.position = Mission2CMTransform.position;
-        XRFloorCM.transform.position = Mission2FloorCMTransform.position;
+        soundManager.StopAllBGM(); 
+        soundManager.PlaySFX("CMScreenSFX"); 
+        soundManager.PlayBGM("QUEST2"); 
+        XRCM.transform.position = Mission2CMTransform.position; 
+        XRFloorCM.transform.position = Mission2FloorCMTransform.position;  
     }
 
     void ActiveMission3Screcen()
     {
-        soundManager.PlaySFX("CMScreenSFX");
-        XRCM.transform.position = Mission3CMTransform.position;
-        XRFloorCM.transform.position = Mission3FloorCMTransform.position;
+        soundManager.StopAllBGM(); 
+        soundManager.PlaySFX("CMScreenSFX"); 
+        soundManager.PlayBGM("QUEST3"); 
+        XRCM.transform.position = Mission3CMTransform.position;  
+        XRFloorCM.transform.position = Mission3FloorCMTransform.position; 
     }
 }

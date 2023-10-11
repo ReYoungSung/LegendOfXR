@@ -153,7 +153,7 @@ namespace VRUIP
             var buttonSize = buttonImage.rectTransform.rect;
             var x = 1 + additionalScale;
             var y = 1 + (additionalScale * (buttonSize.width / buttonSize.height));
-            _adjustedExpandBorderScale = new Vector3(x, y, 1);
+            _adjustedExpandBorderScale = new Vector3(x, y, 1); 
             
             // Setup shine animation positions.
             var shineWidth = buttonShine.rectTransform.rect.width;
