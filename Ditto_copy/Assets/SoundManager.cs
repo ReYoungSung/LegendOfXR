@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class AudioSourceInfo
@@ -24,6 +25,12 @@ public class SoundManager : MonoBehaviour
         instance = this;
         InitializeAudioSources();
     } 
+
+    void Update() 
+    {
+        ChangeVolumeAllBGM(1f);
+    
+    }
 
     private void InitializeAudioSources()
     {
@@ -115,6 +122,14 @@ public class SoundManager : MonoBehaviour
         foreach (var bgmSource in bgmAudioSources.Values)
         {
             bgmSource.Stop();
+        }
+    }
+
+    public void ChangeVolumeAllBGM(float Power)
+    {
+        foreach (var bgmSource in bgmAudioSources.Values)
+        {
+            bgmSource.volume = Power;
         }
     }
 
