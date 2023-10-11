@@ -55,7 +55,7 @@ public class SoundManager : MonoBehaviour
         } 
     }
 
-    public void PlayBGM(string bgmTitle, float volume = 0.75f)
+    public void PlayBGM(string bgmTitle, float volume = 0.5f)
     {
         if (bgmAudioSources.ContainsKey(bgmTitle))
         {
@@ -70,7 +70,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlaySFX(string sfxTitle, float volume = 1f)
+    public void PlaySFX(string sfxTitle, float volume = 1.2f)
     {
         if (sfxAudioSources.ContainsKey(sfxTitle))
         {
