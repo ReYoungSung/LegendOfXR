@@ -14,11 +14,20 @@ public class ObjectSystemManager : MonoBehaviour
     [SerializeField] private GameObject StudioLight; 
 
     [SerializeField] private Transform targetTransform;
-     
+
+    [SerializeField] private GameObject avatar1;
+    [SerializeField] private GameObject avatar2;
+    [SerializeField] public GameObject avatar3;
+
+    private Transform originAvatar1Transform;
+    private Transform originAvatar2Transform;
+    private Transform originAvatar3Transform;
+
     [HideInInspector] public bool isActiveXRScreen = false;
     [HideInInspector] public bool isActiveBookshelfs = false;
     [HideInInspector] public bool isActiveCMScreen = false;
     [HideInInspector] public bool isActiveStudioLight = true;
+    [HideInInspector] public bool isActiveFullSetting = false;
 
     private float rotationSpeed = 90f; // ȸ�� �ӵ� 
     private float moveSpeed = 0.5f; // �̵� �ӵ� 
@@ -39,12 +48,12 @@ public class ObjectSystemManager : MonoBehaviour
         
         originalPosition = XRScreenTransform.position;
 
-        // CMScreen ���� ������Ʈ �ʱ� ����
-        CMScreen = GameObject.Find("CMScreen");
-        CMScreen.SetActive(false);
-
         // ������ ȸ�� ���� ����
         originalRotation = objectsToRotate[0].transform.rotation;
+
+        originAvatar1Transform = avatar1.transform;
+        originAvatar2Transform = avatar2.transform;
+        originAvatar3Transform = avatar3.transform;
     }
 
     void Update()
@@ -92,6 +101,18 @@ public class ObjectSystemManager : MonoBehaviour
         else if (Input.GetKey(KeyCode.G))
         {
             DeActiveXRSetting();
+        }
+
+        if(isActiveXRScreen == true
+           && isActiveBookshelfs == true
+           && isActiveCMScreen == true
+           && isActiveStudioLight == false)
+        {
+            isActiveFullSetting = true;
+        }
+        else
+        {
+            isActiveFullSetting = false;
         }
     }
 
@@ -233,7 +254,7 @@ public class ObjectSystemManager : MonoBehaviour
     // CMScreen�� Ȱ��ȭ�ϴ� �޼��� 
     public void ActivateCMScreen()   
     {
-        if (!isActiveCMScreen)
+        if (CMScreen.activeSelf == false)
         {
             soundManager.PlaySFX("CMScreenSFX");
             CMScreen.SetActive(true);
@@ -245,7 +266,7 @@ public class ObjectSystemManager : MonoBehaviour
     // CMScreen�� ��Ȱ��ȭ�ϴ� �޼���
     public void DeactivateCMScreen()   
     {
-        if (isActiveCMScreen)
+        if (CMScreen.activeSelf == true)
         {
             soundManager.PlaySFX("CMScreenSFX");
             CMScreen.SetActive(false);
@@ -257,7 +278,7 @@ public class ObjectSystemManager : MonoBehaviour
     // StudioLight�� Ȱ��ȭ�ϴ� �޼���
     public void ActivateStudioLight()  
     {
-        if (!isActiveStudioLight)
+        if (StudioLight.activeSelf == false)
         {
             soundManager.PlaySFX("LightSFX");
             StudioLight.SetActive(true);
@@ -269,13 +290,25 @@ public class ObjectSystemManager : MonoBehaviour
     // StudioLight�� ��Ȱ��ȭ�ϴ� �޼���
     public void DeactivateStudioLight()  
     {
-        if (isActiveStudioLight) 
+        if (StudioLight.activeSelf == true) 
         {
             soundManager.PlaySFX("LightSFX"); 
             StudioLight.SetActive(false); 
             // Set isActive to false since StudioLight is deactivated
             isActiveStudioLight = false; 
         }
+    }
+
+    public void returnObjectsToOriginSpace() 
+    {
+        avatar1.transform.position = originAvatar1Transform.position;
+        avatar2.transform.position = originAvatar2Transform.position; 
+        avatar3.transform.position = originAvatar3Transform.position;
+        avatar1.transform.localRotation = originAvatar1Transform.localRotation;
+        avatar2.transform.localRotation = originAvatar2Transform.localRotation;
+        avatar3.transform.localRotation = originAvatar3Transform.localRotation;
+
+
     }
 }
 

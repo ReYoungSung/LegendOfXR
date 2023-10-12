@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class XRScreenManager : MonoBehaviour
 {
-    [SerializeField] private GameObject XRCM;
-    [SerializeField] private Transform Mission1CMTransform;
-    [SerializeField] private Transform Mission2CMTransform;
-    [SerializeField] private Transform Mission3CMTransform;
-    [SerializeField] private Transform NoMissionCMTransform; 
+    [SerializeField] private GameObject XRCM; 
+    [SerializeField] private Transform Mission1CMTransform; 
+    [SerializeField] private Transform Mission2CMTransform; 
+    [SerializeField] private Transform Mission3CMTransform; 
+    [SerializeField] private Transform NoMissionCMTransform;  
 
-    [SerializeField] private GameObject XRFloorCM;
-    [SerializeField] private Transform Mission1FloorCMTransform;
-    [SerializeField] private Transform Mission2FloorCMTransform;
-    [SerializeField] private Transform Mission3FloorCMTransform;
-    [SerializeField] private Transform NoMissionFloorCMTransform; 
+    [SerializeField] private GameObject XRFloorCM; 
+    [SerializeField] private Transform Mission1FloorCMTransform; 
+    [SerializeField] private Transform Mission2FloorCMTransform; 
+    [SerializeField] private Transform Mission3FloorCMTransform; 
+    [SerializeField] private Transform NoMissionFloorCMTransform;  
 
-    private SoundManager soundManager;
+    private SoundManager soundManager; 
 
-    [HideInInspector] public bool isActiveMission1 = false;
-    [HideInInspector] public bool isActiveMission2 = false;
-    [HideInInspector] public bool isActiveMission3 = false;
+    [HideInInspector] public bool isActiveMission1 = false; 
+    [HideInInspector] public bool isActiveMission2 = false; 
+    [HideInInspector] public bool isActiveMission3 = false;  
 
     void Awake()
     {
@@ -55,7 +55,7 @@ public class XRScreenManager : MonoBehaviour
         }
     }
 
-    void DeActiveAllMissionScreen()
+    public void DeActiveAllMissionScreen()
     {   
         soundManager.StopAllBGM();   
         soundManager.PlaySFX("CMScreenSFX");  
@@ -68,7 +68,7 @@ public class XRScreenManager : MonoBehaviour
     }
 
 
-    void ActiveMission1Screen()
+    public void ActiveMission1Screen()
     {
         soundManager.StopAllBGM();  
         soundManager.PlaySFX("CMScreenSFX"); 
@@ -80,7 +80,7 @@ public class XRScreenManager : MonoBehaviour
         isActiveMission3 = false;
     }
 
-    void ActiveMission2Screen()
+    public void ActiveMission2Screen()
     {
         soundManager.StopAllBGM(); 
         soundManager.PlaySFX("CMScreenSFX"); 
@@ -92,7 +92,7 @@ public class XRScreenManager : MonoBehaviour
         isActiveMission3 = false;
     }
 
-    void ActiveMission3Screen()
+    public void ActiveMission3Screen()
     {
         soundManager.StopAllBGM(); 
         soundManager.PlaySFX("CMScreenSFX"); 
