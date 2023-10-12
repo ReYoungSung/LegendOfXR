@@ -4732,7 +4732,15 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 547852988476715699, guid: aa367ba593c043a469b69e03a01059ca, type: 3}
+    - {fileID: 441436794217180195, guid: aa367ba593c043a469b69e03a01059ca, type: 3}
+    - {fileID: 436672193809122062, guid: aa367ba593c043a469b69e03a01059ca, type: 3}
+    - {fileID: 436672193560182391, guid: aa367ba593c043a469b69e03a01059ca, type: 3}
+    - {fileID: 436672193730589850, guid: aa367ba593c043a469b69e03a01059ca, type: 3}
+    - {fileID: 436672192929193813, guid: aa367ba593c043a469b69e03a01059ca, type: 3}
+    - {fileID: 436672193125889844, guid: aa367ba593c043a469b69e03a01059ca, type: 3}
+    - {fileID: 436672191950076002, guid: aa367ba593c043a469b69e03a01059ca, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aa367ba593c043a469b69e03a01059ca, type: 3}
 --- !u!4 &2958376336019887577 stripped
 Transform:

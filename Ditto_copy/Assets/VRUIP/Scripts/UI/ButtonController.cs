@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
 using Image = UnityEngine.UI.Image;
 
+
 namespace VRUIP
 {
     public class ButtonController : A_UIIntercations
@@ -317,32 +318,34 @@ namespace VRUIP
         
 #if UNITY_EDITOR
         // ON VALIDATE ----------
-        private void OnValidate()
+      private void OnValidate()
+{
+    if (buttonImage != null && buttonBorder != null)
+    {
+        if (!followsTheme)
         {
-            if (!followsTheme)
+            // Update button visuals
+            buttonImage.color = buttonNormalColor;
+            buttonBorder.color = borderNormalColor;
+            buttonText.color = textNormalColor;
+        }
+        else
+        {
+            if (VRUIPManager.instance != null)
             {
-                // Update button visuals
-                buttonImage.color = buttonNormalColor;
-                buttonBorder.color = borderNormalColor;
-                buttonText.color = textNormalColor;
+                SetupElement(VRUIPManager.instance.CurrentColorTheme);
             }
-            else
-            {
-                if (VRUIPManager.instance != null)
-                {
-                    SetupElement(VRUIPManager.instance.CurrentColorTheme);
-                }
-            }
-            
-            // Set text
-            buttonText.text = text;
-            
-            // Border
-            Roundness = roundness;
-            
-            buttonImage.GetComponent<RectTransform>().SetAllOffsets(borderWidth);
         }
 
+        // Set text
+        buttonText.text = text;
+
+        // Border
+        Roundness = roundness;
+
+        buttonImage.GetComponent<RectTransform>().SetAllOffsets(borderWidth);
+    }
+}
         // ----------
 #endif
     }
