@@ -8,6 +8,11 @@ public class VolumeControl : MonoBehaviour
 
     private void Start()
     {
+        // Set the initial value of the Scrollbar to 0.5
+        if (BGMScrollbar != null)
+        {
+            BGMScrollbar.value = 0.5f;
+        }
         // Set the initial volume based on the Scrollbar value
         AdjustVolume();
     }
