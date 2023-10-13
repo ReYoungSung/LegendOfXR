@@ -146,4 +146,9 @@ public class SoundManager : MonoBehaviour
         StopAllBGM();
         StopAllSFX();
     }
+
+    public void PlayTapSFX()
+    {
+        PlaySFX("ButtonSFX"); 
+    }
 }

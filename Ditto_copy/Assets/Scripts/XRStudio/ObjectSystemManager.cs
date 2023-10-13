@@ -280,7 +280,6 @@ public class ObjectSystemManager : MonoBehaviour
     {
         if (StudioLight.activeSelf == false)
         {
-            soundManager.PlaySFX("LightSFX");
             StudioLight.SetActive(true);
             // Set isActive to true since StudioLight is active
             isActiveStudioLight = true;
@@ -292,7 +291,6 @@ public class ObjectSystemManager : MonoBehaviour
     {
         if (StudioLight.activeSelf == true) 
         {
-            soundManager.PlaySFX("LightSFX"); 
             StudioLight.SetActive(false); 
             // Set isActive to false since StudioLight is deactivated
             isActiveStudioLight = false; 
@@ -307,8 +305,6 @@ public class ObjectSystemManager : MonoBehaviour
         avatar1.transform.localRotation = originAvatar1Transform.localRotation;
         avatar2.transform.localRotation = originAvatar2Transform.localRotation;
         avatar3.transform.localRotation = originAvatar3Transform.localRotation;
-
-
     }
 }
 
