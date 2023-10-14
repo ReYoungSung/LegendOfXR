@@ -4,17 +4,15 @@ using UnityEngine.UI;
 public class VolumeControl : MonoBehaviour
 {
     public Scrollbar BGMScrollbar;
-    public AudioSource SoundManager;
+    public float currentVolume = 0.5f; // The current volume level
 
     private void Start()
     {
         // Set the initial value of the Scrollbar to 0.5
         if (BGMScrollbar != null)
         {
-            BGMScrollbar.value = 0.5f;
+            BGMScrollbar.value = currentVolume;
         }
-        // Set the initial volume based on the Scrollbar value
-        AdjustVolume();
     }
 
     private void Update()
@@ -25,14 +23,22 @@ public class VolumeControl : MonoBehaviour
 
     private void AdjustVolume()
     {
-        // Ensure the Scrollbar and SoundManager are assigned
-        if (BGMScrollbar != null && SoundManager != null)
+        // Ensure the Scrollbar is assigned
+        if (BGMScrollbar != null)
         {
-            // Map the Scrollbar value to the desired volume range (0 to 1)
-            float volume = BGMScrollbar.value;
+            // Set the current volume to the Scrollbar value
+            currentVolume = BGMScrollbar.value;
+        }
+    }
 
-            // Set the volume of the SoundManager to the mapped value
-            SoundManager.volume = volume;
+    // This method assumes that you're calling it to play the BGM.
+    public void PlayBGM(AudioSource bgmSource)
+    {
+        if (bgmSource != null)
+        {
+            bgmSource.volume = currentVolume;  // Set the volume to currentVolume
+            bgmSource.loop = true;
+            bgmSource.Play();
         }
     }
 }
