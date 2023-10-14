@@ -7,6 +7,8 @@ TagManager:
   - LeftHand
   - RightHand
   - PlayerHand
+  - Avatar
+  - XRCamera
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Grab
   - Water
   - UI
-  - 
+  - Hints
   - 
   - 
   - 

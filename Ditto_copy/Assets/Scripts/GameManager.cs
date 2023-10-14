@@ -9,12 +9,11 @@ public class GameManager : MonoBehaviour
     private bool isClearMission2 = false; 
     private bool isClearMission3 = false;
 
-    [HideInInspector] public bool isStudioBlackOut = false;
-    [HideInInspector] public bool isCharacterInExactPlace = false;
-    [HideInInspector] public bool isCameraInExactPlace = false;
-    [HideInInspector] public bool isNoCodeInExactPlace = false;
+    public bool isCharacterInExactPlace = false;
+    public bool isCameraInExactPlace = false;
+    public bool isNoCodeInExactPlace = false;
 
-    [HideInInspector] public bool getFinishCMButton = false;   
+    public bool getFinishCMButton = false;   
 
     private XRScreenManager xrScreenManager;
     private ObjectSystemManager objectSystemManager;
@@ -24,6 +23,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         xrScreenManager = this.GetComponent<XRScreenManager>();
+        objectSystemManager = this.GetComponent<ObjectSystemManager>();
 
         PlayerPrefs.SetInt("Mission1", 0);
         PlayerPrefs.SetInt("Mission2", 0);
@@ -32,7 +32,22 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            StartMission1();
+        }
+        else if (Input.GetKey(KeyCode.Alpha2))
+        {
+            xrScreenManager.ActiveMission2Screen();
+        }
+        else if (Input.GetKey(KeyCode.Alpha3))
+        {
+            xrScreenManager.ActiveMission3Screen();
+        }
+        else if (Input.GetKey(KeyCode.Alpha4))
+        {
+            xrScreenManager.DeActiveAllMissionScreen();
+        }
     }
 
     private void StartMission1()
@@ -67,7 +82,7 @@ public class GameManager : MonoBehaviour
         objectSystemManager.DeActiveXRSetting(); 
     } 
 
-    public IEnumerator Mission1EventFlow()
+    public IEnumerator Mission1EventFlow() 
     {
         yield return new WaitForSeconds(5);
 
@@ -103,7 +118,7 @@ public class GameManager : MonoBehaviour
             if (isCharacterInExactPlace
                && isCameraInExactPlace
                && isNoCodeInExactPlace
-               && isStudioBlackOut
+               && !objectSystemManager.isActiveStudioLight
                && getFinishCMButton) 
             {
                 isClearMission1 = true; 
