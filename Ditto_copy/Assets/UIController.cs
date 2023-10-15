@@ -9,8 +9,7 @@ public class UIController : MonoBehaviour
 
     public void ToggleUI()
     {
-        Debug.Log("ehlsekshelshelhsle");
-        isUIVisible = !isUIVisible;
-        uiToToggle.SetActive(isUIVisible);
+        isUIVisible = !isUIVisible; 
+        uiToToggle.SetActive(isUIVisible); 
     }
 }
