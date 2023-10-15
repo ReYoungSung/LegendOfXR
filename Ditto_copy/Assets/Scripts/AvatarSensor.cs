@@ -51,7 +51,7 @@ public class AvatarSensor : MonoBehaviour
 
     private bool IsRotationWithinRange(Transform avatarTransform)
     {
-        float rotationY = avatarTransform.localRotation.eulerAngles.y;
+        float rotationY = avatarTransform.localRotation.y;
 
         switch (allowedRotation)
         {

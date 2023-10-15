@@ -5,30 +5,28 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private bool isClearMission1 = false; 
-    private bool isClearMission2 = false; 
-    private bool isClearMission3 = false;
+    private bool isClearMission1 = false;  
+    private bool isClearMission2 = false;  
+    private bool isClearMission3 = false;  
 
-    public bool isCharacterInExactPlace = false;
-    public bool isCameraInExactPlace = false;
-    public bool isNoCodeInExactPlace = false;
+    public bool isCharacterInExactPlace = false;  
+    public bool isCameraInExactPlace = false;  
+    public bool isNoCodeInExactPlace = false;  
 
     public bool getFinishCMButton = false;   
 
-    private XRScreenManager xrScreenManager;
-    private ObjectSystemManager objectSystemManager;
-
-    
+    private XRScreenManager xrScreenManager;  
+    private ObjectSystemManager objectSystemManager;  
 
     void Start()
     {
-        xrScreenManager = this.GetComponent<XRScreenManager>();
-        objectSystemManager = this.GetComponent<ObjectSystemManager>();
+        xrScreenManager = this.GetComponent<XRScreenManager>();  
+        objectSystemManager = this.GetComponent<ObjectSystemManager>();  
 
-        PlayerPrefs.SetInt("Mission1", 0);
-        PlayerPrefs.SetInt("Mission2", 0);
-        PlayerPrefs.SetInt("Mission3", 0);
-    }
+        PlayerPrefs.SetInt("Mission1", 0);  
+        PlayerPrefs.SetInt("Mission2", 0);  
+        PlayerPrefs.SetInt("Mission3", 0);  
+    }  
 
     void Update()
     {
