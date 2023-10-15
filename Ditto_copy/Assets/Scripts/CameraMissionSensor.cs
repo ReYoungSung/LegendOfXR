@@ -30,9 +30,10 @@ public class CameraMissionSensor : MonoBehaviour
     {
         if (other.CompareTag("XRCamera"))
         {
-            Debug.Log("A");
-            if (IsRotationWithinRange(other.gameObject.transform))
+            
+            if (IsRotationWithinRange(other.gameObject.transform)) 
             {
+                Debug.Log("A");
                 gameManager.isCameraInExactPlace = true;
             }
             else
@@ -52,7 +53,7 @@ public class CameraMissionSensor : MonoBehaviour
 
     private bool IsRotationWithinRange(Transform avatarTransform)
     {
-        float rotationY = avatarTransform.localRotation.eulerAngles.y;
+        float rotationY = avatarTransform.localRotation.y;
 
         switch (allowedRotation)
         {

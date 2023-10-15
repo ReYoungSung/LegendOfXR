@@ -32,6 +32,7 @@ public class AvatarSensor : MonoBehaviour
         {
             if (IsRotationWithinRange(other.gameObject.transform))
             {
+                Debug.Log(other.gameObject.transform.rotation.y);
                 gameManager.isCharacterInExactPlace = true;
             }
             else
@@ -51,18 +52,23 @@ public class AvatarSensor : MonoBehaviour
 
     private bool IsRotationWithinRange(Transform avatarTransform)
     {
-        float rotationY = avatarTransform.localRotation.eulerAngles.y;
+        float rotationY = avatarTransform.rotation.eulerAngles.y;  
 
-        switch (allowedRotation)
+        if(allowedRotation == RotationRange.M1)
         {
-            case RotationRange.M1:
-                return (rotationY >= -90f && rotationY <= 0f); 
-            case RotationRange.M2:
-                return (rotationY >= -15f && rotationY <= 15f); 
-            case RotationRange.M3:
-                return (rotationY >= 0f && rotationY <= 45f); 
+            return (rotationY >= 360f-90f && rotationY <= 360f);
         }
-
-        return false; 
+        else if (allowedRotation == RotationRange.M2) 
+        { 
+            return (rotationY >= 360f-15f && rotationY <= 360+15f);     
+        }
+        else if (allowedRotation == RotationRange.M3)
+        {
+            return (rotationY >= 0f && rotationY <= 45f);  
+        }
+        else 
+        {
+            return false;
+        }
     }
 }
