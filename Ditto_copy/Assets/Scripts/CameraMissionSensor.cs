@@ -33,7 +33,6 @@ public class CameraMissionSensor : MonoBehaviour
             
             if (IsRotationWithinRange(other.gameObject.transform)) 
             {
-                Debug.Log("A");
                 gameManager.isCameraInExactPlace = true;
             }
             else
@@ -53,14 +52,14 @@ public class CameraMissionSensor : MonoBehaviour
 
     private bool IsRotationWithinRange(Transform avatarTransform)
     {
-        float rotationY = avatarTransform.localRotation.y;
+        float rotationY = avatarTransform.eulerAngles.y;
 
         switch (allowedRotation)
         {
             case RotationRange.M1:
-                return (rotationY >= -45f && rotationY <= 0f);
+                return (rotationY >= 360f-45f && rotationY <= 360f);
             case RotationRange.M2:
-                return (rotationY >= -15f && rotationY <= 15f);
+                return (rotationY >= 360f-15f || rotationY <= 15f);
             case RotationRange.M3:
                 return (rotationY >= 0f && rotationY <= 45f);
         }
