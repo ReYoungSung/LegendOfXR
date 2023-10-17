@@ -46,7 +46,7 @@ public class XRCMRotationController : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Update() 
     {
         if (isLeftButtonPressed)
         {
@@ -70,7 +70,7 @@ public class XRCMRotationController : MonoBehaviour
         }
     }
 
-    void RotateLeft()
+    void RotateLeft() 
     {
         float rotationAmount = -rotationSpeed * Time.deltaTime;
         float targetRotation = XRCM.transform.eulerAngles.y + rotationAmount;
@@ -81,7 +81,7 @@ public class XRCMRotationController : MonoBehaviour
         }
     }
 
-    void RotateRight()
+    void RotateRight() 
     {
         float rotationAmount = rotationSpeed * Time.deltaTime;
         float targetRotation = XRCM.transform.eulerAngles.y + rotationAmount;
@@ -92,14 +92,14 @@ public class XRCMRotationController : MonoBehaviour
         }
     }
 
-    void AnimateButtonPress()
+    void AnimateButtonPress() 
     {
         Vector3 newPosition = button.localPosition;
         newPosition.y -= pressDepth;
         button.localPosition = newPosition;
     }
 
-    void AnimateButtonRelease()
+    void AnimateButtonRelease() 
     {
         Vector3 newPosition = button.localPosition;
         newPosition.y += pressDepth;
