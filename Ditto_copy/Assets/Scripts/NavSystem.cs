@@ -49,4 +49,17 @@ public class NavSystem : MonoBehaviour
             target = target5;
         }
     }
+
+    public void ActiveNavArrow()
+    {
+        if(navArrow.activeSelf == true)
+        {
+            navArrow.SetActive(false);
+
+        }
+        else if(navArrow.activeSelf == false)
+        {
+            navArrow.SetActive(true);
+        }
+    } 
 }
