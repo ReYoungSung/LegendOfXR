@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     private bool isClearMission2 = false;  
     private bool isClearMission3 = false;  
 
+    [HideInInspector] public int CurrentMissionNum = 0; 
+
     public bool isCharacterInExactPlace = false;  
     public bool isCameraInExactPlace = false;  
     public bool isNoCodeInExactPlace = false;  
@@ -60,6 +62,8 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.GetInt("Mission1") == 1)
         {
             xrScreenManager.ActiveMission2Screen();
+
+            StartCoroutine(Mission2EventFlow());
         }
 
     }
@@ -71,6 +75,8 @@ public class GameManager : MonoBehaviour
             objectSystemManager.avatar3.SetActive(true); //Spawn Mage Avatar
 
             xrScreenManager.ActiveMission3Screen();
+
+            StartCoroutine(Mission3EventFlow());
         }
 
     }
@@ -82,37 +88,11 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator Mission1EventFlow() 
     {
+        CurrentMissionNum = 1;
         yield return new WaitForSeconds(5);
 
         while ( isClearMission1 != true )
         {
-            if(isCharacterInExactPlace == true)
-            {
-                //Please put the UI success display switch function here.
-            }
-            else
-            {
-                //Bandelo
-            }
-
-            if (isCameraInExactPlace == true)
-            {
-                //Please put the UI success display switch function here.
-            }
-            else
-            {
-                //Bandelo
-            }
-
-            if (isNoCodeInExactPlace == true)
-            {
-                //Please put the UI success display switch function here.
-            }
-            else
-            {
-                //Bandelo
-            } 
-
             if (isCharacterInExactPlace
                && isCameraInExactPlace
                && isNoCodeInExactPlace
@@ -127,6 +107,7 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(5);
         objectSystemManager.returnObjectsToOriginSpace();
+        xrScreenManager.DeActiveAllMissionScreen();
 
         PlayerPrefs.SetInt("Mission1",1);
 
@@ -135,5 +116,69 @@ public class GameManager : MonoBehaviour
         isCharacterInExactPlace = false;
         isCameraInExactPlace = false;
         isNoCodeInExactPlace = false;
-    } 
+    }
+
+    public IEnumerator Mission2EventFlow()
+    {
+        CurrentMissionNum = 2;
+        yield return new WaitForSeconds(5);
+
+        while (isClearMission1 != true)
+        {
+            if (isCharacterInExactPlace
+               && isCameraInExactPlace
+               && isNoCodeInExactPlace
+               && !objectSystemManager.isActiveStudioLight
+               && getFinishCMButton)
+            {
+                isClearMission2 = true;
+            }
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(5);
+        objectSystemManager.returnObjectsToOriginSpace();
+        xrScreenManager.DeActiveAllMissionScreen();
+
+        PlayerPrefs.SetInt("Mission2", 1);
+
+        FinishMission();
+
+        isCharacterInExactPlace = false;
+        isCameraInExactPlace = false;
+        isNoCodeInExactPlace = false;
+    }
+
+    public IEnumerator Mission3EventFlow()
+    {
+        CurrentMissionNum = 3;
+        yield return new WaitForSeconds(5);
+
+        while (isClearMission1 != true)
+        {
+            if (isCharacterInExactPlace
+               && isCameraInExactPlace
+               && isNoCodeInExactPlace
+               && !objectSystemManager.isActiveStudioLight
+               && getFinishCMButton)
+            {
+                isClearMission3 = true;
+            }
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(5);
+        objectSystemManager.returnObjectsToOriginSpace();
+        xrScreenManager.DeActiveAllMissionScreen();
+
+        PlayerPrefs.SetInt("Mission3", 1);
+
+        FinishMission();
+
+        isCharacterInExactPlace = false;
+        isCameraInExactPlace = false;
+        isNoCodeInExactPlace = false;
+    }
 }
