@@ -107,7 +107,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ProbeReflectionIntensity: 0.8
-    - _RealtimeReflectionIntensity: 1
+    - _RealtimeReflectionIntensity: 0
     - _ReflectionIntensity: 0.385
     - _Refraction: 0.4
     - _RefractionDistance: 10
