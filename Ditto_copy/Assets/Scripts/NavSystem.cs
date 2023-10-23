@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NavSystem : MonoBehaviour
+public class NavButtonOn : MonoBehaviour
 {
     [SerializeField] private Transform target1; 
     [SerializeField] private Transform target2;
