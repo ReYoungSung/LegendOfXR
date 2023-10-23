@@ -84,13 +84,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AtmosphereThickness: 1
+    - _AtmosphereThickness: 1.64
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Exponent: 1
-    - _Exposure: 1
+    - _Exposure: 0.87
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -108,8 +108,8 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SunDisk: 2
-    - _SunSize: 0.5
-    - _SunSizeConvergence: 5
+    - _SunSize: 0.076
+    - _SunSizeConvergence: 5.77
     - _UVSec: 0
     - _UpVectorPitch: 0
     - _UpVectorYaw: 0
