@@ -837,7 +837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8884718517491783893}
   - component: {fileID: 4148730816897338796}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Renderer_Outfit_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9238,7 +9238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4204359548712894125}
   - component: {fileID: 2040341295729357405}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Renderer_Outfit_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9731,7 +9731,7 @@ MonoBehaviour:
     ikTarget: {fileID: 1899845237353382104}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
     trackingRotationOffset: {x: 0, y: 0, z: 0}
-  headBodyPositionOffset: {x: 0, y: -2.3, z: 0}
+  headBodyPositionOffset: {x: 0, y: -1.7, z: 0}
   headBodyYawOffset: 0
 --- !u!114 &680839270
 MonoBehaviour:
