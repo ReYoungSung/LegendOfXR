@@ -1258,13 +1258,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4855606995453059291}
   - component: {fileID: 8371331181298252494}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Renderer_EyeRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4855606995453059291
 Transform:
   m_ObjectHideFlags: 0
@@ -1412,13 +1412,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8718414285689970557}
   - component: {fileID: 6803921196204757206}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Renderer_Teeth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8718414285689970557
 Transform:
   m_ObjectHideFlags: 0
@@ -1832,13 +1832,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4962166227727638094}
   - component: {fileID: 6071037858471173979}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Renderer_EyeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4962166227727638094
 Transform:
   m_ObjectHideFlags: 0
@@ -11027,13 +11027,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5860283032608073294}
   - component: {fileID: 5388964717597858896}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Renderer_Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5860283032608073294
 Transform:
   m_ObjectHideFlags: 0
@@ -13008,7 +13008,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8561217628177395968}
   - component: {fileID: 5443772929248491851}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Renderer_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13699,13 +13699,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7103936478079033405}
   - component: {fileID: 5702875733692367890}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Renderer_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7103936478079033405
 Transform:
   m_ObjectHideFlags: 0
