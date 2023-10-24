@@ -7,9 +7,11 @@ public class NoCodeManager : MonoBehaviour
 {
     private GameManager gameManager;
 
-    private bool[] mission1Answers = new bool[] {false, false, false};  
-    private bool[] mission2Answers = new bool[] {false, false, false};
-    private bool[] mission3Answers = new bool[] {false, false, false};
+    [HideInInspector] public bool[] mission1Answers = new bool[] {false, false};
+    [HideInInspector] public bool[] mission2Answers = new bool[] {false, false};
+    [HideInInspector] public bool[] mission3Answers = new bool[] {false, false, false};
+
+    [HideInInspector] public bool IsPlayButtonDown = false; 
 
     private void Awake()
     {
@@ -27,7 +29,7 @@ public class NoCodeManager : MonoBehaviour
     {
         if(gameManager.CurrentMissionNum == 1)
         {
-            if (mission1Answers[0] && mission1Answers[1] && mission1Answers[3])
+            if (mission1Answers[0] && mission1Answers[1] && IsPlayButtonDown)
             {
                 gameManager.isNoCodeInExactPlace = true;
             }
@@ -38,7 +40,7 @@ public class NoCodeManager : MonoBehaviour
         }
         else if(gameManager.CurrentMissionNum == 2)
         {
-            if (mission2Answers[0] && mission2Answers[1] && mission2Answers[3])
+            if (mission2Answers[0] && mission2Answers[1] && IsPlayButtonDown)
             {
                 gameManager.isNoCodeInExactPlace = true;
             }
@@ -49,7 +51,7 @@ public class NoCodeManager : MonoBehaviour
         }
         else if (gameManager.CurrentMissionNum == 3)
         {
-            if (mission3Answers[0] && mission3Answers[1] && mission3Answers[3])
+            if (mission3Answers[0] && mission3Answers[1] && mission3Answers[3] && IsPlayButtonDown)
             {
                 gameManager.isNoCodeInExactPlace = true;
             }

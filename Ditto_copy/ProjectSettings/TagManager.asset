@@ -9,6 +9,8 @@ TagManager:
   - PlayerHand
   - Avatar
   - XRCamera
+  - loweffect
+  - RuneStone
   layers:
   - Default
   - TransparentFX

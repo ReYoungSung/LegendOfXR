@@ -15,6 +15,8 @@ public class ObjectSystemManager : MonoBehaviour
 
     [SerializeField] private Transform targetTransform;
 
+    [SerializeField] private GameObject[] NeonLightLineObjects;
+
     [SerializeField] private GameObject avatar1;
     [SerializeField] private GameObject avatar2;
     [SerializeField] public GameObject avatar3;
@@ -39,6 +41,7 @@ public class ObjectSystemManager : MonoBehaviour
 
     private SoundManager soundManager;    
     private XRScreenManager xrScreenManager;
+
 
 
     void Start()
@@ -281,6 +284,7 @@ public class ObjectSystemManager : MonoBehaviour
         if (StudioLight.activeSelf == false)
         {
             StudioLight.SetActive(true);
+            DeActivateNeonLightLine();
             // Set isActive to true since StudioLight is active
             isActiveStudioLight = true;
         }
@@ -291,9 +295,26 @@ public class ObjectSystemManager : MonoBehaviour
     {
         if (StudioLight.activeSelf == true) 
         {
-            StudioLight.SetActive(false); 
+            StudioLight.SetActive(false);
+            ActivateNeonLightLine();
             // Set isActive to false since StudioLight is deactivated
             isActiveStudioLight = false; 
+        }
+    }
+
+    public void ActivateNeonLightLine()
+    {
+        for (int i = 0; i < NeonLightLineObjects.Length; i++)
+        {
+            NeonLightLineObjects[i].SetActive(true);
+        }
+    }
+
+    public void DeActivateNeonLightLine()
+    {
+        for (int i = 0; i < NeonLightLineObjects.Length; i++)
+        {
+            NeonLightLineObjects[i].SetActive(false);
         }
     }
 
