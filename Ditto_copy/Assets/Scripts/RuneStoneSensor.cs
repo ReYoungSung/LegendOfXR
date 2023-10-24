@@ -6,6 +6,8 @@ public class RuneStoneSensor : MonoBehaviour
 {
     private NoCodeManager noCodeManager; 
 
+    private bool IsGrabed = false;
+
     private enum MissionType
     {
         None,
@@ -32,9 +34,18 @@ public class RuneStoneSensor : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if(other.CompareTag("PlayerHand"))
+        {
+            IsGrabed = true;
+        }
+
         if(other.CompareTag("RuneStone"))
         {
-            other.transform.position = this.transform.position;
+            if(IsGrabed == false)
+            {
+                other.transform.position = this.transform.position; 
+                other.transform.localEulerAngles = new Vector3(-90,0,0);
+            }
 
             if (missionType == MissionType.Mission1) 
             {
@@ -42,24 +53,31 @@ public class RuneStoneSensor : MonoBehaviour
                 {
                     if(other.name == "BeginToPlay")
                     {
-                        noCodeManager.mission1Answers[0] = true;
+                        noCodeManager.mission1Answers[0] = false;
+                        noCodeManager.isRepeatEvent = false;
                     }
-                }
-                else if(blankType == BlankType.Second)
-                {
-                    if (other.name == "WaterSwordEffect") 
+
+                    if(other.name == "TickEvent")
                     {
-                        noCodeManager.mission1Answers[1] = true;
+                        noCodeManager.mission1Answers[0] = true;
+                        noCodeManager.isRepeatEvent = true;
                     }
                 }
             }
             else if(missionType == MissionType.Mission2)
             {
-                if (blankType == BlankType.First)
+                if(blankType == BlankType.First)
                 {
-                    if (other.name == "TickEvent")
+                    if(other.name == "BeginToPlay")
+                    {
+                        noCodeManager.mission1Answers[0] = false;
+                        noCodeManager.isRepeatEvent = false;
+                    }
+
+                    if(other.name == "TickEvent")
                     {
                         noCodeManager.mission1Answers[0] = true;
+                        noCodeManager.isRepeatEvent = true;
                     }
                 }
                 else if (blankType == BlankType.Second)
@@ -72,20 +90,50 @@ public class RuneStoneSensor : MonoBehaviour
             }
             else if (missionType == MissionType.Mission2)
             {
-                if (blankType == BlankType.First)
+                if(blankType == BlankType.First)
                 {
-                    if (other.name == "TickEvent")
+                    if(other.name == "BeginToPlay")
+                    {
+                        noCodeManager.mission1Answers[0] = false;
+                        noCodeManager.isRepeatEvent = false;
+                    }
+
+                    if(other.name == "TickEvent")
                     {
                         noCodeManager.mission1Answers[0] = true;
+                        noCodeManager.isRepeatEvent = true;
                     }
                 }
-                else if (blankType == BlankType.Second)
+                else if (blankType == BlankType.Second) 
                 {
                     if (other.name == "12HourChanger")
                     {
                         noCodeManager.mission1Answers[1] = true;
                     }
                 }
+                else if (blankType == BlankType.Third) 
+                {
+                    if (other.name == "12HourChanger")
+                    {
+                        noCodeManager.mission1Answers[1] = true;
+                    }
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("PlayerHand"))
+        {
+            IsGrabed = false;
+        }
+
+        if(other.CompareTag("RuneStone"))
+        {
+            if(other.name == "BeginToPlay")
+            {
+                noCodeManager.mission1Answers[0] = false; 
             }
         }
     }

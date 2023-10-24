@@ -7,9 +7,12 @@ public class NoCodeManager : MonoBehaviour
 {
     private GameManager gameManager;
 
-    [HideInInspector] public bool[] mission1Answers = new bool[] {false, false};
-    [HideInInspector] public bool[] mission2Answers = new bool[] {false, false};
-    [HideInInspector] public bool[] mission3Answers = new bool[] {false, false, false};
+    public bool[] mission1Answers = new bool[] {false};
+    public bool[] mission2Answers = new bool[] {false, false};
+    public bool[] mission3Answers = new bool[] {false, false, false};
+
+    [HideInInspector] public bool isRepeatEvent = false;
+    [SerializeField] private GameObject WatarSordVFX;
 
     [HideInInspector] public bool IsPlayButtonDown = false; 
 
@@ -29,7 +32,7 @@ public class NoCodeManager : MonoBehaviour
     {
         if(gameManager.CurrentMissionNum == 1)
         {
-            if (mission1Answers[0] && mission1Answers[1] && IsPlayButtonDown)
+            if (mission1Answers[0] && IsPlayButtonDown) 
             {
                 gameManager.isNoCodeInExactPlace = true;
             }
@@ -59,6 +62,16 @@ public class NoCodeManager : MonoBehaviour
             {
                 gameManager.isNoCodeInExactPlace = false;
             }
+        }
+    }
+
+    IEnumerator Mission1RuneStoneFlow() 
+    {
+        yield return new WaitForSeconds(2.0f); 
+        if(isRepeatEvent == false)
+        {
+            //WatarSordVFX.setActive(true);
+            
         }
     }
 }
