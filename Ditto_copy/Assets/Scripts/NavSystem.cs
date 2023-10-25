@@ -50,16 +50,9 @@ public class NavSystem : MonoBehaviour
         }
     }
 
-    public void ActiveNavArrow()
+    public void ActiveNavArrow(bool activeButton)
     {
-        if(navArrow.activeSelf == true)
-        {
-            navArrow.SetActive(false);
+        navArrow.SetActive(activeButton);
 
-        }
-        else if(navArrow.activeSelf == false)
-        {
-            navArrow.SetActive(true);
-        }
     } 
 }
