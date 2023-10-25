@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
     public bool getFinishCMButton = false;   
 
     private XRScreenManager xrScreenManager;  
-    private ObjectSystemManager objectSystemManager;  
+    private ObjectSystemManager objectSystemManager;
+
+    [SerializeField] private GameObject[] RuneStonePlates;
 
     void Start()
     {
@@ -39,10 +41,12 @@ public class GameManager : MonoBehaviour
         else if (Input.GetKey(KeyCode.Alpha2))
         {
             xrScreenManager.ActiveMission2Screen();
+            StartMission2();
         }
         else if (Input.GetKey(KeyCode.Alpha3))
         {
             xrScreenManager.ActiveMission3Screen();
+            StartMission3();
         }
         else if (Input.GetKey(KeyCode.Alpha4))
         {
@@ -52,8 +56,10 @@ public class GameManager : MonoBehaviour
 
     private void StartMission1()
     {
-        xrScreenManager.ActiveMission1Screen(); 
-
+        xrScreenManager.ActiveMission1Screen();
+        RuneStonePlates[0].SetActive(true);
+        RuneStonePlates[1].SetActive(false);
+        RuneStonePlates[2].SetActive(false);
         StartCoroutine(Mission1EventFlow()); 
     }
 
@@ -62,10 +68,11 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.GetInt("Mission1") == 1)
         {
             xrScreenManager.ActiveMission2Screen();
-
+            RuneStonePlates[0].SetActive(false);
+            RuneStonePlates[1].SetActive(true);
+            RuneStonePlates[2].SetActive(false);
             StartCoroutine(Mission2EventFlow());
         }
-
     }
 
     private void StartMission3()
@@ -75,10 +82,11 @@ public class GameManager : MonoBehaviour
             objectSystemManager.avatar3.SetActive(true); //Spawn Mage Avatar
 
             xrScreenManager.ActiveMission3Screen();
-
+            RuneStonePlates[0].SetActive(false);
+            RuneStonePlates[1].SetActive(false);
+            RuneStonePlates[2].SetActive(true);
             StartCoroutine(Mission3EventFlow());
         }
-
     }
 
     private void FinishMission()

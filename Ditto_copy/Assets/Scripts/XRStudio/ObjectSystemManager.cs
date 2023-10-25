@@ -16,6 +16,8 @@ public class ObjectSystemManager : MonoBehaviour
     [SerializeField] private Transform targetTransform;
 
     [SerializeField] private GameObject[] NeonLightLineObjects;
+    [SerializeField] private GameObject[] RuneStoneObjects;
+    private GameObject[] RuneStonesOriginTransform; 
 
     [SerializeField] private GameObject avatar1;
     [SerializeField] private GameObject avatar2;
@@ -44,6 +46,8 @@ public class ObjectSystemManager : MonoBehaviour
 
 
 
+
+
     void Start()
     {
         soundManager = this.GetComponent<SoundManager>();
@@ -57,6 +61,7 @@ public class ObjectSystemManager : MonoBehaviour
         originAvatar1Transform = avatar1.transform;
         originAvatar2Transform = avatar2.transform;
         originAvatar3Transform = avatar3.transform;
+        SaveRuneStonesOriginTransform();
     }
 
     void Update()
@@ -318,6 +323,24 @@ public class ObjectSystemManager : MonoBehaviour
         }
     }
 
+    public void SaveRuneStonesOriginTransform()
+    {
+        for (int i = 0; i < RuneStoneObjects.Length; i++)
+        {
+            if (i < RuneStonesOriginTransform.Length)
+            {
+                GameObject runeObject = RuneStoneObjects[i];
+                GameObject originTransform = RuneStonesOriginTransform[i];
+
+                if (runeObject != null && originTransform != null)
+                {
+                    originTransform.transform.position = runeObject.transform.position;
+                    originTransform.transform.rotation = runeObject.transform.rotation;
+                }
+            }
+        }
+    }
+
     public void returnObjectsToOriginSpace() 
     {
         avatar1.transform.position = originAvatar1Transform.position;
@@ -326,6 +349,21 @@ public class ObjectSystemManager : MonoBehaviour
         avatar1.transform.localRotation = originAvatar1Transform.localRotation;
         avatar2.transform.localRotation = originAvatar2Transform.localRotation;
         avatar3.transform.localRotation = originAvatar3Transform.localRotation;
+
+        for (int i = 0; i < RuneStoneObjects.Length; i++)
+        {
+            if (i < RuneStonesOriginTransform.Length)
+            {
+                GameObject runeObject = RuneStoneObjects[i];
+                GameObject originTransform = RuneStonesOriginTransform[i];
+
+                if (runeObject != null && originTransform != null)
+                {
+                    runeObject.transform.position = originTransform.transform.position;
+                    runeObject.transform.rotation = originTransform.transform.rotation;
+                }
+            }
+        }
     }
 }
 

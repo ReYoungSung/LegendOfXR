@@ -65,24 +65,48 @@ public class RuneStoneSensor : MonoBehaviour
             {
                 if(blankType == BlankType.First)
                 {
-                    if(other.name == "BeginToPlay")
+                    noCodeManager.mission2FillBlank[0] = true;
+
+                    if (other.name == "BeginToPlay")
                     {
-                        noCodeManager.mission1Answers[0] = false;
+                        noCodeManager.mission1Answers[0] = true;
                         noCodeManager.isRepeatEvent = false;
                     }
 
                     if(other.name == "TickEvent")
                     {
-                        noCodeManager.mission1Answers[0] = true;
+                        noCodeManager.mission1Answers[0] = false;   
                         noCodeManager.isRepeatEvent = true;
                     }
                 }
                 else if (blankType == BlankType.Second)
                 {
-                    if (other.name == "12HourChanger")
+                    noCodeManager.mission2FillBlank[1] = true;
+
+                    if (other.name == "12HourChanger") 
                     {
                         noCodeManager.mission1Answers[1] = true;
+                        noCodeManager.TimeValue = 12;
                     }
+
+                    if (other.name == "6HourChanger")
+                    {
+                        noCodeManager.mission1Answers[1] = false;
+                        noCodeManager.TimeValue = 6;
+                    }
+
+                    if (other.name == "18HourChanger")
+                    {
+                        noCodeManager.mission1Answers[1] = false;
+                        noCodeManager.TimeValue = 18;
+                    }
+
+                    if (other.name == "24HourChanger")
+                    {
+                        noCodeManager.mission1Answers[1] = false;
+                        noCodeManager.TimeValue = 24;
+                    }
+
                 }
             }
             else if (missionType == MissionType.Mission2)
@@ -123,10 +147,19 @@ public class RuneStoneSensor : MonoBehaviour
     {
         if(other.CompareTag("RuneStone"))
         {
-            if(other.name == "BeginToPlay")
-            {
-                noCodeManager.mission1Answers[0] = false; 
-            }
+            noCodeManager.mission1Answers[0] = false;
+            noCodeManager.mission2Answers[0] = false;
+            noCodeManager.mission2Answers[1] = false;
+            noCodeManager.mission3Answers[0] = false;
+            noCodeManager.mission3Answers[1] = false;
+            noCodeManager.mission3Answers[2] = false;
+
+            noCodeManager.mission1FillBlank[0] = true;
+            noCodeManager.mission2FillBlank[0] = true;
+            noCodeManager.mission2FillBlank[1] = true;
+            noCodeManager.mission3FillBlank[0] = true;
+            noCodeManager.mission3FillBlank[1] = true;
+            noCodeManager.mission3FillBlank[2] = true;
         }
     }
 }

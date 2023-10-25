@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,16 +16,27 @@ public class NoCodeManager : MonoBehaviour
     public bool[] mission3FillBlank = new bool[] { false, false, false };
     public bool fullFillBlanks = false;
 
+    //Mission1
     [HideInInspector] public bool isRepeatEvent = false;
-    [SerializeField] private GameObject WatarSwordVFX; 
+    [SerializeField] private GameObject WatarSwordVFX;
+
+    //Mission2
+    private GameObject sunLight;
+    private Coroutine rotateCoroutine;
+    private float rotationSpeed = 90f; 
+    private float rotationDuration = 2f;
+    [HideInInspector] public int TimeValue = 0;
+
 
     [HideInInspector] public bool IsPlayButtonDown = false;
-    private Coroutine RuneStoneCoroutine = null;
+    private Coroutine RuneStoneCoroutine = null; 
 
-    private void Awake()
+
+
+    private void Awake() 
     {
         gameManager = GameObject.Find("XRStudioSystemManager").GetComponent<GameManager>();
-    }
+    } 
 
 
     void Start()
@@ -108,14 +119,14 @@ public class NoCodeManager : MonoBehaviour
         if(RuneStoneCoroutine == null && fullFillBlanks == true) 
         {
             if (gameManager.CurrentMissionNum == 1)
-                RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());
+                RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow()); 
             else if(gameManager.CurrentMissionNum == 2)
-                RuneStoneCoroutine = StartCoroutine(Mission2RuneStoneFlow());
+                RuneStoneCoroutine = StartCoroutine(Mission2RuneStoneFlow()); 
             else if (gameManager.CurrentMissionNum == 3)
-                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow());
+                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow()); 
         }
             
-        IsPlayButtonDown = true;
+        IsPlayButtonDown = true;  
     }
 
     public void StopRuneStone()
@@ -149,18 +160,47 @@ public class NoCodeManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
 
-        WatarSwordVFX.SetActive(true);
+        RotateSunLight();
 
         while (isRepeatEvent == true)
         {
+            RotateSunLight();
             yield return null;
         }
 
         yield return new WaitForSeconds(1.0f);
-        WatarSwordVFX.SetActive(false);
+
+        RuneStoneCoroutine = null;
     }
 
-    IEnumerator Mission3RuneStoneFlow()
+    public void RotateSunLight()
+    {
+        if (rotateCoroutine == null)
+        {
+            rotateCoroutine = StartCoroutine(RotateSunLightCoroutine(180f/12*TimeValue));
+        }
+    } 
+
+    private IEnumerator RotateSunLightCoroutine(float targetRotation)
+    {
+        float rotationTime = 0f;
+        Quaternion currentRotations = sunLight.transform.rotation;
+
+        while (rotationTime < rotationDuration)
+        {
+            float t = rotationTime / rotationDuration;
+
+            sunLight.transform.rotation = Quaternion.Slerp(currentRotations, Quaternion.Euler(currentRotations.eulerAngles.x + targetRotation, 0f, 0f), t);  
+            rotationTime += Time.deltaTime;
+            yield return null;
+        }
+
+        sunLight.transform.rotation = Quaternion.Euler(0f, currentRotations.eulerAngles.y + targetRotation, 0f); 
+        
+        rotateCoroutine = null; 
+    }
+
+    private IEnumerator Mission3RuneStoneFlow()
     {
         yield return new WaitForSeconds(2.0f);
 
