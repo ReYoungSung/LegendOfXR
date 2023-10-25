@@ -46,7 +46,7 @@ public class CameraMissionSensor : MonoBehaviour
     {
         if (other.CompareTag("XRCamera"))
         {
-            gameManager.isCameraInExactPlace = false;
+            gameManager.isCameraInExactPlace = false; 
         }
     }
 
@@ -57,7 +57,7 @@ public class CameraMissionSensor : MonoBehaviour
         switch (allowedRotation)
         {
             case RotationRange.M1:
-                return (rotationY >= 360f-45f && rotationY <= 360f);
+                return (rotationY >= 360f-45f && rotationY <= 360f); 
             case RotationRange.M2:
                 return (rotationY >= 360f-15f || rotationY <= 15f);
             case RotationRange.M3:

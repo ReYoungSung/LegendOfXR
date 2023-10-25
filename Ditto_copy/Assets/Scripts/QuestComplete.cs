@@ -29,7 +29,7 @@ public class QuestComplete : MonoBehaviour
         
     }
       
-          if (gameManager.isCameraInExactPlace)
+          if (gameManager.isNoCodeInExactPlace)
     {
         uiImage2.color = Color.green;
     }
@@ -39,7 +39,7 @@ public class QuestComplete : MonoBehaviour
         
     }
       
-          if ( gameManager.isNoCodeInExactPlace)
+          if ( gameManager.isCameraInExactPlace) 
     {
         uiImage3.color = Color.green;
     }
