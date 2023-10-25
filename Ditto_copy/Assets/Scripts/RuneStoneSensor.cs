@@ -51,7 +51,9 @@ public class RuneStoneSensor : MonoBehaviour
             {
                 if(blankType == BlankType.First)
                 {
-                    if(other.name == "BeginToPlay")
+                    noCodeManager.mission1FillBlank[0] = true;
+
+                    if (other.name == "BeginToPlay")
                     {
                         noCodeManager.mission1Answers[0] = false;
                         noCodeManager.isRepeatEvent = false;
@@ -60,7 +62,7 @@ public class RuneStoneSensor : MonoBehaviour
                     if(other.name == "TickEvent")
                     {
                         noCodeManager.mission1Answers[0] = true;
-                        noCodeManager.isRepeatEvent = true;
+                        noCodeManager.isRepeatEvent = true; 
                     }
                 }
             }
