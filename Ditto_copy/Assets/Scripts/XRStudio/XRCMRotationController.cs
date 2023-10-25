@@ -17,8 +17,8 @@ public class XRCMRotationController : MonoBehaviour
     
     public float rotationSpeed = 30.0f;
 
-    private bool isLeftButtonPressed = false;
-    private bool isRightButtonPressed = false;
+    private bool isLeftButtonPressed = false; 
+    private bool isRightButtonPressed = false; 
 
     public Transform button;
     public float pressDepth = 0.01f;
@@ -50,11 +50,11 @@ public class XRCMRotationController : MonoBehaviour
     {
         if (isLeftButtonPressed)
         {
-            RotateLeft();
+            RotateLeft(); 
         }
         else if (isRightButtonPressed)
         {
-            RotateRight();
+            RotateRight(); 
         }
     }
 
@@ -62,11 +62,11 @@ public class XRCMRotationController : MonoBehaviour
     {
         if (buttonType == ButtonType.Left)
         {
-            isLeftButtonPressed = isPressed;
+            isLeftButtonPressed = isPressed; 
         }
         else if (buttonType == ButtonType.Right)
         {
-            isRightButtonPressed = isPressed;
+            isRightButtonPressed = isPressed; 
         }
     }
 
