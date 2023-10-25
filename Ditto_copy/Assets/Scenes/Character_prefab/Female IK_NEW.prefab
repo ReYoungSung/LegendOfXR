@@ -2816,7 +2816,6 @@ GameObject:
   - component: {fileID: 2066035170759707686}
   - component: {fileID: 2066035170759707684}
   - component: {fileID: 2066035170759707687}
-  - component: {fileID: 3867605189324412732}
   m_Layer: 5
   m_Name: uiImage3
   m_TagString: Untagged
@@ -2882,21 +2881,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3867605189324412732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2066035170759707681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d328b90209e95234f83f3e8b5885dff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiImage1: {fileID: 2066035172050194610}
-  uiImage2: {fileID: 2066035171886739060}
-  uiImage3: {fileID: 2066035170759707687}
 --- !u!1 &2066035170777292518
 GameObject:
   m_ObjectHideFlags: 0
@@ -5250,7 +5234,6 @@ GameObject:
   - component: {fileID: 2066035171886739063}
   - component: {fileID: 2066035171886739061}
   - component: {fileID: 2066035171886739060}
-  - component: {fileID: 3867605189139889560}
   m_Layer: 5
   m_Name: uiImage2
   m_TagString: Untagged
@@ -5316,21 +5299,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3867605189139889560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2066035171886739062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d328b90209e95234f83f3e8b5885dff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiImage1: {fileID: 2066035172050194610}
-  uiImage2: {fileID: 2066035171886739060}
-  uiImage3: {fileID: 2066035170759707687}
 --- !u!1 &2066035171924571119
 GameObject:
   m_ObjectHideFlags: 0
@@ -11488,7 +11456,6 @@ GameObject:
   - component: {fileID: 806080448047879864}
   - component: {fileID: 8675612850030326562}
   - component: {fileID: 264235670776183786}
-  - component: {fileID: 1879275503502614878}
   - component: {fileID: 7789727576047399226}
   m_Layer: 5
   m_Name: NaviON Button
@@ -11626,20 +11593,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonImage: {fileID: 8675612850030326562}
   selectedPressedSprite: {fileID: 21300000, guid: 0d04f494115c2f247a7d3e4aeecc9342, type: 3}
---- !u!114 &1879275503502614878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5562816652307954632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9401d79d961b1664b8a86cbd73e80bc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navArrow: {fileID: 0}
-  onButton: {fileID: 806080448047879864}
 --- !u!114 &7789727576047399226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11668,6 +11621,18 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: NavSystem, Assembly-CSharp
+          m_MethodName: ActiveNavArrow
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
           m_CallState: 2
 --- !u!1 &5879849927969799563
 GameObject:
@@ -13276,7 +13241,6 @@ GameObject:
   - component: {fileID: 4025303231279432608}
   - component: {fileID: 4152752728574864481}
   - component: {fileID: 7515408057911484645}
-  - component: {fileID: 4912443234030023640}
   - component: {fileID: 5525926998092002235}
   m_Layer: 5
   m_Name: NaviOFF Button
@@ -13402,20 +13366,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonImage: {fileID: 4152752728574864481}
   selectedPressedSprite: {fileID: 21300000, guid: 0d04f494115c2f247a7d3e4aeecc9342, type: 3}
---- !u!114 &4912443234030023640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7616878054495007588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24bf742b57774244682b1dd3f1c61f7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navArrow: {fileID: 0}
-  offButton: {fileID: 4025303231279432608}
 --- !u!114 &5525926998092002235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13437,6 +13387,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
           m_MethodName: Play
           m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: NavSystem, Assembly-CSharp
+          m_MethodName: ActiveNavArrow
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
