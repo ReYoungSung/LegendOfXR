@@ -222,7 +222,7 @@ public class ObjectSystemManager : MonoBehaviour
                 rotateCoroutine = StartCoroutine(RotateBookshelfsCoroutine(180f)); 
                 // Set isActive to false since bookshelves are deactivated
                 isActiveBookshelfs = false;
-            }
+            }   
         }
     }
 
@@ -325,6 +325,8 @@ public class ObjectSystemManager : MonoBehaviour
 
     public void SaveRuneStonesOriginTransform()
     {
+        RuneStonesOriginTransform = new GameObject[RuneStoneObjects.Length];
+
         for (int i = 0; i < RuneStoneObjects.Length; i++)
         {
             if (i < RuneStonesOriginTransform.Length)
