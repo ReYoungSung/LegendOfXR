@@ -10,11 +10,24 @@ public class ChangeSkyInStartSC : MonoBehaviour
     private float moveSpeed = 20f;
     [SerializeField] private Transform targetTransform;
 
+    [SerializeField] private GameObject[] Particle1;
+    [SerializeField] private GameObject[] Particle2;
+    [SerializeField] private GameObject[] Particle3;
+    [SerializeField] private GameObject[] Particle4;
+    [SerializeField] private GameObject[] Particle5;
+    [SerializeField] private GameObject[] Particle6;
+    [SerializeField] private GameObject Particle8;
+    [SerializeField] private GameObject Particle9;
+    [SerializeField] private GameObject Particle10;
+
+    
+
     // Start is called before the first frame update
     void Start() 
     {
         SkyBoxTransform = skyBox.transform;
         StartCoroutine(ChangeSky());
+        StartCoroutine(CineStartFlow());
     }
 
     // Update is called once per frame
@@ -23,11 +36,34 @@ public class ChangeSkyInStartSC : MonoBehaviour
         
     }
 
-    private IEnumerator ChangeSky()
+    private IEnumerator ChangeSky() 
     {
         yield return new WaitForSeconds(8.3f);
         skyBox.SetActive(true);
-        MoveXRScreenToTargetPosition();
+        MoveXRScreenToTargetPosition();  
+    }
+
+    private IEnumerator CineStartFlow() 
+    {
+        yield return new WaitForSeconds(18f); 
+         
+        for(int i = 0; i < Particle1.Length; i++)
+        {
+            Particle1[i].SetActive(true);
+        }
+
+        yield return new WaitForSeconds(15f); 
+    for(int i = 0; i < Particle2.Length; i++)
+        {
+            Particle2[i].SetActive(true);
+        }
+
+        yield return new WaitForSeconds(15f); 
+        for(int i = 0; i < Particle3.Length; i++)
+        {
+            Particle3[i].SetActive(true);
+        }
+
     } 
 
     // XRScreen�� ��ǥ ��ġ�� õõ�� �̵��ϴ� �޼���
