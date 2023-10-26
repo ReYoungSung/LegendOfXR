@@ -20,6 +20,11 @@ public class SoundManager : MonoBehaviour
     private Dictionary<string, AudioSource> bgmAudioSources = new Dictionary<string, AudioSource>();
     private Dictionary<string, AudioSource> sfxAudioSources = new Dictionary<string, AudioSource>();
 
+    float volume = 0.3f;
+
+    [SerializeField] private GameObject Handle;
+    
+
     private void Awake()
     {
         instance = this;
@@ -28,7 +33,7 @@ public class SoundManager : MonoBehaviour
 
     void Update() 
     {
-        ChangeVolumeAllBGM(1f);
+        ChangeVolumeAllBGM(volume*Handle.GetComponent<Scrollbar>().value);
     
     }
 
@@ -62,7 +67,7 @@ public class SoundManager : MonoBehaviour
         } 
     }
 
-    public void PlayBGM(string bgmTitle, float volume = 0.5f)
+    public void PlayBGM(string bgmTitle)
     {
         if (bgmAudioSources.ContainsKey(bgmTitle))
         {
