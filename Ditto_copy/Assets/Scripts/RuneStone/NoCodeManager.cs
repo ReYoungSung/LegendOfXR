@@ -133,6 +133,7 @@ public class NoCodeManager : MonoBehaviour
     {
         if (RuneStoneCoroutine != null)
         {
+            isRepeatEvent = false;
             StopCoroutine(RuneStoneCoroutine);
             RuneStoneCoroutine = null;
         }

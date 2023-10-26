@@ -17,15 +17,16 @@ public class ObjectSystemManager : MonoBehaviour
 
     [SerializeField] private GameObject[] NeonLightLineObjects;
     [SerializeField] private GameObject[] RuneStoneObjects;
-    private GameObject[] RuneStonesOriginTransform; 
+    private Vector3[] RuneStonesOriginPosition; 
+    private Quaternion[] RuneStonesOriginRotation;
 
     [SerializeField] private GameObject avatar1;
     [SerializeField] private GameObject avatar2;
     [SerializeField] public GameObject avatar3;
 
-    private Transform originAvatar1Transform;
-    private Transform originAvatar2Transform;
-    private Transform originAvatar3Transform;
+    private Vector3 originAvatar1Position;
+    private Vector3 originAvatar2Position;
+    private Vector3 originAvatar3Position;
 
     [HideInInspector] public bool isActiveXRScreen = false;
     [HideInInspector] public bool isActiveBookshelfs = false;
@@ -44,24 +45,20 @@ public class ObjectSystemManager : MonoBehaviour
     private SoundManager soundManager;    
     private XRScreenManager xrScreenManager;
 
-
-
-
-
     void Start()
     {
         soundManager = this.GetComponent<SoundManager>();
-        xrScreenManager = this.GetComponent<XRScreenManager>();
+        xrScreenManager = this.GetComponent<XRScreenManager>(); 
         
         originalPosition = XRScreenTransform.position;
 
         // ������ ȸ�� ���� ����
         originalRotation = objectsToRotate[0].transform.rotation;
 
-        originAvatar1Transform = avatar1.transform;
-        originAvatar2Transform = avatar2.transform;
-        originAvatar3Transform = avatar3.transform;
-        SaveRuneStonesOriginTransform();
+        originAvatar1Position = avatar1.transform.position;  
+        originAvatar2Position = avatar2.transform.position;  
+        originAvatar3Position = avatar3.transform.position;  
+        SaveRuneStonesOriginTransform();  
     }
 
     void Update()
@@ -325,45 +322,31 @@ public class ObjectSystemManager : MonoBehaviour
 
     public void SaveRuneStonesOriginTransform()
     {
-        RuneStonesOriginTransform = new GameObject[RuneStoneObjects.Length];
+        RuneStonesOriginPosition = new Vector3[RuneStoneObjects.Length]; 
+        RuneStonesOriginRotation = new Quaternion[RuneStoneObjects.Length];
 
         for (int i = 0; i < RuneStoneObjects.Length; i++)
         {
-            if (i < RuneStonesOriginTransform.Length)
+            if (i < RuneStonesOriginPosition.Length)
             {
-                GameObject runeObject = RuneStoneObjects[i];
-                GameObject originTransform = RuneStonesOriginTransform[i];
-
-                if (runeObject != null && originTransform != null)
-                {
-                    originTransform.transform.position = runeObject.transform.position;
-                    originTransform.transform.rotation = runeObject.transform.rotation;
-                }
+                RuneStonesOriginPosition[i] = RuneStoneObjects[i].transform.position;
+                RuneStonesOriginRotation[i] = RuneStoneObjects[i].transform.rotation;
             }
         }
     }
 
     public void returnObjectsToOriginSpace() 
     {
-        avatar1.transform.position = originAvatar1Transform.position;
-        avatar2.transform.position = originAvatar2Transform.position; 
-        avatar3.transform.position = originAvatar3Transform.position;
-        avatar1.transform.localRotation = originAvatar1Transform.localRotation;
-        avatar2.transform.localRotation = originAvatar2Transform.localRotation;
-        avatar3.transform.localRotation = originAvatar3Transform.localRotation;
+        avatar1.transform.position = originAvatar1Position;
+        avatar2.transform.position = originAvatar2Position;
+        avatar3.transform.position = originAvatar3Position;
 
         for (int i = 0; i < RuneStoneObjects.Length; i++)
         {
-            if (i < RuneStonesOriginTransform.Length)
+            if (i < RuneStonesOriginPosition.Length)
             {
-                GameObject runeObject = RuneStoneObjects[i];
-                GameObject originTransform = RuneStonesOriginTransform[i];
-
-                if (runeObject != null && originTransform != null)
-                {
-                    runeObject.transform.position = originTransform.transform.position;
-                    runeObject.transform.rotation = originTransform.transform.rotation;
-                }
+                RuneStoneObjects[i].transform.position = RuneStonesOriginPosition[i];  
+                RuneStoneObjects[i].transform.rotation = RuneStonesOriginRotation[i];
             }
         }
     }
