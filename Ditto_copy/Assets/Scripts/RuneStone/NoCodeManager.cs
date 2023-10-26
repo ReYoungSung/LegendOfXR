@@ -21,7 +21,7 @@ public class NoCodeManager : MonoBehaviour
     [SerializeField] private GameObject WatarSwordVFX;
 
     //Mission2
-    private GameObject sunLight;
+    [SerializeField] private GameObject sunLight;
     private Coroutine rotateCoroutine;
     private float rotationSpeed = 90f; 
     private float rotationDuration = 2f;
@@ -133,12 +133,10 @@ public class NoCodeManager : MonoBehaviour
     {
         if (RuneStoneCoroutine != null)
         {
-            isRepeatEvent = false;
-            StopCoroutine(RuneStoneCoroutine);
-            RuneStoneCoroutine = null;
+            isRepeatEvent = false; 
         }
 
-        IsPlayButtonDown = false;
+        IsPlayButtonDown = false;  
     }
 
     IEnumerator Mission1RuneStoneFlow() 
@@ -154,6 +152,8 @@ public class NoCodeManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);  
         WatarSwordVFX.SetActive(false);  
+
+        StopCoroutine(RuneStoneCoroutine);
         RuneStoneCoroutine = null;  
     }
 
@@ -171,6 +171,7 @@ public class NoCodeManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
+        StopCoroutine(RuneStoneCoroutine);
         RuneStoneCoroutine = null;
     }
 
@@ -178,34 +179,34 @@ public class NoCodeManager : MonoBehaviour
     {
         if (rotateCoroutine == null)
         {
-            rotateCoroutine = StartCoroutine(RotateSunLightCoroutine(180f/12*TimeValue));
+            rotateCoroutine = StartCoroutine(RotateSunLightCoroutine(180f*TimeValue/12));
         }
     } 
 
     private IEnumerator RotateSunLightCoroutine(float targetRotation)
     {
-        float rotationTime = 0f;
-        Quaternion currentRotations = sunLight.transform.rotation;
+        float rotationDuration = 5f; // 원하는 회전 시간
+        float rotationTime = 0f; // 현재 회전 시간
+        Quaternion startRotation = sunLight.transform.rotation;
+        Quaternion endRotation = Quaternion.Euler(startRotation.eulerAngles.x + targetRotation, 0f, 0f);
 
         while (rotationTime < rotationDuration)
         {
             float t = rotationTime / rotationDuration;
-
-            sunLight.transform.rotation = Quaternion.Slerp(currentRotations, Quaternion.Euler(currentRotations.eulerAngles.x + targetRotation, 0f, 0f), t);  
+            sunLight.transform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
             rotationTime += Time.deltaTime;
             yield return null;
         }
 
-        sunLight.transform.rotation = Quaternion.Euler(0f, currentRotations.eulerAngles.y + targetRotation, 0f); 
-        
-        rotateCoroutine = null; 
+        sunLight.transform.rotation = endRotation; // 최종 회전 각도로 설정
+
+        rotateCoroutine = null;
     }
+
 
     private IEnumerator Mission3RuneStoneFlow()
     {
         yield return new WaitForSeconds(2.0f);
-
-        WatarSwordVFX.SetActive(true);
 
         while (isRepeatEvent == true)
         {
@@ -213,6 +214,8 @@ public class NoCodeManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1.0f);
-        WatarSwordVFX.SetActive(false);
+        
+        StopCoroutine(RuneStoneCoroutine);
+        RuneStoneCoroutine = null;
     }
 }
