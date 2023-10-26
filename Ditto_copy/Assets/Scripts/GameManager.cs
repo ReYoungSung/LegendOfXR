@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void StartMission1()
+    public void StartMission1()
     {
         xrScreenManager.ActiveMission1Screen();
         RuneStonePlates[0].SetActive(true);
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Mission1EventFlow()); 
     }
 
-    private void StartMission2()
+    public void StartMission2()
     {
         if (PlayerPrefs.GetInt("Mission1") == 1)
         {
@@ -75,9 +75,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void StartMission3()
+    public void StartMission3()
     {
-        if (PlayerPrefs.GetInt("Mission2") == 1)
+        if (PlayerPrefs.GetInt("Mission2") == 1 && PlayerPrefs.GetInt("Mission1") == 1)
         {
             objectSystemManager.avatar3.SetActive(true); //Spawn Mage Avatar
 

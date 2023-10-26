@@ -24,7 +24,7 @@ public class NavSystem : MonoBehaviour
 
     public void selectNavTarget(int UISelectNum = 0)
     {
-        if(UISelectNum == 0)
+        if(UISelectNum == 0) 
         {
             return;
         }
