@@ -29,7 +29,7 @@ public class RuneStoneSensor : MonoBehaviour
 
     void Start()
     {
-        noCodeManager = GameObject.Find("RuneStoneMissions").GetComponent<NoCodeManager>(); 
+        noCodeManager = GameObject.Find("XRStudioSystemManager").GetComponent<NoCodeManager>(); 
     }
 
     private void OnTriggerStay(Collider other)

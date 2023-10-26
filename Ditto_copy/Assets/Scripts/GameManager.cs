@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     private XRScreenManager xrScreenManager;  
     private ObjectSystemManager objectSystemManager;
+    private NoCodeManager noCodeManager;
 
     [SerializeField] private GameObject[] RuneStonePlates;
 
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     {
         xrScreenManager = this.GetComponent<XRScreenManager>();  
         objectSystemManager = this.GetComponent<ObjectSystemManager>();  
+        noCodeManager = this.GetComponent<NoCodeManager>();
 
         PlayerPrefs.SetInt("Mission1", 0);  
         PlayerPrefs.SetInt("Mission2", 0);  
@@ -56,18 +58,18 @@ public class GameManager : MonoBehaviour
 
     public void StartMission1()
     {
-        xrScreenManager.ActiveMission1Screen();
-        RuneStonePlates[0].SetActive(true);
-        RuneStonePlates[1].SetActive(false);
-        RuneStonePlates[2].SetActive(false);
-        StartCoroutine(Mission1EventFlow()); 
+        xrScreenManager.ActiveMission1Screen();  
+        RuneStonePlates[0].SetActive(true);    
+        RuneStonePlates[1].SetActive(false);    
+        RuneStonePlates[2].SetActive(false);    
+        StartCoroutine(Mission1EventFlow());    
     }
 
     public void StartMission2()
     {
         if (PlayerPrefs.GetInt("Mission1") == 1)
         {
-            xrScreenManager.ActiveMission2Screen();
+            xrScreenManager.ActiveMission2Screen();  
             RuneStonePlates[0].SetActive(false);
             RuneStonePlates[1].SetActive(true);
             RuneStonePlates[2].SetActive(false);
@@ -91,7 +93,13 @@ public class GameManager : MonoBehaviour
 
     private void FinishMission()
     {
-        objectSystemManager.DeActiveXRSetting(); 
+        objectSystemManager.returnObjectsToOriginSpace();
+        xrScreenManager.DeActiveAllMissionScreen();
+        isCharacterInExactPlace = false;
+        isCameraInExactPlace = false;
+        isNoCodeInExactPlace = false;
+        getFinishCMButton = false;
+        noCodeManager.StopRuneStone();
     } 
 
     public IEnumerator Mission1EventFlow() 
@@ -104,7 +112,6 @@ public class GameManager : MonoBehaviour
             if (isCharacterInExactPlace
                && isCameraInExactPlace
                && isNoCodeInExactPlace
-               && !objectSystemManager.isActiveStudioLight
                && getFinishCMButton) 
             {
                 isClearMission1 = true; 
@@ -114,16 +121,11 @@ public class GameManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(5);
-        objectSystemManager.returnObjectsToOriginSpace();
-        xrScreenManager.DeActiveAllMissionScreen();
-
+        
         PlayerPrefs.SetInt("Mission1",1);
 
         FinishMission();
 
-        isCharacterInExactPlace = false;
-        isCameraInExactPlace = false;
-        isNoCodeInExactPlace = false;
     }
 
     public IEnumerator Mission2EventFlow()
@@ -131,12 +133,11 @@ public class GameManager : MonoBehaviour
         CurrentMissionNum = 2;
         yield return new WaitForSeconds(5);
 
-        while (isClearMission1 != true)
+        while (isClearMission2 != true)
         {
             if (isCharacterInExactPlace
                && isCameraInExactPlace
                && isNoCodeInExactPlace
-               && !objectSystemManager.isActiveStudioLight
                && getFinishCMButton)
             {
                 isClearMission2 = true;
@@ -146,16 +147,10 @@ public class GameManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(5);
-        objectSystemManager.returnObjectsToOriginSpace();
-        xrScreenManager.DeActiveAllMissionScreen();
 
         PlayerPrefs.SetInt("Mission2", 1);
 
         FinishMission();
-
-        isCharacterInExactPlace = false;
-        isCameraInExactPlace = false;
-        isNoCodeInExactPlace = false;
     }
 
     public IEnumerator Mission3EventFlow()
@@ -163,12 +158,11 @@ public class GameManager : MonoBehaviour
         CurrentMissionNum = 3;
         yield return new WaitForSeconds(5);
 
-        while (isClearMission1 != true)
+        while (isClearMission3 != true)
         {
             if (isCharacterInExactPlace
                && isCameraInExactPlace
                && isNoCodeInExactPlace
-               && !objectSystemManager.isActiveStudioLight
                && getFinishCMButton)
             {
                 isClearMission3 = true;
@@ -178,15 +172,9 @@ public class GameManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(5);
-        objectSystemManager.returnObjectsToOriginSpace();
-        xrScreenManager.DeActiveAllMissionScreen();
 
         PlayerPrefs.SetInt("Mission3", 1);
 
         FinishMission();
-
-        isCharacterInExactPlace = false;
-        isCameraInExactPlace = false;
-        isNoCodeInExactPlace = false;
     }
 }
