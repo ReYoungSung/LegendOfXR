@@ -233,12 +233,16 @@ public class NoCodeManager : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
 
         Metheo.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        Metheo.transform.GetChild(0).gameObject.SetActive(true);
 
         while (isRepeatEvent == true)
         {
             yield return null;
         }
 
+        Metheo.transform.GetChild(0).gameObject.SetActive(false);
+        yield return new WaitForSeconds(1.0f);
         Metheo.SetActive(false);
 
         yield return new WaitForSeconds(1.0f);  
@@ -251,14 +255,22 @@ public class NoCodeManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
 
-        Shield.SetActive(true);
+        Shield.transform.GetChild(0).gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        Shield.transform.GetChild(1).gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        Shield.transform.GetChild(2).gameObject.SetActive(true);
 
         while (isRepeatEvent == true)  
         {
             yield return null; 
         }
 
-        Shield.SetActive(false);
+        Shield.transform.GetChild(2).gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        Shield.transform.GetChild(1).gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        Shield.transform.GetChild(0).gameObject.SetActive(false);
 
         yield return new WaitForSeconds(1.0f);
 

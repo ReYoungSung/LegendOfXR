@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,13 +27,14 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject[] RuneStonePlates;
 
-    public Camera PlayerCamera; // Ã¹ ¹øÂ° Ä«¸Þ¶ó
-    public Camera XRCamera; // µÎ ¹øÂ° Ä«¸Þ¶ó
+    public Camera PlayerCamera; // Ã¹ ï¿½ï¿½Â° Ä«ï¿½Þ¶ï¿½
+    public Camera XRCamera; // ï¿½ï¿½ ï¿½ï¿½Â° Ä«ï¿½Þ¶ï¿½
 
+    public PlayableDirector WizardTimeline;
 
     void Start()
     {
-        // ÃÊ±â¿¡´Â Ã¹ ¹øÂ° Ä«¸Þ¶ó¸¦ È°¼ºÈ­
+        // ï¿½Ê±â¿¡ï¿½ï¿½ Ã¹ ï¿½ï¿½Â° Ä«ï¿½Þ¶ï¿½ È°ï¿½ï¿½È­
         PlayerCamera.enabled = true;
         XRCamera.enabled = false;
 
@@ -50,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // ¿¹¸¦ µé¾î, Å° ÀÔ·ÂÀ» »ç¿ëÇÏ¿© Ä«¸Þ¶ó ÀüÈ¯
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, Å° ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½È¯
         if (Input.GetKeyDown(KeyCode.C))
         {
             PlayerCamera.enabled = !PlayerCamera.enabled;
@@ -108,6 +110,12 @@ public class GameManager : MonoBehaviour
             RuneStonePlates[1].SetActive(false);
             RuneStonePlates[2].SetActive(true);
             StartCoroutine(Mission3EventFlow());
+
+            // WizardTimeline ì‹¤í–‰
+            if (WizardTimeline != null)
+            {
+                WizardTimeline.Play();
+            }
         }
     }
 
@@ -210,6 +218,10 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i < MissionLogos.Length; i++)
         {
+            for(int b = 0; b < MissionLogos.Length; b++)
+            {
+                MissionLogos[i].transform.GetChild(b).gameObject.SetActive(false);
+            }
             MissionLogos[i].transform.GetChild(CurrentMissionNum).gameObject.SetActive(true);
         }
     }
