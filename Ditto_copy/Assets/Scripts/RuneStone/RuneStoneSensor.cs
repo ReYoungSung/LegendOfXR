@@ -26,7 +26,9 @@ public class RuneStoneSensor : MonoBehaviour
     {
         First, 
         Second,
-        Third
+        Third,
+        Fourth,
+        Fifth
     }
 
     [SerializeField] private BlankType blankType = BlankType.First; 
@@ -109,7 +111,7 @@ public class RuneStoneSensor : MonoBehaviour
             }
             else if (missionType == MissionType.Mission3)
             {
-                if(blankType == BlankType.First)
+                if(blankType == BlankType.First)  //Shield
                 {
                     noCodeManager.mission3FillBlank[0] = true;
 
@@ -125,11 +127,48 @@ public class RuneStoneSensor : MonoBehaviour
                         noCodeManager.isRepeatEvent = true;
                     }
                 }
-                else if (blankType == BlankType.Second) 
+                else if (blankType == BlankType.Second)  //Metheo
                 {
-                    if (filledObject.name == "12HourChanger")
+                    noCodeManager.mission3FillBlank[1] = true;
+
+                    if (filledObject.name == "BeginToPlay")
                     {
-                        noCodeManager.mission3Answers[1] = true;  
+                        noCodeManager.mission3Answers[1] = true;
+                        noCodeManager.isRepeatEvent = false;
+                    }
+
+                    if (filledObject.name == "TickEvent")
+                    {
+                        noCodeManager.mission3Answers[1] = false;
+                        noCodeManager.isRepeatEvent = true;
+                    }
+                }
+                else if (blankType == BlankType.Third)  //Wizard
+                {
+                    noCodeManager.mission3FillBlank[2] = true;
+
+                    if (filledObject.name == "WiZard") 
+                    {
+                        noCodeManager.mission3Answers[2] = true;  
+                    }
+                }
+                else if (blankType == BlankType.Fourth)  //Shield
+                {
+                    noCodeManager.mission3FillBlank[3] = true;
+
+                    if (filledObject.name == "Shield")
+                    {
+                        noCodeManager.mission3Answers[3] = true;
+                    }
+
+                }
+                else if (blankType == BlankType.Fifth)   //Metheo
+                {
+                    noCodeManager.mission3FillBlank[4] = true;
+
+                    if (filledObject.name == "Metheo")
+                    {
+                        noCodeManager.mission3Answers[4] = true;
                     }
                 }
             }

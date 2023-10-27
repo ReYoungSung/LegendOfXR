@@ -9,11 +9,11 @@ public class NoCodeManager : MonoBehaviour
 
     public bool[] mission1Answers = new bool[] {false};
     public bool[] mission2Answers = new bool[] {false, false};
-    public bool[] mission3Answers = new bool[] {false, false, false};
+    public bool[] mission3Answers = new bool[] {false, false, false, false, false};
 
     public bool[] mission1FillBlank = new bool[] { false };
     public bool[] mission2FillBlank = new bool[] { false, false };
-    public bool[] mission3FillBlank = new bool[] { false, false, false };
+    public bool[] mission3FillBlank = new bool[] { false, false, false, false, false};
     public bool fullFillBlanks = false;
 
     //Mission1
@@ -26,6 +26,11 @@ public class NoCodeManager : MonoBehaviour
     private float rotationSpeed = 90f; 
     private float rotationDuration = 2f;
     [HideInInspector] public int TimeValue = 0;
+    private Quaternion originSunLightRotation;
+
+    //Mission3
+    [SerializeField] private GameObject Metheo;
+    [SerializeField] private GameObject Shield; 
 
 
     [HideInInspector] public bool IsPlayButtonDown = false;
@@ -41,7 +46,7 @@ public class NoCodeManager : MonoBehaviour
 
     void Start()
     {
-        
+        originSunLightRotation = sunLight.transform.localRotation;
     }
 
     
@@ -54,7 +59,7 @@ public class NoCodeManager : MonoBehaviour
     {
         if (gameManager.CurrentMissionNum == 1)
         {
-            if (mission1FillBlank[0])
+            if (ArrayIsAllTrue(mission1FillBlank))
             {
                 fullFillBlanks = true;
             }
@@ -63,7 +68,7 @@ public class NoCodeManager : MonoBehaviour
                 fullFillBlanks = false;
             }
 
-            if (mission1Answers[0] && IsPlayButtonDown)  
+            if (ArrayIsAllTrue(mission1Answers))  
             {
                 gameManager.isNoCodeInExactPlace = true;
             }
@@ -74,7 +79,7 @@ public class NoCodeManager : MonoBehaviour
         }
         else if (gameManager.CurrentMissionNum == 2)
         {
-            if (mission2FillBlank[0] && mission2FillBlank[1])
+            if (ArrayIsAllTrue(mission2FillBlank))
             {
                 fullFillBlanks = true;
             }
@@ -83,7 +88,7 @@ public class NoCodeManager : MonoBehaviour
                 fullFillBlanks = false;
             }
 
-            if (mission2Answers[0] && mission2Answers[1] && IsPlayButtonDown) 
+            if (ArrayIsAllTrue(mission2Answers)) 
             {
                 gameManager.isNoCodeInExactPlace = true;
             }
@@ -94,7 +99,7 @@ public class NoCodeManager : MonoBehaviour
         }
         else if (gameManager.CurrentMissionNum == 3)
         {
-            if (mission3FillBlank[0] && mission3FillBlank[1] && mission3FillBlank[2])
+            if (ArrayIsAllTrue(mission3FillBlank))
             {
                 fullFillBlanks = true;
             }
@@ -103,7 +108,7 @@ public class NoCodeManager : MonoBehaviour
                 fullFillBlanks = false;
             }
 
-            if (mission3Answers[0] && mission3Answers[1] && mission3Answers[3] && IsPlayButtonDown)
+            if (ArrayIsAllTrue(mission3Answers))
             {
                 gameManager.isNoCodeInExactPlace = true;
             }
@@ -114,16 +119,32 @@ public class NoCodeManager : MonoBehaviour
         }  
     } 
 
+    private bool ArrayIsAllTrue(bool[] array)
+    {
+        for(int i = 0; i < array.Length; i++)
+        {
+            if(array[i] == false)
+            {
+                return false;
+            }
+        }
+        return true; 
+    }
+
+
     public void PlayRuneStone()
     {
         if(RuneStoneCoroutine == null && fullFillBlanks == true) 
         {
             if (gameManager.CurrentMissionNum == 1)
-                RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow()); 
-            else if(gameManager.CurrentMissionNum == 2)
-                RuneStoneCoroutine = StartCoroutine(Mission2RuneStoneFlow()); 
+                RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());
+            else if (gameManager.CurrentMissionNum == 2)
+                RuneStoneCoroutine = StartCoroutine(Mission2RuneStoneFlow());
             else if (gameManager.CurrentMissionNum == 3)
-                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow()); 
+            {
+                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow1());
+                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow2());
+            }
         }
             
         IsPlayButtonDown = true;  
@@ -133,30 +154,33 @@ public class NoCodeManager : MonoBehaviour
     {
         if (RuneStoneCoroutine != null)
         {
-            isRepeatEvent = false; 
+            isRepeatEvent = false;
+            sunLight.transform.localRotation = originSunLightRotation;
         }
 
         IsPlayButtonDown = false;  
     }
 
+    //Mission1
     IEnumerator Mission1RuneStoneFlow() 
     {
         yield return new WaitForSeconds(2.0f);
         
-        WatarSwordVFX.SetActive(true);
+        WatarSwordVFX.SetActive(true); 
         
         while (isRepeatEvent == true)
         {
-            yield return null;
+            yield return null; 
         }
 
         yield return new WaitForSeconds(1.0f);  
         WatarSwordVFX.SetActive(false);  
 
-        StopCoroutine(RuneStoneCoroutine);
+        StopCoroutine(RuneStoneCoroutine); 
         RuneStoneCoroutine = null;  
     }
 
+    //Mission2 
     IEnumerator Mission2RuneStoneFlow()
     {
         yield return new WaitForSeconds(2.0f);
@@ -169,7 +193,7 @@ public class NoCodeManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.0f); 
 
         StopCoroutine(RuneStoneCoroutine);
         RuneStoneCoroutine = null;
@@ -194,27 +218,50 @@ public class NoCodeManager : MonoBehaviour
         {
             float t = rotationTime / rotationDuration;
             sunLight.transform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
-            rotationTime += Time.deltaTime;
-            yield return null;
+            rotationTime += Time.deltaTime; 
+            yield return null; 
         }
 
-        sunLight.transform.rotation = endRotation; // 최종 회전 각도로 설정
+        sunLight.transform.rotation = endRotation; // 최종 회전 각도로 설정 
 
-        rotateCoroutine = null;
+        rotateCoroutine = null; 
     }
 
-
-    private IEnumerator Mission3RuneStoneFlow()
+    //Mission3
+    private IEnumerator Mission3RuneStoneFlow1()
     {
         yield return new WaitForSeconds(2.0f);
+
+        Metheo.SetActive(true);
 
         while (isRepeatEvent == true)
         {
             yield return null;
         }
 
-        yield return new WaitForSeconds(1.0f);
+        Metheo.SetActive(false);
+
+        yield return new WaitForSeconds(1.0f);  
         
+        StopCoroutine(RuneStoneCoroutine);   
+        RuneStoneCoroutine = null;  
+    }
+
+    private IEnumerator Mission3RuneStoneFlow2()
+    {
+        yield return new WaitForSeconds(2.0f);
+
+        Shield.SetActive(true);
+
+        while (isRepeatEvent == true)  
+        {
+            yield return null; 
+        }
+
+        Shield.SetActive(false);
+
+        yield return new WaitForSeconds(1.0f);
+
         StopCoroutine(RuneStoneCoroutine);
         RuneStoneCoroutine = null;
     }

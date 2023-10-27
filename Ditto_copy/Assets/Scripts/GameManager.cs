@@ -1,6 +1,7 @@
 using Oculus.Platform;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -21,22 +22,41 @@ public class GameManager : MonoBehaviour
     private ObjectSystemManager objectSystemManager;
     private NoCodeManager noCodeManager;
 
+    [SerializeField] private GameObject[] MissionLogos;
+
     [SerializeField] private GameObject[] RuneStonePlates;
+
+    public Camera PlayerCamera; // 첫 번째 카메라
+    public Camera XRCamera; // 두 번째 카메라
+
 
     void Start()
     {
+        // 초기에는 첫 번째 카메라를 활성화
+        PlayerCamera.enabled = true;
+        XRCamera.enabled = false;
+
         xrScreenManager = this.GetComponent<XRScreenManager>();  
         objectSystemManager = this.GetComponent<ObjectSystemManager>();  
         noCodeManager = this.GetComponent<NoCodeManager>();
 
         PlayerPrefs.SetInt("Mission1", 0);  
         PlayerPrefs.SetInt("Mission2", 0);  
-        PlayerPrefs.SetInt("Mission3", 0);  
-    }  
+        PlayerPrefs.SetInt("Mission3", 0);
+
+        CurrentMissionNum = 0; 
+        changeMissionLogo();
+    }   
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Alpha1))
+        // 예를 들어, 키 입력을 사용하여 카메라 전환
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            PlayerCamera.enabled = !PlayerCamera.enabled;
+            XRCamera.enabled = !XRCamera.enabled;
+        }
+        else if (Input.GetKey(KeyCode.Alpha1))
         {
             StartMission1();
         }
@@ -52,13 +72,13 @@ public class GameManager : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.Alpha4))
         {
-            xrScreenManager.DeActiveAllMissionScreen();
+            xrScreenManager.DeActiveAllMissionScreen(); 
         }
     }
 
     public void StartMission1()
     {
-        xrScreenManager.ActiveMission1Screen();  
+        xrScreenManager.ActiveMission1Screen();   
         RuneStonePlates[0].SetActive(true);    
         RuneStonePlates[1].SetActive(false);    
         RuneStonePlates[2].SetActive(false);    
@@ -99,12 +119,13 @@ public class GameManager : MonoBehaviour
         isCameraInExactPlace = false;
         isNoCodeInExactPlace = false;
         getFinishCMButton = false;
-        noCodeManager.StopRuneStone();
+        noCodeManager.StopRuneStone(); 
     } 
 
     public IEnumerator Mission1EventFlow() 
     {
         CurrentMissionNum = 1;
+        changeMissionLogo();
         yield return new WaitForSeconds(5);
 
         while ( isClearMission1 != true )
@@ -119,18 +140,20 @@ public class GameManager : MonoBehaviour
 
             yield return null;
         }
-
-        yield return new WaitForSeconds(5);
+        changeCamera();
+        noCodeManager.PlayRuneStone();
+        yield return new WaitForSeconds(10);
         
         PlayerPrefs.SetInt("Mission1",1);
 
+        changeCamera();
         FinishMission();
-
     }
 
     public IEnumerator Mission2EventFlow()
     {
         CurrentMissionNum = 2;
+        changeMissionLogo();
         yield return new WaitForSeconds(5);
 
         while (isClearMission2 != true)
@@ -145,17 +168,20 @@ public class GameManager : MonoBehaviour
 
             yield return null;
         }
-
-        yield return new WaitForSeconds(5);
+        changeCamera();
+        noCodeManager.PlayRuneStone();
+        yield return new WaitForSeconds(10);
 
         PlayerPrefs.SetInt("Mission2", 1);
 
+        changeCamera();
         FinishMission();
     }
 
     public IEnumerator Mission3EventFlow()
     {
         CurrentMissionNum = 3;
+        changeMissionLogo();
         yield return new WaitForSeconds(5);
 
         while (isClearMission3 != true)
@@ -170,11 +196,27 @@ public class GameManager : MonoBehaviour
 
             yield return null;
         }
-
-        yield return new WaitForSeconds(5);
+        changeCamera();
+        noCodeManager.PlayRuneStone();
+        yield return new WaitForSeconds(10);
 
         PlayerPrefs.SetInt("Mission3", 1);
 
+        changeCamera();
         FinishMission();
+    }
+
+    public void changeMissionLogo()
+    {
+        for(int i = 0; i < MissionLogos.Length; i++)
+        {
+            MissionLogos[i].transform.GetChild(CurrentMissionNum).gameObject.SetActive(true);
+        }
+    }
+
+    public void changeCamera()
+    {
+        PlayerCamera.enabled = !PlayerCamera.enabled;
+        XRCamera.enabled = !XRCamera.enabled;
     }
 }
