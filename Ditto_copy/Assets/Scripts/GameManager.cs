@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     public PlayableDirector WizardTimeline;
 
+
+
     void Start()
     {
         // �ʱ⿡�� ù ��° ī�޶� Ȱ��ȭ

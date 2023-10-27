@@ -29,5 +29,22 @@ public class TriggerTargets : MonoBehaviour
         {
             turorialVideoFlow.isArriveXRScreen = true;
         }
+
+        if(other.name == "AvatarPosition") 
+        {
+            turorialVideoFlow.isArriveAvatar = true;
+        }
+
+        if(other.name ==  "NoCodePosition")
+        {
+            turorialVideoFlow.isPlaceRuneStone = true;
+        }
+
+        if(other.name == "XRStudioPosition") 
+        {
+            turorialVideoFlow.isArriveCameraController = true;
+        }
+
+
     }
 }
