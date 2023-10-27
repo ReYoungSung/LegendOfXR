@@ -8,6 +8,10 @@ public class RuneStoneSensor : MonoBehaviour
 
     private bool IsGrabed = false;
 
+    private bool isFilled = false;
+
+    private GameObject filledObject;
+
     private enum MissionType
     {
         None,
@@ -32,29 +36,23 @@ public class RuneStoneSensor : MonoBehaviour
         noCodeManager = GameObject.Find("XRStudioSystemManager").GetComponent<NoCodeManager>(); 
     }
 
-    private void OnTriggerStay(Collider other)
+    void Update() 
     {
-        if(other.CompareTag("RuneStone"))
+        if(filledObject != null) 
         {
-            if (other.transform.GetComponent<RuneStoneGrabInteracterble>().isGrabbed == false)
-            {
-                other.transform.position = this.transform.position;  
-                other.transform.localEulerAngles = new Vector3(-90,0,0);
-            }
-
-            if (missionType == MissionType.Mission1) 
-            {
+            if (missionType == MissionType.Mission1)  
+            { 
                 if(blankType == BlankType.First)
                 {
                     noCodeManager.mission1FillBlank[0] = true; 
 
-                    if (other.name == "BeginToPlay")
+                    if (filledObject.name == "BeginToPlay")
                     {
                         noCodeManager.mission1Answers[0] = false;
                         noCodeManager.isRepeatEvent = false;
                     }
 
-                    if(other.name == "TickEvent")
+                    if(filledObject.name == "TickEvent")
                     {
                         noCodeManager.mission1Answers[0] = true;
                         noCodeManager.isRepeatEvent = true; 
@@ -67,13 +65,13 @@ public class RuneStoneSensor : MonoBehaviour
                 {
                     noCodeManager.mission2FillBlank[0] = true;
 
-                    if (other.name == "BeginToPlay")
+                    if (filledObject.name == "BeginToPlay")
                     {
                         noCodeManager.mission2Answers[0] = true;
                         noCodeManager.isRepeatEvent = false;
                     }
 
-                    if(other.name == "TickEvent")
+                    if(filledObject.name == "TickEvent")
                     {
                         noCodeManager.mission2Answers[0] = false;   
                         noCodeManager.isRepeatEvent = true;
@@ -83,25 +81,25 @@ public class RuneStoneSensor : MonoBehaviour
                 {
                     noCodeManager.mission2FillBlank[1] = true;
 
-                    if (other.name == "12HourChanger") 
+                    if (filledObject.name == "12HourChanger") 
                     {
                         noCodeManager.mission2Answers[1] = true;
                         noCodeManager.TimeValue = 12;
                     }
 
-                    if (other.name == "6HourChanger")
+                    if (filledObject.name == "6HourChanger")
                     {
                         noCodeManager.mission2Answers[1] = false;
                         noCodeManager.TimeValue = 6;
                     }
 
-                    if (other.name == "18HourChanger")
+                    if (filledObject.name == "18HourChanger")
                     {
                         noCodeManager.mission2Answers[1] = false;
                         noCodeManager.TimeValue = 18;
                     }
 
-                    if (other.name == "24HourChanger")
+                    if (filledObject.name == "24HourChanger")
                     {
                         noCodeManager.mission2Answers[1] = false;
                         noCodeManager.TimeValue = 24;
@@ -113,13 +111,15 @@ public class RuneStoneSensor : MonoBehaviour
             {
                 if(blankType == BlankType.First)
                 {
-                    if(other.name == "BeginToPlay")
+                    noCodeManager.mission3FillBlank[0] = true;
+
+                    if(filledObject.name == "BeginToPlay")
                     {
                         noCodeManager.mission3Answers[0] = false;
                         noCodeManager.isRepeatEvent = false;
                     }
 
-                    if(other.name == "TickEvent")
+                    if(filledObject.name == "TickEvent")
                     {
                         noCodeManager.mission3Answers[0] = true;
                         noCodeManager.isRepeatEvent = true;
@@ -127,11 +127,28 @@ public class RuneStoneSensor : MonoBehaviour
                 }
                 else if (blankType == BlankType.Second) 
                 {
-                    if (other.name == "12HourChanger")
+                    if (filledObject.name == "12HourChanger")
                     {
-                        noCodeManager.mission3Answers[1] = true;
+                        noCodeManager.mission3Answers[1] = true;  
                     }
                 }
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.CompareTag("RuneStone"))
+        {
+            if (other.transform.GetComponent<RuneStoneGrabInteracterble>().isGrabbed == false)
+            {
+                if(filledObject == null)
+                {
+                    filledObject = other.gameObject;   
+                }
+
+                filledObject.transform.position = this.transform.position;   
+                filledObject.transform.localEulerAngles = new Vector3(190,0,0);  
             }
         }
     }
@@ -153,6 +170,9 @@ public class RuneStoneSensor : MonoBehaviour
             noCodeManager.mission3FillBlank[0] = true;
             noCodeManager.mission3FillBlank[1] = true;
             noCodeManager.mission3FillBlank[2] = true;
+
+            if(filledObject != null)
+                filledObject = null;
         }
     }
 }
