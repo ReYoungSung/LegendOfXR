@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     public Camera PlayerCamera; // ù ��° ī�޶�
     public Camera XRCamera; // �� ��° ī�޶�
 
+    public PlayableDirector WizardTimeline;
 
     void Start()
     {
@@ -108,6 +110,12 @@ public class GameManager : MonoBehaviour
             RuneStonePlates[1].SetActive(false);
             RuneStonePlates[2].SetActive(true);
             StartCoroutine(Mission3EventFlow());
+
+            // WizardTimeline 실행
+            if (WizardTimeline != null)
+            {
+                WizardTimeline.Play();
+            }
         }
     }
 
