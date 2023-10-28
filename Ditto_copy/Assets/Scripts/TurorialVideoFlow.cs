@@ -109,8 +109,8 @@ public class TurorialVideoFlow : MonoBehaviour
         Videos[4].SetActive(false);
         Texture.SetActive(false);
 
-        RecommendOnNum = 0
-        isRecommendOn = false;
+        RecommendOnNum = 0;
+        isRecommendOn = false; 
         while (isRecommendOn != true) 
         {
             yield return null;
