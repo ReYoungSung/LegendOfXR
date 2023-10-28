@@ -152,7 +152,6 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         changeCamera();
-        noCodeManager.PlayRuneStone();
         yield return new WaitForSeconds(10);
         
         PlayerPrefs.SetInt("Mission1",1);
@@ -180,7 +179,6 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         changeCamera();
-        noCodeManager.PlayRuneStone();
         yield return new WaitForSeconds(10);
 
         PlayerPrefs.SetInt("Mission2", 1);
@@ -208,7 +206,6 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         changeCamera();
-        noCodeManager.PlayRuneStone();
         yield return new WaitForSeconds(10);
 
         PlayerPrefs.SetInt("Mission3", 1);

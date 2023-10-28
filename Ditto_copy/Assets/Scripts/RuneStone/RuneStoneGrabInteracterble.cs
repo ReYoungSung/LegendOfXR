@@ -5,6 +5,15 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class RuneStoneGrabInteracterble : XRGrabInteractable
 {
+    public enum RuneType
+    {
+        Rectangle,
+        Triangle,   
+        Circle
+    }
+
+    public RuneType runeType = RuneType.Rectangle;
+
     public bool isGrabbed = false;
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)

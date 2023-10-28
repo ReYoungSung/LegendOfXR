@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro; 
 
 public class NoCodeManager : MonoBehaviour
 {
@@ -36,6 +37,9 @@ public class NoCodeManager : MonoBehaviour
     [HideInInspector] public bool IsPlayButtonDown = false;
     private Coroutine RuneStoneCoroutine = null; 
 
+    public TextMeshProUGUI firstText;
+    public TextMeshProUGUI secondText;
+
     private void Awake() 
     {
         gameManager = GameObject.Find("XRStudioSystemManager").GetComponent<GameManager>();
@@ -50,10 +54,10 @@ public class NoCodeManager : MonoBehaviour
     
     void Update()
     {
-        CheckRuneStones();
+        CheckRuneSotnes();
     }
 
-    public void CheckRuneStones()
+    public void CheckRuneSotnes()
     {
         if (gameManager.CurrentMissionNum == 1)
         {
@@ -66,9 +70,9 @@ public class NoCodeManager : MonoBehaviour
                 fullFillBlanks = false;
             }
 
-            if (ArrayIsAllTrue(mission1Answers))  
+            if (ArrayIsAllTrue(mission1Answers) && IsPlayButtonDown == true)  
             {
-                gameManager.isNoCodeInExactPlace = true;
+                gameManager.isNoCodeInExactPlace = true; 
             }
             else
             {
@@ -86,7 +90,7 @@ public class NoCodeManager : MonoBehaviour
                 fullFillBlanks = false;
             }
 
-            if (ArrayIsAllTrue(mission2Answers)) 
+            if (ArrayIsAllTrue(mission2Answers) && IsPlayButtonDown == true) 
             {
                 gameManager.isNoCodeInExactPlace = true;
             }
@@ -106,7 +110,7 @@ public class NoCodeManager : MonoBehaviour
                 fullFillBlanks = false;
             }
 
-            if (ArrayIsAllTrue(mission3Answers))
+            if (ArrayIsAllTrue(mission3Answers) && IsPlayButtonDown == true)
             {
                 gameManager.isNoCodeInExactPlace = true;
             }
@@ -135,14 +139,19 @@ public class NoCodeManager : MonoBehaviour
         if(RuneStoneCoroutine == null && fullFillBlanks == true) 
         {
             if (gameManager.CurrentMissionNum == 1)
-                RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());
+                RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());  
             else if (gameManager.CurrentMissionNum == 2)
-                RuneStoneCoroutine = StartCoroutine(Mission2RuneStoneFlow());
+                RuneStoneCoroutine = StartCoroutine(Mission2RuneStoneFlow());  
             else if (gameManager.CurrentMissionNum == 3)
             {
-                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow1());
-                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow2());
+                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow1());  
+                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow2());  
             }
+        }
+        else
+        {
+            firstText.text = "틀렸다네"; 
+            secondText.text = "다시 해보게나"; 
         }
             
         IsPlayButtonDown = true;  
@@ -160,7 +169,7 @@ public class NoCodeManager : MonoBehaviour
     }
 
     //Mission1
-    IEnumerator Mission1RuneStoneFlow() 
+    IEnumerator Mission1RuneStoneFlow()  
     {
         yield return new WaitForSeconds(2.0f);
         
@@ -170,8 +179,6 @@ public class NoCodeManager : MonoBehaviour
         {
             yield return null; 
         }
-
-        yield return new WaitForSeconds(1.0f);  
         WatarSwordVFX.SetActive(false);  
 
         StopCoroutine(RuneStoneCoroutine); 
@@ -190,9 +197,6 @@ public class NoCodeManager : MonoBehaviour
             RotateSunLight();
             yield return null;
         }
-
-        yield return new WaitForSeconds(1.0f); 
-
         StopCoroutine(RuneStoneCoroutine);
         RuneStoneCoroutine = null;
     }
@@ -240,10 +244,7 @@ public class NoCodeManager : MonoBehaviour
         }
 
         Metheo.transform.GetChild(0).gameObject.SetActive(false);
-        yield return new WaitForSeconds(1.0f);
         Metheo.SetActive(false);
-
-        yield return new WaitForSeconds(1.0f);  
         
         StopCoroutine(RuneStoneCoroutine);   
         RuneStoneCoroutine = null;  

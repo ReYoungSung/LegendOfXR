@@ -14,7 +14,7 @@ public class RuneStoneSensor : MonoBehaviour
 
     private GameObject filledObject;
 
-    private TextMeshProUGUI textMeshPro;
+    public TextMeshProUGUI textMeshPro;
 
     private enum MissionType
     {
@@ -41,7 +41,7 @@ public class RuneStoneSensor : MonoBehaviour
     {
         noCodeManager = GameObject.Find("XRStudioSystemManager").GetComponent<NoCodeManager>(); 
 
-        textMeshPro = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();   
+        textMeshPro = this.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>();  
     }
 
     void Update() 
@@ -188,7 +188,7 @@ public class RuneStoneSensor : MonoBehaviour
 
                     if (filledObject.name == "Metheo")
                     {
-                        ChangeText("메테오를 생성한다");
+                        ChangeText("메테오를 생성한다"); 
                         noCodeManager.mission3Answers[4] = true;
                     }
                 }
@@ -207,8 +207,26 @@ public class RuneStoneSensor : MonoBehaviour
                     filledObject = other.gameObject;   
                 }
 
-                filledObject.transform.position = this.transform.position;   
-                filledObject.transform.localEulerAngles = new Vector3(190,0,0);  
+                filledObject.transform.position = this.transform.position;
+                var grabInteractable = filledObject.transform.GetComponent<RuneStoneGrabInteracterble>();
+
+                if (grabInteractable != null)
+                {
+                    switch (grabInteractable.runeType)
+                    {
+                        case RuneStoneGrabInteracterble.RuneType.Rectangle:
+                            filledObject.transform.localEulerAngles = new Vector3(190, 0, 0);
+                            break;
+
+                        case RuneStoneGrabInteracterble.RuneType.Triangle:
+                            filledObject.transform.localEulerAngles = new Vector3(-17, 180, 0);
+                            break;
+
+                        case RuneStoneGrabInteracterble.RuneType.Circle:
+                            filledObject.transform.localEulerAngles = new Vector3(11, 0, 0);
+                            break;
+                    }
+                }
             }
         }
     }
@@ -233,6 +251,8 @@ public class RuneStoneSensor : MonoBehaviour
 
             if(filledObject != null)
                 filledObject = null;
+
+            ChangeText("???");
         }
     }
 
