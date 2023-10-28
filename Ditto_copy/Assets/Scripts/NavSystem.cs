@@ -28,7 +28,7 @@ public class NavSystem : MonoBehaviour
         {
             return;
         }
-        else if(UISelectNum == 1)
+        else if(UISelectNum == 1) 
         {
             target = target1;
         }
