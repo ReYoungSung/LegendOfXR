@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class TriggerTargets : MonoBehaviour
 {
-    private TurorialVideoFlow turorialVideoFlow;
+    [SerializeField] private TurorialVideoFlow turorialVideoFlow;
 
     // Start is called before the first frame update
     void Start()
     {
-        turorialVideoFlow = GameObject.Find("TutorialVideoTimeline").GetComponent<TurorialVideoFlow>();
+        //turorialVideoFlow = GameObject.Find("TutorialVideoTimeline").GetComponent<TurorialVideoFlow>();
     }
 
     // Update is called once per frame
