@@ -25,7 +25,9 @@ public class TurorialVideoFlow : MonoBehaviour
 
     public bool isChangingXRCameraPosition = false;
 
-    [SerializeField] private GameObject[] Videos; 
+    [SerializeField] private GameObject[] Videos;
+    [SerializeField] private GameObject Texture;
+    [SerializeField] private GameObject[] UIImages;
 
     int HenaUIClickNum = 0;
     int PosterUINum = 0;
@@ -48,12 +50,18 @@ public class TurorialVideoFlow : MonoBehaviour
 
     public IEnumerator TutorialFlow()  
     {
+        Texture.SetActive(true);
         Videos[0].SetActive(true);
         yield return new WaitForSecondsRealtime(35);
         Videos[0].SetActive(false);
+       
         Videos[1].SetActive(true);
         yield return new WaitForSecondsRealtime(35);
         Videos[1].SetActive(false);
+        Texture.SetActive(false);
+
+        UIImages[0].SetActive(true);
+        UIImages[1].SetActive(true);
 
         HenaUIClickNum = 0;
         isHenaUIClosed = false; 
@@ -62,9 +70,14 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        UIImages[0].SetActive(false);
+        UIImages[1].SetActive(false);
+
+        Texture.SetActive(true);
         Videos[2].SetActive(true);
         yield return new WaitForSecondsRealtime(15);
         Videos[2].SetActive(false);
+        Texture.SetActive(false);
 
         isArrivePoster = false;
         while ( isArrivePoster != true ) 
@@ -72,9 +85,11 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        Texture.SetActive(true);
         Videos[3].SetActive(true);
-        yield return new WaitForSecondsRealtime(25);
+        yield return new WaitForSecondsRealtime(22);
         Videos[3].SetActive(false);
+        Texture.SetActive(false);
 
 
         PosterUINum = 0;
@@ -84,9 +99,11 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        Texture.SetActive(true);
         Videos[4].SetActive(true);
         yield return new WaitForSecondsRealtime(39);
         Videos[4].SetActive(false);
+        Texture.SetActive(false);
 
         isArriveAvatar = false;
         while(isArriveAvatar != true) 
@@ -94,11 +111,13 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        Texture.SetActive(true);
         Videos[5].SetActive(true);
         yield return new WaitForSecondsRealtime(25);
         Videos[5].SetActive(false);
+        Texture.SetActive(false);
 
-        
+
         isGrabAvatar = false;
         isArriveXRScreen = false;
         while (isGrabAvatar != true || isArriveXRScreen != true) 
@@ -106,9 +125,11 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        Texture.SetActive(true);
         Videos[6].SetActive(true);
         yield return new WaitForSecondsRealtime(16);
         Videos[6].SetActive(false);
+        Texture.SetActive(false);
 
         gameManager.isCharacterInExactPlace = false;
         while (gameManager.isCharacterInExactPlace != true) 
@@ -116,9 +137,11 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        Texture.SetActive(true);
         Videos[7].SetActive(true);
         yield return new WaitForSecondsRealtime(14);
         Videos[7].SetActive(false);
+        Texture.SetActive(false);
 
         isPlaceRuneStone = false;
         while(isPlaceRuneStone != true) 
@@ -126,15 +149,18 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        Texture.SetActive(true);
         Videos[8].SetActive(true);
         yield return new WaitForSecondsRealtime(17);
         Videos[8].SetActive(false);
+        Texture.SetActive(false);
 
-       
-
+        Texture.SetActive(true);
         Videos[9].SetActive(true);
         yield return new WaitForSecondsRealtime(23);
         Videos[9].SetActive(false);
+        Texture.SetActive(false);
+
 
         gameManager.isNoCodeInExactPlace = false;
          while (gameManager.isNoCodeInExactPlace != true) 
@@ -142,9 +168,12 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        Texture.SetActive(true);
         Videos[10].SetActive(true);
         yield return new WaitForSecondsRealtime(10);
         Videos[10].SetActive(false);
+        Texture.SetActive(false);
+
 
         isArriveCameraController = false;
         while (isArriveCameraController != true) 
@@ -152,9 +181,12 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        Texture.SetActive(true);
         Videos[11].SetActive(true);
         yield return new WaitForSecondsRealtime(20);
         Videos[11].SetActive(false);
+        Texture.SetActive(false);
+
 
         gameManager.isNoCodeInExactPlace = false;
         while (gameManager.isNoCodeInExactPlace != true) 
@@ -162,10 +194,14 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        Texture.SetActive(true);
         Videos[12].SetActive(true);
         yield return new WaitForSecondsRealtime(8);
         Videos[12].SetActive(false);
+        Texture.SetActive(false);
+
     }
+
 
     public void HenaUIClosed()
     {
