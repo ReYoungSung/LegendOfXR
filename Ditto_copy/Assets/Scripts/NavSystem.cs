@@ -9,6 +9,9 @@ public class NavSystem : MonoBehaviour
     [SerializeField] private Transform target3;
     [SerializeField] private Transform target4;
     [SerializeField] private Transform target5;
+    [SerializeField] private Transform target6;
+    [SerializeField] private Transform target7;
+
     private Transform target = null;
 
     [SerializeField] private GameObject navArrow;
@@ -47,6 +50,15 @@ public class NavSystem : MonoBehaviour
         else if(UISelectNum == 5)
         {
             target = target5;
+        }
+        else if(UISelectNum == 6)
+        {
+            target = target6;
+        }
+
+        else if( UISelectNum == 7)
+        {
+            target = target7;
         }
     }
 
