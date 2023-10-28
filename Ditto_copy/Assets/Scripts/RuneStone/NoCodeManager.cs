@@ -136,25 +136,28 @@ public class NoCodeManager : MonoBehaviour
 
     public void PlayRuneStone()
     {
-        if(RuneStoneCoroutine == null && fullFillBlanks == true) 
+        if(RuneStoneCoroutine == null)
         {
-            if (gameManager.CurrentMissionNum == 1)
-                RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());  
-            else if (gameManager.CurrentMissionNum == 2)
-                RuneStoneCoroutine = StartCoroutine(Mission2RuneStoneFlow());  
-            else if (gameManager.CurrentMissionNum == 3)
+            if(fullFillBlanks == true) 
             {
-                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow1());  
-                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow2());  
-            }
+                if (gameManager.CurrentMissionNum == 1)
+                    RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());  
+                else if (gameManager.CurrentMissionNum == 2)
+                    RuneStoneCoroutine = StartCoroutine(Mission2RuneStoneFlow());  
+                else if (gameManager.CurrentMissionNum == 3)
+                {
+                    RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow1());  
+                    RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow2());  
+                }
 
-            firstText.text = "이걸 눌러야"; 
-            secondText.text = "확인이 될걸세"; 
-        }
-        else
-        {
-            firstText.text = "틀렸다네"; 
-            secondText.text = "다시 해보게나";  
+                firstText.text = "이걸 눌러야";  
+                secondText.text = "확인이 될걸세"; 
+            }
+            else
+            {
+                firstText.text = "틀렸다네"; 
+                secondText.text = "다시 해보게나";  
+            }
         }
             
         IsPlayButtonDown = true;  
