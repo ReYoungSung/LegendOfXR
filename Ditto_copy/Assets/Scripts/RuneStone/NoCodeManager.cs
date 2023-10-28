@@ -208,7 +208,7 @@ public class NoCodeManager : MonoBehaviour
     {
         if (rotateCoroutine == null)
         {
-            rotateCoroutine = StartCoroutine(RotateSunLightCoroutine(180f*TimeValue/12));
+            rotateCoroutine = StartCoroutine(RotateSunLightCoroutine(150f*TimeValue/12));
         }
     } 
 

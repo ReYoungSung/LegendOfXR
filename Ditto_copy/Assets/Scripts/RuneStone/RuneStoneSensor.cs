@@ -14,7 +14,7 @@ public class RuneStoneSensor : MonoBehaviour
 
     private GameObject filledObject;
 
-    public TextMeshProUGUI textMeshPro;
+    public TextMeshProUGUI textMeshPro; 
 
     private enum MissionType
     {
