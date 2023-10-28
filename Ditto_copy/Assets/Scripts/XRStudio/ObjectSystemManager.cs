@@ -23,6 +23,7 @@ public class ObjectSystemManager : MonoBehaviour
     [SerializeField] private GameObject avatar1;
     [SerializeField] private GameObject avatar2;
     [SerializeField] public GameObject avatar3;
+    public GameObject WizardRuneStone;
 
     private Vector3 originAvatar1Position;
     private Vector3 originAvatar2Position;

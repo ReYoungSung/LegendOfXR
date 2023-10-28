@@ -14,7 +14,7 @@ public class RuneStoneSensor : MonoBehaviour
 
     private GameObject filledObject;
 
-    public TextMeshProUGUI textMeshPro;
+    private TextMeshProUGUI textMeshPro;
 
     private enum MissionType
     {
@@ -41,7 +41,7 @@ public class RuneStoneSensor : MonoBehaviour
     {
         noCodeManager = GameObject.Find("XRStudioSystemManager").GetComponent<NoCodeManager>(); 
 
-        textMeshPro = this.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>();  
+        textMeshPro = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();   
     }
 
     void Update() 

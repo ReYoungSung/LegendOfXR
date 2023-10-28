@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.GetInt("Mission2") == 1 && PlayerPrefs.GetInt("Mission1") == 1)
         {
             objectSystemManager.avatar3.SetActive(true); //Spawn Mage Avatar
+            objectSystemManager.WizardRuneStone.SetActive(true);
 
             xrScreenManager.ActiveMission3Screen();
             RuneStonePlates[0].SetActive(false);
