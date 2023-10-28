@@ -7,9 +7,9 @@ using UnityEngine.Playables;
 
 public class GameManager : MonoBehaviour
 {
-    private bool isClearMission1 = false;  
-    private bool isClearMission2 = false;  
-    private bool isClearMission3 = false;  
+    public bool isClearMission1 = false;
+    public bool isClearMission2 = false;
+    public bool isClearMission3 = false;  
 
     [HideInInspector] public int CurrentMissionNum = 0; 
 
