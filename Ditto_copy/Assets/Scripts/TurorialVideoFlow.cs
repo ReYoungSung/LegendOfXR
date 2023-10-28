@@ -16,6 +16,10 @@ public class TurorialVideoFlow : MonoBehaviour
     public bool isGrabAvatar = false;
 
     public bool isArriveXRScreen = false;
+
+    public bool isArriveXRScreen2 = false;
+
+    public bool isRecommendOn = false;
     
     public bool isPlaceDownAvatar = false;
 
@@ -31,6 +35,7 @@ public class TurorialVideoFlow : MonoBehaviour
 
     int HenaUIClickNum = 0;
     int PosterUINum = 0;
+    int RecommendOnNum = 0;
 
     GameManager gameManager;
 
@@ -85,10 +90,37 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+          // add  videos 
         Texture.SetActive(true);
         Videos[3].SetActive(true);
-        yield return new WaitForSecondsRealtime(22);
+        yield return new WaitForSecondsRealtime(13);
         Videos[3].SetActive(false);
+        Texture.SetActive(false);
+
+        isArriveXRScreen2 = false;
+        while (isArriveXRScreen2 != true) 
+        {
+            yield return null;
+        }
+
+        Texture.SetActive(true);
+        Videos[4].SetActive(true);
+        yield return new WaitForSecondsRealtime(13);
+        Videos[4].SetActive(false);
+        Texture.SetActive(false);
+
+        RecommendOnNum = 0;
+        isRecommendOn = false; 
+        while (isRecommendOn != true) 
+        {
+            yield return null;
+        }
+        // finish add
+
+        Texture.SetActive(true);
+        Videos[5].SetActive(true);
+        yield return new WaitForSecondsRealtime(22);
+        Videos[5].SetActive(false);
         Texture.SetActive(false);
 
 
@@ -100,9 +132,9 @@ public class TurorialVideoFlow : MonoBehaviour
         }
 
         Texture.SetActive(true);
-        Videos[4].SetActive(true);
+        Videos[6].SetActive(true);
         yield return new WaitForSecondsRealtime(39);
-        Videos[4].SetActive(false);
+        Videos[6].SetActive(false);
         Texture.SetActive(false);
 
         isArriveAvatar = false;
@@ -112,9 +144,9 @@ public class TurorialVideoFlow : MonoBehaviour
         }
 
         Texture.SetActive(true);
-        Videos[5].SetActive(true);
+        Videos[7].SetActive(true);
         yield return new WaitForSecondsRealtime(25);
-        Videos[5].SetActive(false);
+        Videos[7].SetActive(false);
         Texture.SetActive(false);
 
 
@@ -126,9 +158,9 @@ public class TurorialVideoFlow : MonoBehaviour
         }
 
         Texture.SetActive(true);
-        Videos[6].SetActive(true);
+        Videos[8].SetActive(true);
         yield return new WaitForSecondsRealtime(16);
-        Videos[6].SetActive(false);
+        Videos[8].SetActive(false);
         Texture.SetActive(false);
 
         gameManager.isCharacterInExactPlace = false;
@@ -138,9 +170,9 @@ public class TurorialVideoFlow : MonoBehaviour
         }
 
         Texture.SetActive(true);
-        Videos[7].SetActive(true);
+        Videos[9].SetActive(true);
         yield return new WaitForSecondsRealtime(14);
-        Videos[7].SetActive(false);
+        Videos[9].SetActive(false);
         Texture.SetActive(false);
 
         isPlaceRuneStone = false;
@@ -150,15 +182,15 @@ public class TurorialVideoFlow : MonoBehaviour
         }
 
         Texture.SetActive(true);
-        Videos[8].SetActive(true);
+        Videos[10].SetActive(true);
         yield return new WaitForSecondsRealtime(17);
-        Videos[8].SetActive(false);
+        Videos[10].SetActive(false);
         Texture.SetActive(false);
 
         Texture.SetActive(true);
-        Videos[9].SetActive(true);
+        Videos[11].SetActive(true);
         yield return new WaitForSecondsRealtime(23);
-        Videos[9].SetActive(false);
+        Videos[11].SetActive(false);
         Texture.SetActive(false);
 
 
@@ -169,9 +201,9 @@ public class TurorialVideoFlow : MonoBehaviour
         }
 
         Texture.SetActive(true);
-        Videos[10].SetActive(true);
+        Videos[12].SetActive(true);
         yield return new WaitForSecondsRealtime(10);
-        Videos[10].SetActive(false);
+        Videos[12].SetActive(false);
         Texture.SetActive(false);
 
 
@@ -182,9 +214,9 @@ public class TurorialVideoFlow : MonoBehaviour
         }
 
         Texture.SetActive(true);
-        Videos[11].SetActive(true);
+        Videos[13].SetActive(true);
         yield return new WaitForSecondsRealtime(20);
-        Videos[11].SetActive(false);
+        Videos[13].SetActive(false);
         Texture.SetActive(false);
 
 
@@ -195,9 +227,9 @@ public class TurorialVideoFlow : MonoBehaviour
         }
 
         Texture.SetActive(true);
-        Videos[12].SetActive(true);
+        Videos[14].SetActive(true);
         yield return new WaitForSecondsRealtime(8);
-        Videos[12].SetActive(false);
+        Videos[14].SetActive(false);
         Texture.SetActive(false);
 
     }
@@ -218,6 +250,11 @@ public class TurorialVideoFlow : MonoBehaviour
     public void GrabAvatar()
     {
         isGrabAvatar = true;    
+    }
+
+    public void RecommendOn() 
+    {
+        isRecommendOn = true;
     }
 
    

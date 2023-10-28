@@ -14548,7 +14548,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1000
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -14601,7 +14601,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.01
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -19240,10 +19240,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPosOffset: {x: 10, y: 50, z: 30}
-  speed: 80
+  speed: 40
   detonationPrefab: {fileID: 100010, guid: 58cdf464e218e2f4e8044e57682af001, type: 3}
   destroyOnHit: 0
-  setRateToNull: 1
+  setRateToNull: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 0
