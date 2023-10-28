@@ -233,4 +233,10 @@ public class GameManager : MonoBehaviour
         PlayerCamera.enabled = !PlayerCamera.enabled;
         XRCamera.enabled = !XRCamera.enabled;
     }
+
+    public void GetClearButtonDown()
+    {
+        getFinishCMButton = true;
+    }
+
 }

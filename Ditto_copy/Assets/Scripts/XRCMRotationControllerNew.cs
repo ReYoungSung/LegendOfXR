@@ -9,20 +9,13 @@ public class XRCMRotationControllerNew : MonoBehaviour
     private Rigidbody XRCMRigidbody;
     public float rotationSpeed = 30.0f;
 
-    // UI Button를 Inspector에서 직접 연결하기 위한 변수
-    public Button leftButton;
-    public Button rightButton;
-
     private void Start()
     {
         XRCMRigidbody = XRCM.GetComponent<Rigidbody>();
 
-        // UI Button 클릭 이벤트에 메서드 연결
-        leftButton.onClick.AddListener(RotateLeft);
-        rightButton.onClick.AddListener(RotateRight);
     }
 
-    void RotateLeft()
+    public void RotateLeft()
     {
         float rotationAmount = -rotationSpeed * Time.deltaTime;
         float targetRotation = XRCM.transform.eulerAngles.y + rotationAmount;
@@ -33,7 +26,7 @@ public class XRCMRotationControllerNew : MonoBehaviour
         }
     }
 
-    void RotateRight()
+    public void RotateRight()
     {
         float rotationAmount = rotationSpeed * Time.deltaTime;
         float targetRotation = XRCM.transform.eulerAngles.y + rotationAmount;
