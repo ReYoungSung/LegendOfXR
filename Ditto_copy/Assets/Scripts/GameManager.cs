@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
 
     public PlayableDirector WizardTimeline;
 
+    public GameObject mission1ClearImage;
+    public GameObject mission2ClearImage;
+    public GameObject mission3ClearImage;
+
 
 
     void Start()
@@ -156,6 +160,10 @@ public class GameManager : MonoBehaviour
         
         PlayerPrefs.SetInt("Mission1",1);
 
+        mission1ClearImage.SetActive(true);
+        yield return new WaitForSeconds(3);
+        mission1ClearImage.SetActive(false);
+
         changeCamera();
         FinishMission();
     }
@@ -183,6 +191,10 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetInt("Mission2", 1);
 
+        mission2ClearImage.SetActive(true);
+        yield return new WaitForSeconds(3);
+        mission2ClearImage.SetActive(false);
+
         changeCamera();
         FinishMission();
     }
@@ -209,6 +221,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(10);
 
         PlayerPrefs.SetInt("Mission3", 1);
+
+        mission3ClearImage.SetActive(true);
+        yield return new WaitForSeconds(3);
+        mission3ClearImage.SetActive(false);
 
         changeCamera();
         FinishMission();
