@@ -214,13 +214,13 @@ public class GameManager : MonoBehaviour
         FinishMission();
     }
 
-    public void changeMissionLogo()
+    public void changeMissionLogo()  
     {
         for(int i = 0; i < MissionLogos.Length; i++)
         {
-            for(int b = 0; b < MissionLogos.Length; b++)
+            for(int b = 0; b < MissionLogos[i].transform.childCount; b++)
             {
-                MissionLogos[i].transform.GetChild(b).gameObject.SetActive(false);
+                MissionLogos[i].transform.GetChild(b).gameObject.SetActive(false); 
             }
             MissionLogos[i].transform.GetChild(CurrentMissionNum).gameObject.SetActive(true);
         }

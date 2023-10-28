@@ -147,11 +147,14 @@ public class NoCodeManager : MonoBehaviour
                 RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow1());  
                 RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow2());  
             }
+
+            firstText.text = "이걸 눌러야"; 
+            secondText.text = "확인이 될걸세"; 
         }
         else
         {
             firstText.text = "틀렸다네"; 
-            secondText.text = "다시 해보게나"; 
+            secondText.text = "다시 해보게나";  
         }
             
         IsPlayButtonDown = true;  

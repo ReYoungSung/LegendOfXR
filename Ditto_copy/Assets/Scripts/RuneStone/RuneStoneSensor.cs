@@ -41,7 +41,7 @@ public class RuneStoneSensor : MonoBehaviour
     {
         noCodeManager = GameObject.Find("XRStudioSystemManager").GetComponent<NoCodeManager>(); 
 
-        textMeshPro = this.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>();  
+        textMeshPro = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();  
     }
 
     void Update() 
