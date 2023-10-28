@@ -18,6 +18,11 @@ public class TurorialVideoFlow : MonoBehaviour
     public bool isArriveXRScreen = false;
 
     public bool isArriveXRScreen2 = false;
+      
+    public bool hasVisitedXRScreen1 = false;
+
+
+    public bool hasVisitedXRScreen2 = false;
 
     public bool isRecommendOn = false;
     
@@ -78,9 +83,11 @@ public class TurorialVideoFlow : MonoBehaviour
         UIImages[0].SetActive(false);
         UIImages[1].SetActive(false);
 
+        yield return new WaitForSeconds(2.0f);
+
         Texture.SetActive(true);
         Videos[2].SetActive(true);
-        yield return new WaitForSecondsRealtime(15);
+        yield return new WaitForSecondsRealtime(15);    
         Videos[2].SetActive(false);
         Texture.SetActive(false);
 
@@ -89,7 +96,7 @@ public class TurorialVideoFlow : MonoBehaviour
         {
             yield return null;
         }
-
+        yield return new WaitForSeconds(2.0f);
           // add  videos 
         Texture.SetActive(true);
         Videos[3].SetActive(true);
@@ -97,11 +104,13 @@ public class TurorialVideoFlow : MonoBehaviour
         Videos[3].SetActive(false);
         Texture.SetActive(false);
 
-        isArriveXRScreen2 = false;
-        while (isArriveXRScreen2 != true) 
+        isArriveXRScreen = false;
+        while (isArriveXRScreen != true || (isArriveXRScreen2 != true && !hasVisitedXRScreen1))
         {
             yield return null;
         }
+      
+        yield return new WaitForSeconds(2.0f);
 
         Texture.SetActive(true);
         Videos[4].SetActive(true);
@@ -109,13 +118,15 @@ public class TurorialVideoFlow : MonoBehaviour
         Videos[4].SetActive(false);
         Texture.SetActive(false);
 
-        RecommendOnNum = 0
+        RecommendOnNum = 0;
         isRecommendOn = false;
         while (isRecommendOn != true) 
         {
             yield return null;
         }
         // finish add
+
+       yield return new WaitForSeconds(2.0f);
 
         Texture.SetActive(true);
         Videos[5].SetActive(true);
@@ -131,6 +142,8 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(2.0f);
+
         Texture.SetActive(true);
         Videos[6].SetActive(true);
         yield return new WaitForSecondsRealtime(39);
@@ -143,19 +156,38 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+       yield return new WaitForSeconds(2.0f);
+
         Texture.SetActive(true);
         Videos[7].SetActive(true);
         yield return new WaitForSecondsRealtime(25);
         Videos[7].SetActive(false);
         Texture.SetActive(false);
 
-
         isGrabAvatar = false;
         isArriveXRScreen = false;
-        while (isGrabAvatar != true || isArriveXRScreen != true) 
+        while (isArriveXRScreen != true || (isArriveXRScreen2 != true && !hasVisitedXRScreen1))
         {
             yield return null;
         }
+        if (isArriveXRScreen == true && !hasVisitedXRScreen1)
+        {
+            hasVisitedXRScreen1 = true;
+            
+        }
+
+         if (isArriveXRScreen2 == true && hasVisitedXRScreen1)
+        {
+            hasVisitedXRScreen2 = true;
+        }
+      
+        while (isGrabAvatar != true || isArriveXRScreen2 != true) 
+        {
+            yield return null;
+        }
+
+
+        yield return new WaitForSeconds(2.0f);
 
         Texture.SetActive(true);
         Videos[8].SetActive(true);
@@ -169,6 +201,8 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(2.0f);
+
         Texture.SetActive(true);
         Videos[9].SetActive(true);
         yield return new WaitForSecondsRealtime(14);
@@ -181,11 +215,19 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(2.0f);
+
+
         Texture.SetActive(true);
         Videos[10].SetActive(true);
         yield return new WaitForSecondsRealtime(17);
         Videos[10].SetActive(false);
         Texture.SetActive(false);
+
+
+        // noCode needs to be inserted.
+
+        yield return new WaitForSeconds(2.0f);   
 
         Texture.SetActive(true);
         Videos[11].SetActive(true);
@@ -200,6 +242,9 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(2.0f);   
+
+
         Texture.SetActive(true);
         Videos[12].SetActive(true);
         yield return new WaitForSecondsRealtime(10);
@@ -212,6 +257,8 @@ public class TurorialVideoFlow : MonoBehaviour
         {
             yield return null;
         }
+
+        yield return new WaitForSeconds(2.0f);
 
         Texture.SetActive(true);
         Videos[13].SetActive(true);
@@ -226,12 +273,13 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(2.0f);
+
         Texture.SetActive(true);
         Videos[14].SetActive(true);
         yield return new WaitForSecondsRealtime(8);
         Videos[14].SetActive(false);
         Texture.SetActive(false);
-
     }
 
 
@@ -256,7 +304,6 @@ public class TurorialVideoFlow : MonoBehaviour
     {
         isRecommendOn = true;
     }
-
    
     
 }
