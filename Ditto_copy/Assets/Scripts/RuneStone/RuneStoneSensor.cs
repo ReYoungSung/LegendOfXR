@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro; 
 
 public class RuneStoneSensor : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class RuneStoneSensor : MonoBehaviour
     private bool isFilled = false;
 
     private GameObject filledObject;
+
+    public TextMeshProUGUI textMeshPro;
 
     private enum MissionType
     {
@@ -36,6 +40,8 @@ public class RuneStoneSensor : MonoBehaviour
     void Start()
     {
         noCodeManager = GameObject.Find("XRStudioSystemManager").GetComponent<NoCodeManager>(); 
+
+        textMeshPro = this.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>();  
     }
 
     void Update() 
@@ -50,13 +56,15 @@ public class RuneStoneSensor : MonoBehaviour
 
                     if (filledObject.name == "BeginToPlay")
                     {
-                        noCodeManager.mission1Answers[0] = false;
+                        ChangeText("시작 시 한 번");
+                        noCodeManager.mission1Answers[0] = false; 
                         noCodeManager.isRepeatEvent = false;
                     }
 
                     if(filledObject.name == "TickEvent")
                     {
-                        noCodeManager.mission1Answers[0] = true;
+                        ChangeText("계속 반복해서");
+                        noCodeManager.mission1Answers[0] = true; 
                         noCodeManager.isRepeatEvent = true; 
                     }
                 }
@@ -69,12 +77,14 @@ public class RuneStoneSensor : MonoBehaviour
 
                     if (filledObject.name == "BeginToPlay")
                     {
+                        ChangeText("시작 시 한 번");
                         noCodeManager.mission2Answers[0] = true;
                         noCodeManager.isRepeatEvent = false;
                     }
 
                     if(filledObject.name == "TickEvent")
                     {
+                        ChangeText("계속 반복해서");
                         noCodeManager.mission2Answers[0] = false;   
                         noCodeManager.isRepeatEvent = true;
                     }
@@ -85,25 +95,29 @@ public class RuneStoneSensor : MonoBehaviour
 
                     if (filledObject.name == "12HourChanger") 
                     {
+                        ChangeText("12시간 후로 돌린다");
                         noCodeManager.mission2Answers[1] = true;
                         noCodeManager.TimeValue = 12;
                     }
 
                     if (filledObject.name == "6HourChanger")
                     {
+                        ChangeText("6시간 후로 돌린다");
                         noCodeManager.mission2Answers[1] = false;
                         noCodeManager.TimeValue = 6;
                     }
 
                     if (filledObject.name == "18HourChanger")
                     {
+                        ChangeText("18시간 후로 돌린다");
                         noCodeManager.mission2Answers[1] = false;
                         noCodeManager.TimeValue = 18;
                     }
 
                     if (filledObject.name == "24HourChanger")
                     {
-                        noCodeManager.mission2Answers[1] = false;
+                        ChangeText("24시간 후로 돌린다");
+                        noCodeManager.mission2Answers[1] = false; 
                         noCodeManager.TimeValue = 24;
                     }
 
@@ -117,12 +131,14 @@ public class RuneStoneSensor : MonoBehaviour
 
                     if(filledObject.name == "BeginToPlay")
                     {
+                        ChangeText("시작 시 한 번");
                         noCodeManager.mission3Answers[0] = false;
                         noCodeManager.isRepeatEvent = false;
                     }
 
                     if(filledObject.name == "TickEvent")
                     {
+                        ChangeText("계속 반복해서"); 
                         noCodeManager.mission3Answers[0] = true;
                         noCodeManager.isRepeatEvent = true;
                     }
@@ -133,12 +149,14 @@ public class RuneStoneSensor : MonoBehaviour
 
                     if (filledObject.name == "BeginToPlay")
                     {
+                        ChangeText("시작 시 한 번");
                         noCodeManager.mission3Answers[1] = true;
                         noCodeManager.isRepeatEvent = false;
                     }
 
                     if (filledObject.name == "TickEvent")
                     {
+                        ChangeText("계속 반복해서"); 
                         noCodeManager.mission3Answers[1] = false;
                         noCodeManager.isRepeatEvent = true;
                     }
@@ -149,6 +167,7 @@ public class RuneStoneSensor : MonoBehaviour
 
                     if (filledObject.name == "WiZard") 
                     {
+                        ChangeText("마법사가"); 
                         noCodeManager.mission3Answers[2] = true;  
                     }
                 }
@@ -158,6 +177,7 @@ public class RuneStoneSensor : MonoBehaviour
 
                     if (filledObject.name == "Shield")
                     {
+                        ChangeText("쉴드를 생성한다");
                         noCodeManager.mission3Answers[3] = true;
                     }
 
@@ -168,6 +188,7 @@ public class RuneStoneSensor : MonoBehaviour
 
                     if (filledObject.name == "Metheo")
                     {
+                        ChangeText("메테오를 생성한다");
                         noCodeManager.mission3Answers[4] = true;
                     }
                 }
@@ -213,5 +234,10 @@ public class RuneStoneSensor : MonoBehaviour
             if(filledObject != null)
                 filledObject = null;
         }
+    }
+
+    public void ChangeText(string newText) 
+    {
+        textMeshPro.text = newText;  
     }
 }

@@ -14,7 +14,7 @@ public class NoCodeManager : MonoBehaviour
     public bool[] mission1FillBlank = new bool[] { false };
     public bool[] mission2FillBlank = new bool[] { false, false };
     public bool[] mission3FillBlank = new bool[] { false, false, false, false, false};
-    public bool fullFillBlanks = false;
+    public bool fullFillBlanks = false; 
 
     //Mission1
     [HideInInspector] public bool isRepeatEvent = false;
@@ -35,8 +35,6 @@ public class NoCodeManager : MonoBehaviour
 
     [HideInInspector] public bool IsPlayButtonDown = false;
     private Coroutine RuneStoneCoroutine = null; 
-
-
 
     private void Awake() 
     {
