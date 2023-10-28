@@ -59,11 +59,11 @@ public class AvatarSensor : MonoBehaviour
         }
         else if (allowedRotation == RotationRange.M2) 
         { 
-            return (rotationY >= 360f-15f || rotationY <= 15f);     
+            return (rotationY >= 360f || rotationY <= 90f);     
         }
         else if (allowedRotation == RotationRange.M3)
         {
-            return (rotationY >= 0f && rotationY <= 45f);  
+            return (rotationY >= 360f || rotationY <= 90f);  
         }
         else 
         {
