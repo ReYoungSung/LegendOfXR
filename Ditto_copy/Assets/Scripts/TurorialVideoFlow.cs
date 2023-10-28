@@ -49,20 +49,21 @@ public class TurorialVideoFlow : MonoBehaviour
     public IEnumerator TutorialFlow()  
     {
         Videos[0].SetActive(true);
-        yield return new WaitForSecondsRealtime(29);
+        yield return new WaitForSecondsRealtime(35);
         Videos[0].SetActive(false);
         Videos[1].SetActive(true);
-        yield return new WaitForSecondsRealtime(29);
+        yield return new WaitForSecondsRealtime(35);
         Videos[1].SetActive(false);
 
         HenaUIClickNum = 0;
+        isHenaUIClosed = false; 
         while ( isHenaUIClosed != true ) 
         {
             yield return null;
         }
 
         Videos[2].SetActive(true);
-        yield return new WaitForSecondsRealtime(10);
+        yield return new WaitForSecondsRealtime(15);
         Videos[2].SetActive(false);
 
         isArrivePoster = false;
@@ -72,7 +73,7 @@ public class TurorialVideoFlow : MonoBehaviour
         }
 
         Videos[3].SetActive(true);
-        yield return new WaitForSecondsRealtime(20);
+        yield return new WaitForSecondsRealtime(25);
         Videos[3].SetActive(false);
 
 
@@ -87,61 +88,65 @@ public class TurorialVideoFlow : MonoBehaviour
         yield return new WaitForSecondsRealtime(39);
         Videos[4].SetActive(false);
 
+        isArriveAvatar = false;
         while(isArriveAvatar != true) 
         {
             yield return null;
         }
 
         Videos[5].SetActive(true);
-        yield return new WaitForSecondsRealtime(20);
+        yield return new WaitForSecondsRealtime(25);
         Videos[5].SetActive(false);
 
         
         isGrabAvatar = false;
         isArriveXRScreen = false;
-
         while (isGrabAvatar != true || isArriveXRScreen != true) 
         {
             yield return null;
         }
 
         Videos[6].SetActive(true);
-        yield return new WaitForSecondsRealtime(11);
+        yield return new WaitForSecondsRealtime(16);
         Videos[6].SetActive(false);
 
+        gameManager.isCharacterInExactPlace = false;
         while (gameManager.isCharacterInExactPlace != true) 
         {
             yield return null;
         }
 
         Videos[7].SetActive(true);
-        yield return new WaitForSecondsRealtime(4);
+        yield return new WaitForSecondsRealtime(14);
         Videos[7].SetActive(false);
 
+        isPlaceRuneStone = false;
         while(isPlaceRuneStone != true) 
         {
             yield return null;
         }
 
         Videos[8].SetActive(true);
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(17);
         Videos[8].SetActive(false);
 
        
 
         Videos[9].SetActive(true);
-        yield return new WaitForSecondsRealtime(17);
+        yield return new WaitForSecondsRealtime(23);
         Videos[9].SetActive(false);
 
+        gameManager.isNoCodeInExactPlace = false;
          while (gameManager.isNoCodeInExactPlace != true) 
         {
             yield return null;
         }
 
         Videos[10].SetActive(true);
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(10);
         Videos[10].SetActive(false);
 
+        isArriveCameraController = false;
         while (isArriveCameraController != true) 
         {
             yield return null;
@@ -151,17 +156,15 @@ public class TurorialVideoFlow : MonoBehaviour
         yield return new WaitForSecondsRealtime(20);
         Videos[11].SetActive(false);
 
+        gameManager.isNoCodeInExactPlace = false;
         while (gameManager.isNoCodeInExactPlace != true) 
         {
             yield return null;
         }
 
         Videos[12].SetActive(true);
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(8);
         Videos[12].SetActive(false);
-
-
-
     }
 
     public void HenaUIClosed()
