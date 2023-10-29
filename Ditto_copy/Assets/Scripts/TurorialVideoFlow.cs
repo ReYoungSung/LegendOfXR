@@ -27,15 +27,9 @@ public class TurorialVideoFlow : MonoBehaviour
 
     public bool isPlaceRuneStone = false;
 
+    public bool isRunePLayButton = false;
+
     public bool isArriveXRScreen2 = false;
-      
-    public bool hasVisitedXRScreen1 = false;
-
-    public bool hasVisitedXRScreen2 = false;
-
-    public bool isPlaceDownAvatar = false;
-
-    
 
     public bool isArriveCameraController = false;
 
@@ -71,7 +65,7 @@ public class TurorialVideoFlow : MonoBehaviour
 
         Texture.SetActive(true);
         Videos[0].SetActive(true);
-        yield return new WaitForSecondsRealtime(31);
+        yield return new WaitForSecondsRealtime(29);
         Videos[0].SetActive(false);
        
         Videos[1].SetActive(true);
@@ -125,7 +119,7 @@ public class TurorialVideoFlow : MonoBehaviour
 
         Texture.SetActive(true);
         Videos[4].SetActive(true);
-        yield return new WaitForSecondsRealtime(13);
+        yield return new WaitForSecondsRealtime(11);
         Videos[4].SetActive(false);  
         Texture.SetActive(false);   
 
@@ -191,7 +185,9 @@ public class TurorialVideoFlow : MonoBehaviour
 
         isGrabAvatar = false;
         isArriveXRScreen = false;
-        while (isGrabAvatar != true || isArriveXRScreen != true)
+        gameManager.isCharacterInExactPlace = false;
+
+        while (gameManager.isCharacterInExactPlace !=true)
         {
             yield return null;
         }
@@ -231,15 +227,17 @@ public class TurorialVideoFlow : MonoBehaviour
         Videos[11].SetActive(false);
         Texture.SetActive(false);
 
-        isPlaceRuneStone = false;
-        while (isPlaceRuneStone != true)
+        isRunePLayButton = false;
+        gameManager.isNoCodeInExactPlace = false;
+
+        while (gameManager.isNoCodeInExactPlace != true || isRunePLayButton != true)
         {
             yield return null;
         }
 
         Texture.SetActive(true);
         Videos[12].SetActive(true);
-        yield return new WaitForSecondsRealtime(23);
+        yield return new WaitForSecondsRealtime(6);
         Videos[12].SetActive(false);
         Texture.SetActive(false);
 
@@ -267,7 +265,16 @@ public class TurorialVideoFlow : MonoBehaviour
         yield return new WaitForSecondsRealtime(8);
         Videos[14].SetActive(false);
         Texture.SetActive(false);
+
+
+
+
+
+
+
     }
+
+
 
  
 
@@ -298,6 +305,16 @@ public void HenaUIClosed()
     
     isGrabRuneStone = true;
     
+    }
+
+    public void PlaceRuneStone() 
+    {
+        isPlaceRuneStone = true;
+
+    }
+
+    public void RunePlayButton() { 
+        isRunePLayButton = true;
     }
    
     
