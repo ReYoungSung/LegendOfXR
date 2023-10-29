@@ -25,6 +25,11 @@ public class ObjectSystemManager : MonoBehaviour
     [SerializeField] public GameObject avatar3;
     public GameObject WizardRuneStone;
 
+    [SerializeField] public GameObject XRCamera;
+    [SerializeField] public GameObject XRRotation; 
+    private Vector3 XRCameraOriginPosition; 
+    private Quaternion XRRotationOriginRotation;
+
     private Vector3 originAvatar1Position;
     private Vector3 originAvatar2Position;
     private Vector3 originAvatar3Position;
@@ -60,6 +65,9 @@ public class ObjectSystemManager : MonoBehaviour
         originAvatar2Position = avatar2.transform.position;  
         originAvatar3Position = avatar3.transform.position;  
         SaveRuneStonesOriginTransform();  
+        
+        XRCameraOriginPosition = XRCamera.transform.position;
+        XRRotationOriginRotation = XRRotation.transform.rotation;
     }
 
     void Update()
@@ -340,16 +348,18 @@ public class ObjectSystemManager : MonoBehaviour
     {
         avatar1.transform.position = originAvatar1Position;
         avatar2.transform.position = originAvatar2Position;
-        avatar3.transform.position = originAvatar3Position;
 
         for (int i = 0; i < RuneStoneObjects.Length; i++)
         {
             if (i < RuneStonesOriginPosition.Length)
             {
-                RuneStoneObjects[i].transform.position = RuneStonesOriginPosition[i];  
-                RuneStoneObjects[i].transform.rotation = RuneStonesOriginRotation[i];
+                RuneStoneObjects[i].transform.position = RuneStonesOriginPosition[i];   
+                RuneStoneObjects[i].transform.rotation = RuneStonesOriginRotation[i];   
             }
         }
+
+        XRCamera.transform.position = XRCameraOriginPosition; 
+        XRRotation.transform.rotation = XRRotationOriginRotation;  
     }
 }
 

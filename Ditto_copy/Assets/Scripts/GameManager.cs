@@ -7,9 +7,9 @@ using UnityEngine.Playables;
 
 public class GameManager : MonoBehaviour
 {
-    private bool isClearMission1 = false;  
-    private bool isClearMission2 = false;  
-    private bool isClearMission3 = false;  
+    public bool isClearMission1 = false;
+    public bool isClearMission2 = false;
+    public bool isClearMission3 = false;  
 
     [HideInInspector] public int CurrentMissionNum = 0; 
 
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private ObjectSystemManager objectSystemManager;
     private NoCodeManager noCodeManager;
 
-    [SerializeField] private GameObject[] MissionLogos;
+    [SerializeField] private GameObject[] MissionLogos; 
 
     [SerializeField] private GameObject[] RuneStonePlates;
 
@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
     public Camera XRCamera; // �� ��° ī�޶�
 
     public PlayableDirector WizardTimeline;
+
+    public GameObject mission1ClearImage;
+    public GameObject mission2ClearImage;
+    public GameObject mission3ClearImage;
 
 
 
@@ -91,34 +95,38 @@ public class GameManager : MonoBehaviour
 
     public void StartMission2()
     {
+        xrScreenManager.ActiveMission2Screen();  
+        RuneStonePlates[0].SetActive(false);
+        RuneStonePlates[1].SetActive(true);
+        RuneStonePlates[2].SetActive(false);
+        StartCoroutine(Mission2EventFlow());
+
         if (PlayerPrefs.GetInt("Mission1") == 1)
         {
-            xrScreenManager.ActiveMission2Screen();  
-            RuneStonePlates[0].SetActive(false);
-            RuneStonePlates[1].SetActive(true);
-            RuneStonePlates[2].SetActive(false);
-            StartCoroutine(Mission2EventFlow());
+            
         }
     }
 
     public void StartMission3()
     {
+        objectSystemManager.avatar3.SetActive(true); //Spawn Mage Avatar
+        objectSystemManager.WizardRuneStone.SetActive(true);
+
+        xrScreenManager.ActiveMission3Screen();
+        RuneStonePlates[0].SetActive(false);
+        RuneStonePlates[1].SetActive(false);
+        RuneStonePlates[2].SetActive(true);
+        StartCoroutine(Mission3EventFlow());
+
+        // WizardTimeline 실행
+        if (WizardTimeline != null)
+        {
+            WizardTimeline.Play();
+        }
+        
         if (PlayerPrefs.GetInt("Mission2") == 1 && PlayerPrefs.GetInt("Mission1") == 1)
         {
-            objectSystemManager.avatar3.SetActive(true); //Spawn Mage Avatar
-            objectSystemManager.WizardRuneStone.SetActive(true);
-
-            xrScreenManager.ActiveMission3Screen();
-            RuneStonePlates[0].SetActive(false);
-            RuneStonePlates[1].SetActive(false);
-            RuneStonePlates[2].SetActive(true);
-            StartCoroutine(Mission3EventFlow());
-
-            // WizardTimeline 실행
-            if (WizardTimeline != null)
-            {
-                WizardTimeline.Play();
-            }
+            
         }
     }
 
@@ -126,14 +134,19 @@ public class GameManager : MonoBehaviour
     {
         objectSystemManager.returnObjectsToOriginSpace();
         xrScreenManager.DeActiveAllMissionScreen();
-        isCharacterInExactPlace = false;
-        isCameraInExactPlace = false;
-        isNoCodeInExactPlace = false;
-        getFinishCMButton = false;
+        isCharacterInExactPlace = false; 
+        isCameraInExactPlace = false; 
+        isNoCodeInExactPlace = false; 
+        getFinishCMButton = false; 
         noCodeManager.StopRuneStone(); 
+        noCodeManager.resetText(); 
+        
+        noCodeManager.isRepeatEvent = false;
+        noCodeManager.isRepeatEvent2 = false;
+        noCodeManager.IsPlayButtonDown = false;   
     } 
 
-    public IEnumerator Mission1EventFlow() 
+    public IEnumerator Mission1EventFlow()  
     {
         CurrentMissionNum = 1;
         changeMissionLogo();
@@ -146,19 +159,22 @@ public class GameManager : MonoBehaviour
                && isNoCodeInExactPlace
                && getFinishCMButton) 
             {
-                isClearMission1 = true; 
+                isClearMission1 = true;  
             }
 
-            yield return null;
+            yield return null; 
         }
-        changeCamera();
-        noCodeManager.PlayRuneStone();
-        yield return new WaitForSeconds(10);
+        changeCamera(); 
+        yield return new WaitForSeconds(10); 
         
-        PlayerPrefs.SetInt("Mission1",1);
+        PlayerPrefs.SetInt("Mission1",1); 
 
-        changeCamera();
-        FinishMission();
+        mission1ClearImage.SetActive(true); 
+        yield return new WaitForSeconds(3); 
+        mission1ClearImage.SetActive(false); 
+
+        changeCamera(); 
+        FinishMission(); 
     }
 
     public IEnumerator Mission2EventFlow()
@@ -180,12 +196,15 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         changeCamera();
-        noCodeManager.PlayRuneStone();
         yield return new WaitForSeconds(10);
 
         PlayerPrefs.SetInt("Mission2", 1);
 
-        changeCamera();
+        mission2ClearImage.SetActive(true);
+        yield return new WaitForSeconds(3);
+        mission2ClearImage.SetActive(false);
+
+        changeCamera(); 
         FinishMission();
     }
 
@@ -208,22 +227,25 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         changeCamera();
-        noCodeManager.PlayRuneStone();
         yield return new WaitForSeconds(10);
 
         PlayerPrefs.SetInt("Mission3", 1);
+
+        mission3ClearImage.SetActive(true);
+        yield return new WaitForSeconds(3);
+        mission3ClearImage.SetActive(false);
 
         changeCamera();
         FinishMission();
     }
 
-    public void changeMissionLogo()
+    public void changeMissionLogo()  
     {
         for(int i = 0; i < MissionLogos.Length; i++)
         {
-            for(int b = 0; b < MissionLogos.Length; b++)
+            for(int b = 0; b < MissionLogos[i].transform.childCount; b++)
             {
-                MissionLogos[i].transform.GetChild(b).gameObject.SetActive(false);
+                MissionLogos[i].transform.GetChild(b).gameObject.SetActive(false); 
             }
             MissionLogos[i].transform.GetChild(CurrentMissionNum).gameObject.SetActive(true);
         }

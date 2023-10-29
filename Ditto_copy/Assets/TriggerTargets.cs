@@ -18,16 +18,16 @@ public class TriggerTargets : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(other.name == "FramePosition")
         {
             turorialVideoFlow.isArrivePoster = true;
         }
 
-        if(other.name == "XRStudioPosition")
+        if(other.name == "CMPosition")
         {
-            turorialVideoFlow.isArriveXRScreen = true;
+            turorialVideoFlow.isArriveCMScreen = true;
         }
 
         if(other.name == "AvatarPosition") 
@@ -37,14 +37,22 @@ public class TriggerTargets : MonoBehaviour
 
         if(other.name ==  "NoCodePosition")
         {
-            turorialVideoFlow.isPlaceRuneStone = true;
+            turorialVideoFlow.isArriveRuneStonePlate = true;
         }
 
         if(other.name == "XRStudioPosition") 
         {
-            turorialVideoFlow.isArriveCameraController = true;
+            turorialVideoFlow.isArriveXRScreen = true;
         }
 
+        if(other.name == "RuneStoneArrive")
+        {
+            turorialVideoFlow.isArriveRuneStonePlate = true;
+        }
 
+        if (other.name == "RuneStoneTablet")
+        {
+            turorialVideoFlow.isGrabRuneStone = true;
+        }
     }
 }

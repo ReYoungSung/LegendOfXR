@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro; 
 
 public class NoCodeManager : MonoBehaviour
 {
@@ -9,15 +10,19 @@ public class NoCodeManager : MonoBehaviour
 
     public bool[] mission1Answers = new bool[] {false};
     public bool[] mission2Answers = new bool[] {false, false};
-    public bool[] mission3Answers = new bool[] {false, false, false, false, false};
+    public bool[] mission3Answers = new bool[] {true, false, false};
+    public bool[] mission4Answers = new bool[] {true, false, false};
 
     public bool[] mission1FillBlank = new bool[] { false };
     public bool[] mission2FillBlank = new bool[] { false, false };
-    public bool[] mission3FillBlank = new bool[] { false, false, false, false, false};
+    public bool[] mission3FillBlank = new bool[] { true, false, false};
+    public bool[] mission4FillBlank = new bool[] { true, false, false}; 
+
     public bool fullFillBlanks = false; 
 
     //Mission1
     [HideInInspector] public bool isRepeatEvent = false;
+    [HideInInspector] public bool isRepeatEvent2 = true;
     [SerializeField] private GameObject WatarSwordVFX;
 
     //Mission2
@@ -31,10 +36,20 @@ public class NoCodeManager : MonoBehaviour
     //Mission3
     [SerializeField] private GameObject Metheo;
     [SerializeField] private GameObject Shield; 
+    [SerializeField] private GameObject TickEvent;
+
+
+
+    [SerializeField] private GameObject PlayButton;  
+    [SerializeField] private GameObject PuaseButton;    
 
 
     [HideInInspector] public bool IsPlayButtonDown = false;
     private Coroutine RuneStoneCoroutine = null; 
+    private Coroutine RuneStoneCoroutine2 = null;
+
+    public TextMeshProUGUI firstText;
+    public TextMeshProUGUI secondText;
 
     private void Awake() 
     {
@@ -50,12 +65,23 @@ public class NoCodeManager : MonoBehaviour
     
     void Update()
     {
-        CheckRuneStones();
+        CheckRuneSotnes();
+
+        if(IsPlayButtonDown == true)
+        {
+            PlayButton.SetActive(false);
+            PuaseButton.SetActive(true);
+        }
+        else 
+        {
+            PlayButton.SetActive(true);
+            PuaseButton.SetActive(false); 
+        }
     }
 
-    public void CheckRuneStones()
-    {
-        if (gameManager.CurrentMissionNum == 1)
+    public void CheckRuneSotnes() 
+    { 
+        if (gameManager.CurrentMissionNum == 1) 
         {
             if (ArrayIsAllTrue(mission1FillBlank))
             {
@@ -66,9 +92,9 @@ public class NoCodeManager : MonoBehaviour
                 fullFillBlanks = false;
             }
 
-            if (ArrayIsAllTrue(mission1Answers))  
+            if (ArrayIsAllTrue(mission1Answers) && IsPlayButtonDown == true)  
             {
-                gameManager.isNoCodeInExactPlace = true;
+                gameManager.isNoCodeInExactPlace = true; 
             }
             else
             {
@@ -86,27 +112,27 @@ public class NoCodeManager : MonoBehaviour
                 fullFillBlanks = false;
             }
 
-            if (ArrayIsAllTrue(mission2Answers)) 
+            if (ArrayIsAllTrue(mission2Answers) && IsPlayButtonDown == true) 
             {
                 gameManager.isNoCodeInExactPlace = true;
             }
             else
             {
-                gameManager.isNoCodeInExactPlace = false;
+                gameManager.isNoCodeInExactPlace = false; 
             }
         }
-        else if (gameManager.CurrentMissionNum == 3)
+        else if (gameManager.CurrentMissionNum == 3) 
         {
-            if (ArrayIsAllTrue(mission3FillBlank))
+            if (ArrayIsAllTrue(mission3FillBlank) && ArrayIsAllTrue(mission4FillBlank))
             {
                 fullFillBlanks = true;
             }
-            else
+            else 
             {
                 fullFillBlanks = false;
             }
 
-            if (ArrayIsAllTrue(mission3Answers))
+            if (ArrayIsAllTrue(mission3Answers) && ArrayIsAllTrue(mission4Answers) && IsPlayButtonDown == true) 
             {
                 gameManager.isNoCodeInExactPlace = true;
             }
@@ -131,36 +157,103 @@ public class NoCodeManager : MonoBehaviour
 
 
     public void PlayRuneStone()
+    {     
+        IsPlayButtonDown = true; 
+
+        Invoke("SupportToPlay", 2f);
+    }
+
+    public void SupportToPlay()
     {
-        if(RuneStoneCoroutine == null && fullFillBlanks == true) 
-        {
-            if (gameManager.CurrentMissionNum == 1)
-                RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());
-            else if (gameManager.CurrentMissionNum == 2)
-                RuneStoneCoroutine = StartCoroutine(Mission2RuneStoneFlow());
-            else if (gameManager.CurrentMissionNum == 3)
+        if(RuneStoneCoroutine == null)
+        {       
+            if(gameManager.isNoCodeInExactPlace == true)
             {
-                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow1());
-                RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow2());
+                firstText.text = "잘했다네";  
+                secondText.text = "확실히 될걸세"; 
+
+                if (gameManager.CurrentMissionNum == 1)
+                    RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());  
+                else if (gameManager.CurrentMissionNum == 2)
+                    RuneStoneCoroutine = StartCoroutine(Mission2RuneStoneFlow());  
+                else if (gameManager.CurrentMissionNum == 3)
+                {
+                    RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow1());  
+                    RuneStoneCoroutine2 = StartCoroutine(Mission3RuneStoneFlow2());  
+                }
+            }
+            else if(fullFillBlanks == true && gameManager.isNoCodeInExactPlace == false) 
+            {
+                firstText.text = "틀렸다네"; 
+                secondText.text = "다시 해보게나";  
+
+                if (gameManager.CurrentMissionNum == 1)
+                    RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());  
+                else if (gameManager.CurrentMissionNum == 2)
+                    RuneStoneCoroutine = StartCoroutine(Mission2RuneStoneFlow());  
+                else if (gameManager.CurrentMissionNum == 3)
+                {
+                    RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow1());  
+                    RuneStoneCoroutine2 = StartCoroutine(Mission3RuneStoneFlow2());  
+                }
+            }
+            else
+            {
+                firstText.text = "이걸 눌러야";  
+                secondText.text = "확인이 될걸세"; 
             }
         }
-            
-        IsPlayButtonDown = true;  
+    }
+
+    public void resetText()
+    {
+        firstText.text = "이걸 눌러야";  
+        secondText.text = "확인이 될걸세"; 
+    }
+
+    public void errorText1()
+    {
+        firstText.text = "물이 빠르게";  
+        secondText.text = "꺼지지 않을까?";  
+    }
+
+    public void errorText2()
+    {
+        firstText.text = "시간이 빠르게";  
+        secondText.text = "돌기만 할거야!";  
+    }
+
+    public void errorText3()
+    {
+        firstText.text = "메테오는";  
+        secondText.text = "한번만 쓰게!";  
     }
 
     public void StopRuneStone()
     {
+        IsPlayButtonDown = false;  
+        resetText();
+
         if (RuneStoneCoroutine != null)
         {
-            isRepeatEvent = false;
-            sunLight.transform.localRotation = originSunLightRotation;
+            StopCoroutine(RuneStoneCoroutine);
+            RuneStoneCoroutine = null;
+
+            WatarSwordVFX.SetActive(false);  
+            sunLight.transform.localRotation = Quaternion.Euler(-90f, 0, 0); 
         }
 
-        IsPlayButtonDown = false;  
+        if(RuneStoneCoroutine2 != null)
+        {
+            StopCoroutine(RuneStoneCoroutine2);
+            RuneStoneCoroutine2 = null;
+            Metheo.SetActive(false);
+            Shield.SetActive(false); 
+        }
     }
 
     //Mission1
-    IEnumerator Mission1RuneStoneFlow() 
+    IEnumerator Mission1RuneStoneFlow()  
     {
         yield return new WaitForSeconds(2.0f);
         
@@ -170,8 +263,6 @@ public class NoCodeManager : MonoBehaviour
         {
             yield return null; 
         }
-
-        yield return new WaitForSeconds(1.0f);  
         WatarSwordVFX.SetActive(false);  
 
         StopCoroutine(RuneStoneCoroutine); 
@@ -190,9 +281,6 @@ public class NoCodeManager : MonoBehaviour
             RotateSunLight();
             yield return null;
         }
-
-        yield return new WaitForSeconds(1.0f); 
-
         StopCoroutine(RuneStoneCoroutine);
         RuneStoneCoroutine = null;
     }
@@ -201,7 +289,7 @@ public class NoCodeManager : MonoBehaviour
     {
         if (rotateCoroutine == null)
         {
-            rotateCoroutine = StartCoroutine(RotateSunLightCoroutine(180f*TimeValue/12));
+            rotateCoroutine = StartCoroutine(RotateSunLightCoroutine(150f*TimeValue/12));  
         }
     } 
 
@@ -228,6 +316,7 @@ public class NoCodeManager : MonoBehaviour
     //Mission3
     private IEnumerator Mission3RuneStoneFlow1()
     {
+        TickEvent.SetActive(false);
         yield return new WaitForSeconds(2.0f);
 
         Metheo.SetActive(true);
@@ -238,12 +327,6 @@ public class NoCodeManager : MonoBehaviour
         {
             yield return null;
         }
-
-        Metheo.transform.GetChild(0).gameObject.SetActive(false);
-        yield return new WaitForSeconds(1.0f);
-        Metheo.SetActive(false);
-
-        yield return new WaitForSeconds(1.0f);  
         
         StopCoroutine(RuneStoneCoroutine);   
         RuneStoneCoroutine = null;  
@@ -259,18 +342,16 @@ public class NoCodeManager : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         Shield.transform.GetChild(2).gameObject.SetActive(true);
 
-        while (isRepeatEvent == true)  
+        while (true)  
         {
             yield return null; 
         }
 
-        Shield.transform.GetChild(2).gameObject.SetActive(false);
+        Shield.transform.GetChild(2).gameObject.SetActive(false); 
         yield return new WaitForSeconds(0.5f);
-        Shield.transform.GetChild(1).gameObject.SetActive(false);
+        Shield.transform.GetChild(1).gameObject.SetActive(false); 
         yield return new WaitForSeconds(0.5f);
-        Shield.transform.GetChild(0).gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(1.0f);
+        Shield.transform.GetChild(0).gameObject.SetActive(false); 
 
         StopCoroutine(RuneStoneCoroutine);
         RuneStoneCoroutine = null;
