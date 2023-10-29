@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject[] RuneStonePlates;
 
-    public Camera PlayerCamera; // ù ��° ī�޶�
-    public Camera XRCamera; // �� ��° ī�޶�
+    public Camera PlayerCamera; // ù   ° ī ޶ 
+    public Camera XRCamera; //      ° ī ޶ 
 
     public PlayableDirector WizardTimeline;
 
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // �ʱ⿡�� ù ��° ī�޶� Ȱ��ȭ
+        //  ʱ⿡   ù   ° ī ޶  Ȱ  ȭ
         PlayerCamera.enabled = true;
         XRCamera.enabled = false;
 
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // ���� ���, Ű �Է��� ����Ͽ� ī�޶� ��ȯ
+        //         , Ű  Է        Ͽ  ī ޶    ȯ
         if (Input.GetKeyDown(KeyCode.C))
         {
             PlayerCamera.enabled = !PlayerCamera.enabled;
@@ -144,7 +144,23 @@ public class GameManager : MonoBehaviour
         noCodeManager.isRepeatEvent = false;
         noCodeManager.isRepeatEvent2 = false;
         noCodeManager.IsPlayButtonDown = false;   
-    } 
+    }
+
+
+    //완료시 애니메이션
+    public void SetAnimatorBool(string animatorName, string boolParameter, bool value)
+    {
+        Animator animator = GameObject.Find(animatorName)?.GetComponent<Animator>();
+
+        if (animator != null)
+        {
+            animator.SetBool(boolParameter, value);
+        }
+        else
+        {
+            Debug.LogError("Animator not found: " + animatorName);
+        }
+    }
 
     public IEnumerator Mission1EventFlow()  
     {
@@ -159,7 +175,18 @@ public class GameManager : MonoBehaviour
                && isNoCodeInExactPlace
                && getFinishCMButton) 
             {
-                isClearMission1 = true;  
+                isClearMission1 = true;
+
+                // 클리어 시 Animator 컴포넌트의 "Quest1Bool" 파라미터를 true로 설정
+                if (isClearMission1)
+                {
+                    Animator animator = GetComponent<Animator>(); // GameManager 게임 오브젝트의 Animator 컴포넌트 가져오기
+                    if (animator != null)
+                    {
+                        SetAnimatorBool("Q1_Golem_XR", "Quest1Bool", true);
+                    }
+                }
+
             }
 
             yield return null; 
@@ -191,6 +218,16 @@ public class GameManager : MonoBehaviour
                && getFinishCMButton)
             {
                 isClearMission2 = true;
+                if (isClearMission2)
+                {
+                    Animator animator = GetComponent<Animator>(); // GameManager 게임 오브젝트의 Animator 컴포넌트 가져오기
+                    if (animator != null)
+                    {
+                        SetAnimatorBool("Q2_Priest_XR", "Quest2Bool", true);
+                        SetAnimatorBool("Q2_Saint_anim", "Quest2Bool", true);
+                    }
+                }
+
             }
 
             yield return null;
@@ -222,6 +259,16 @@ public class GameManager : MonoBehaviour
                && getFinishCMButton)
             {
                 isClearMission3 = true;
+                if (isClearMission3)
+                {
+                    Animator animator = GetComponent<Animator>(); // GameManager 게임 오브젝트의 Animator 컴포넌트 가져오기
+                    if (animator != null)
+                    {
+                        SetAnimatorBool("Q3_Drake_XR", "Quest3Bool", true);
+                        SetAnimatorBool("Q3_Wizard_anim", "Quest3Bool", true);
+                    }
+                }
+
             }
 
             yield return null;
