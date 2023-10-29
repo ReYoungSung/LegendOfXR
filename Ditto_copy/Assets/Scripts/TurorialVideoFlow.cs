@@ -38,12 +38,14 @@ public class TurorialVideoFlow : MonoBehaviour
     [SerializeField] private GameObject[] Videos;
     [SerializeField] private GameObject Texture;
     [SerializeField] private GameObject[] UIImages;
+    [SerializeField] private GameObject Navigation;
 
     int HenaUIClickNum = 0;
     int PosterUINum = 0;
     int RecommendOnNum = 0;
 
     GameManager gameManager;
+    NavSystem navSystem;
 
  
     // Start is called before the first frame update
@@ -51,6 +53,7 @@ public class TurorialVideoFlow : MonoBehaviour
     {
         StartCoroutine(TutorialFlow());  
         gameManager = GameObject.Find("XRStudioSystemManager").GetComponent<GameManager>();
+        navSystem = GameObject.Find("NavArrowSystem").GetComponent<NavSystem>();
     }
 
     // Update is called once per frame
@@ -94,11 +97,16 @@ public class TurorialVideoFlow : MonoBehaviour
         Videos[2].SetActive(false);
         Texture.SetActive(false);
 
+        navSystem.selectNavTarget(4);
+        Navigation.SetActive(true);       
+
         isArriveCMScreen = false;
         while (isArriveCMScreen != true )
         {
             yield return null;
         }
+
+        Navigation.SetActive(false);
 
         yield return new WaitForSeconds(1.0f);
           // add  videos 
@@ -121,8 +129,10 @@ public class TurorialVideoFlow : MonoBehaviour
         Videos[4].SetActive(true);
         yield return new WaitForSecondsRealtime(11);
         Videos[4].SetActive(false);  
-        Texture.SetActive(false);   
+        Texture.SetActive(false);
 
+        navSystem.selectNavTarget(1);
+        Navigation.SetActive(true);
 
         isArrivePoster = false;
 
@@ -130,7 +140,9 @@ public class TurorialVideoFlow : MonoBehaviour
         {
             yield return null;
         }
-      
+
+        Navigation.SetActive(false);
+
         yield return new WaitForSeconds(1.0f);
 
         Texture.SetActive(true);
@@ -154,11 +166,16 @@ public class TurorialVideoFlow : MonoBehaviour
         Videos[6].SetActive(false);
         Texture.SetActive(false);
 
+        navSystem.selectNavTarget(2);
+        Navigation.SetActive(true);
+
         isArriveAvatar = false;
         while (isArriveAvatar != true)
         {
             yield return null;
         }
+
+        Navigation.SetActive(false);
 
         yield return new WaitForSeconds(1.0f);
 
@@ -168,11 +185,16 @@ public class TurorialVideoFlow : MonoBehaviour
         Videos[7].SetActive(false);
         Texture.SetActive(false);
 
+        navSystem.selectNavTarget(5);
+        Navigation.SetActive(true);
+
         isArriveXRScreen = false;
         while (isArriveXRScreen != true)
         {
             yield return null;
         }
+
+        Navigation.SetActive(false);
 
         yield return new WaitForSeconds(1.0f);
 
@@ -181,7 +203,6 @@ public class TurorialVideoFlow : MonoBehaviour
         yield return new WaitForSecondsRealtime(14);
         Videos[8].SetActive(false);
         Texture.SetActive(false);
-
 
         isGrabAvatar = false;
         isArriveXRScreen = false;
@@ -199,13 +220,18 @@ public class TurorialVideoFlow : MonoBehaviour
         yield return new WaitForSecondsRealtime(10);
         Videos[9].SetActive(false);
         Texture.SetActive(false);
-    
+
+        navSystem.selectNavTarget(3);
+        Navigation.SetActive(true);
+
         // Runestone play button activate -> nest mission : button 
         isArriveRuneStonePlate = false;
         while (isArriveRuneStonePlate != true)
         {
             yield return null;
         }
+
+        Navigation.SetActive(false);
 
         yield return new WaitForSeconds(1.0f);
 
@@ -241,11 +267,16 @@ public class TurorialVideoFlow : MonoBehaviour
         Videos[12].SetActive(false);
         Texture.SetActive(false);
 
+        navSystem.selectNavTarget(4);
+        Navigation.SetActive(true);
+
         isArriveCMScreen = false;
         while (isArriveCMScreen != true)
         {
             yield return null;
         }
+
+        Navigation.SetActive(false);
 
         Texture.SetActive(true);
         Videos[13].SetActive(true);
