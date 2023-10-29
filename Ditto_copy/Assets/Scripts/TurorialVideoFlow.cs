@@ -293,7 +293,7 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(15.0f);
+        yield return new WaitForSeconds(10.0f);
 
         Texture.SetActive(true);
         Videos[14].SetActive(true);
@@ -321,7 +321,7 @@ public class TurorialVideoFlow : MonoBehaviour
         }
 
         //Mision2 Clear
-        yield return new WaitForSeconds(15.0f);
+        yield return new WaitForSeconds(10.0f);
         Texture.SetActive(true);
         Videos[16].SetActive(true);
         yield return new WaitForSecondsRealtime(3);
@@ -347,7 +347,7 @@ public class TurorialVideoFlow : MonoBehaviour
         }
 
         // Mission 3 Clear
-        yield return new WaitForSeconds(15.0f);
+        yield return new WaitForSeconds(10.0f);
         Texture.SetActive(true);
         Videos[18].SetActive(true);
         yield return new WaitForSecondsRealtime(18.0f);

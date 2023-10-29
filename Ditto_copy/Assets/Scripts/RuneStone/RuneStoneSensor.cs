@@ -38,11 +38,13 @@ public class RuneStoneSensor : MonoBehaviour
     }
 
     [SerializeField] private BlankType blankType = BlankType.First; 
+    SoundManager soundManager;  
 
     void Start()
     {
         noCodeManager = GameObject.Find("XRStudioSystemManager").GetComponent<NoCodeManager>(); 
-
+        
+        soundManager = GameObject.Find("XRStudioSystemManager").GetComponent<SoundManager>();
         textMeshPro = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();   
     }
 
@@ -234,6 +236,14 @@ public class RuneStoneSensor : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("RuneStone"))
+        {
+            soundManager.PlaySFX("PlaceRunstoneSFX");
         }
     }
 

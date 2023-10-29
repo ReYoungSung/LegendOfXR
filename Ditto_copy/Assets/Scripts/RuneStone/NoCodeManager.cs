@@ -51,9 +51,12 @@ public class NoCodeManager : MonoBehaviour
     public TextMeshProUGUI firstText;
     public TextMeshProUGUI secondText;
 
+    SoundManager soundManager;  
+
     private void Awake() 
     {
         gameManager = GameObject.Find("XRStudioSystemManager").GetComponent<GameManager>();
+        soundManager = this.GetComponent<SoundManager>();
     } 
 
 
@@ -171,6 +174,8 @@ public class NoCodeManager : MonoBehaviour
             {
                 firstText.text = "잘했다네";  
                 secondText.text = "확실히 될걸세"; 
+                
+                soundManager.PlaySFX("NocodeSuccessSFX");
 
                 if (gameManager.CurrentMissionNum == 1)
                     RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());  
@@ -186,6 +191,8 @@ public class NoCodeManager : MonoBehaviour
             {
                 firstText.text = "틀렸다네"; 
                 secondText.text = "다시 해보게나";  
+
+                soundManager.PlaySFX("QuestFailSFX");
 
                 if (gameManager.CurrentMissionNum == 1)
                     RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());  

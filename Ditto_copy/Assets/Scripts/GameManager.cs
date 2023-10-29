@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     public GameObject mission2ClearImage;
     public GameObject mission3ClearImage;
 
-
+    SoundManager soundManager;
 
     void Start()
     {
@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
 
         CurrentMissionNum = 0; 
         changeMissionLogo();
+
+        soundManager = this.GetComponent<SoundManager>();
     }   
 
     void Update()
@@ -193,7 +195,8 @@ public class GameManager : MonoBehaviour
             yield return null; 
         }
         changeCamera(); 
-        yield return new WaitForSeconds(10); 
+        soundManager.PlaySFX("QuestClearSFX");
+        yield return new WaitForSeconds(5); 
         
         PlayerPrefs.SetInt("Mission1",1); 
 
@@ -234,7 +237,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         changeCamera();
-        yield return new WaitForSeconds(10);
+        soundManager.PlaySFX("QuestClearSFX");
+        yield return new WaitForSeconds(5);
 
         PlayerPrefs.SetInt("Mission2", 1);
 
@@ -275,7 +279,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         changeCamera();
-        yield return new WaitForSeconds(10);
+        soundManager.PlaySFX("QuestClearSFX");
+        yield return new WaitForSeconds(5);
 
         PlayerPrefs.SetInt("Mission3", 1);
 
@@ -308,6 +313,7 @@ public class GameManager : MonoBehaviour
     public void GetClearButtonDown()
     {
         getFinishCMButton = true;
+        soundManager.PlayShutter();
     }
 
 }

@@ -156,4 +156,9 @@ public class SoundManager : MonoBehaviour
     {
         PlaySFX("ButtonSFX"); 
     }
+
+    public void PlayShutter()
+    {
+        PlaySFX("CameraShutterSFX"); 
+    }
 }
