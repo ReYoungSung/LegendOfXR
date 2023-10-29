@@ -30,14 +30,20 @@ public class AvatarSensor : MonoBehaviour
     {
         if(other.CompareTag("Avatar"))
         {
-            if (IsRotationWithinRange(other.gameObject.transform))
+            if (allowedRotation == RotationRange.M1)
             {
-                gameManager.isCharacterInExactPlace = true;
+                other.transform.localRotation = Quaternion.Euler(0, 30f, 0);
             }
-            else
+            else if (allowedRotation == RotationRange.M2)
             {
-                gameManager.isCharacterInExactPlace = false;
+                other.transform.localRotation = Quaternion.Euler(0, 30f, 0);
             }
+            else if (allowedRotation == RotationRange.M3)
+            {
+                other.transform.localRotation = Quaternion.Euler(0, 65f, 0);
+            }
+        
+            gameManager.isCharacterInExactPlace = true;
         }
     }
 

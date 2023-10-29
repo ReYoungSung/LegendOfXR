@@ -30,14 +30,13 @@ public class CameraMissionSensor : MonoBehaviour
     {
         if (other.CompareTag("XRCamera"))
         {
-            
             if (IsRotationWithinRange(other.gameObject.transform)) 
             {
                 gameManager.isCameraInExactPlace = true;
             }
             else
             {
-                gameManager.isCameraInExactPlace = false;
+                gameManager.isCameraInExactPlace = false; 
             }
         }
     }
@@ -50,18 +49,18 @@ public class CameraMissionSensor : MonoBehaviour
         }
     }
 
-    private bool IsRotationWithinRange(Transform avatarTransform)
+    private bool IsRotationWithinRange(Transform avatarTransform) 
     {
-        float rotationY = avatarTransform.eulerAngles.y;
+        float rotationY = avatarTransform.eulerAngles.y; 
 
-        switch (allowedRotation)
+        switch (allowedRotation) 
         {
             case RotationRange.M1:
-                return (rotationY >= 360f-45f && rotationY <= 360f); 
+                return (rotationY >= 315f && rotationY <= 360f);
             case RotationRange.M2:
-                return (rotationY >= 360f-15f || rotationY <= 15f);
+                return (rotationY >= 0f && rotationY <= 45f); 
             case RotationRange.M3:
-                return (rotationY >= 0f && rotationY <= 45f);
+                return (rotationY >= 0f && rotationY <= 90f); 
         }
 
         return false;

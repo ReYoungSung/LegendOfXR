@@ -36,6 +36,7 @@ public class NoCodeManager : MonoBehaviour
 
     [HideInInspector] public bool IsPlayButtonDown = false;
     private Coroutine RuneStoneCoroutine = null; 
+    private Coroutine RuneStoneCoroutine2 = null;
 
     public TextMeshProUGUI firstText;
     public TextMeshProUGUI secondText;
@@ -96,7 +97,7 @@ public class NoCodeManager : MonoBehaviour
             }
             else
             {
-                gameManager.isNoCodeInExactPlace = false;
+                gameManager.isNoCodeInExactPlace = false; 
             }
         }
         else if (gameManager.CurrentMissionNum == 3)
@@ -135,10 +136,27 @@ public class NoCodeManager : MonoBehaviour
 
 
     public void PlayRuneStone()
-    {
+    {     
+        IsPlayButtonDown = true; 
+
         if(RuneStoneCoroutine == null)
-        {
-            if(fullFillBlanks == true) 
+        {       
+            if(gameManager.isNoCodeInExactPlace == true)
+            {
+                firstText.text = "잘했다네";  
+                secondText.text = "확실히 될걸세"; 
+
+                if (gameManager.CurrentMissionNum == 1)
+                    RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());  
+                else if (gameManager.CurrentMissionNum == 2)
+                    RuneStoneCoroutine = StartCoroutine(Mission2RuneStoneFlow());  
+                else if (gameManager.CurrentMissionNum == 3)
+                {
+                    RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow1());  
+                    RuneStoneCoroutine2 = StartCoroutine(Mission3RuneStoneFlow2());  
+                }
+            }
+            else if(fullFillBlanks == true) 
             {
                 if (gameManager.CurrentMissionNum == 1)
                     RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());  
@@ -147,31 +165,40 @@ public class NoCodeManager : MonoBehaviour
                 else if (gameManager.CurrentMissionNum == 3)
                 {
                     RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow1());  
-                    RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow2());  
+                    RuneStoneCoroutine2 = StartCoroutine(Mission3RuneStoneFlow2());  
                 }
 
-                firstText.text = "이걸 눌러야";  
-                secondText.text = "확인이 될걸세"; 
-            }
-            else
-            {
                 firstText.text = "틀렸다네"; 
                 secondText.text = "다시 해보게나";  
             }
+            else
+            {
+                firstText.text = "이걸 눌러야";  
+                secondText.text = "확인이 될걸세"; 
+            }
         }
-            
-        IsPlayButtonDown = true;  
     }
 
     public void StopRuneStone()
     {
+        IsPlayButtonDown = false;  
+
         if (RuneStoneCoroutine != null)
         {
-            isRepeatEvent = false;
-            sunLight.transform.localRotation = originSunLightRotation;
+            StopCoroutine(RuneStoneCoroutine);
+            RuneStoneCoroutine = null;
+
+            WatarSwordVFX.SetActive(false);  
+            sunLight.transform.localRotation = Quaternion.Euler(-90f, 0, 0); 
         }
 
-        IsPlayButtonDown = false;  
+        if(RuneStoneCoroutine2 != null)
+        {
+            StopCoroutine(RuneStoneCoroutine2);
+            RuneStoneCoroutine2 = null;
+            Metheo.SetActive(false);
+            Shield.SetActive(false); 
+        }
     }
 
     //Mission1
@@ -211,7 +238,7 @@ public class NoCodeManager : MonoBehaviour
     {
         if (rotateCoroutine == null)
         {
-            rotateCoroutine = StartCoroutine(RotateSunLightCoroutine(150f*TimeValue/12)); 
+            rotateCoroutine = StartCoroutine(RotateSunLightCoroutine(150f*TimeValue/12));  
         }
     } 
 
