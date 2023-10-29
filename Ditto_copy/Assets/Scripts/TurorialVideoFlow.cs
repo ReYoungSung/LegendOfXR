@@ -35,6 +35,9 @@ public class TurorialVideoFlow : MonoBehaviour
 
     public bool isChangingXRCameraPosition = false;
 
+    public bool isQuestStart2 = false;
+    public bool isQuestStart3 = false;
+
     [SerializeField] private GameObject[] Videos;
     [SerializeField] private GameObject Texture;
     [SerializeField] private GameObject[] UIImages;
@@ -280,7 +283,7 @@ public class TurorialVideoFlow : MonoBehaviour
 
         Texture.SetActive(true);
         Videos[13].SetActive(true);
-        yield return new WaitForSecondsRealtime(20);
+        yield return new WaitForSecondsRealtime(22);
         Videos[13].SetActive(false);
         Texture.SetActive(false);
 
@@ -289,19 +292,66 @@ public class TurorialVideoFlow : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(3.0f);
 
         Texture.SetActive(true);
         Videos[14].SetActive(true);
-        yield return new WaitForSecondsRealtime(8);
+        yield return new WaitForSecondsRealtime(5);
         Videos[14].SetActive(false);
         Texture.SetActive(false);
 
+        //Quest2Start
 
+        while (isQuestStart2 != true)
+        {
+            yield return null;
+        }
 
+        yield return new WaitForSeconds(2.0f);
+        Texture.SetActive(true);
+        Videos[15].SetActive(true);
+        yield return new WaitForSecondsRealtime(43.0f);
+        Videos[15].SetActive(false);
+        Texture.SetActive(false);
 
+        while(gameManager.isClearMission2 != true)
+        {
+            yield return null;
+        }
 
+        //Mision2 Clear
+        yield return new WaitForSeconds(2.0f);
+        Texture.SetActive(true);
+        Videos[16].SetActive(true);
+        yield return new WaitForSecondsRealtime(3);
+        Videos[16].SetActive(false);
+        Texture.SetActive(false);
 
+        //Mission 3 Start
+        while (isQuestStart3 != true)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(2.0f);
+        Texture.SetActive(true);
+        Videos[17].SetActive(true);
+        yield return new WaitForSecondsRealtime(34.0f);
+        Videos[17].SetActive(false);
+        Texture.SetActive(false);
+
+        while (gameManager.isClearMission3 != true)
+        {
+            yield return null;
+        }
+
+        // Mission 3 Clear
+        yield return new WaitForSeconds(2.0f);
+        Texture.SetActive(true);
+        Videos[18].SetActive(true);
+        yield return new WaitForSecondsRealtime(18.0f);
+        Videos[18].SetActive(false);
+        Texture.SetActive(false);
 
     }
 
@@ -332,7 +382,7 @@ public void HenaUIClosed()
         isRecommendOn = true;
     }
 
-    public void GrabRuneStone () { 
+    public void GrabRuneStone() { 
     
     isGrabRuneStone = true;
     
@@ -344,9 +394,20 @@ public void HenaUIClosed()
 
     }
 
-    public void RunePlayButton() { 
+    public void RunePlayButton() 
+    { 
         isRunePLayButton = true;
     }
-   
-    
+
+    public void QuestStart2()
+    {
+        isQuestStart2 = true;
+    }
+
+    public void QuestStart3()
+    {
+        isQuestStart3 = true;
+    }
+
+
 }
