@@ -152,8 +152,13 @@ public class SoundManager : MonoBehaviour
         StopAllSFX();
     }
 
-    public void PlayTapSFX()
+    public void PlayTapSFX() 
     {
         PlaySFX("ButtonSFX"); 
+    }
+
+    public void playshutterSFX()
+    {
+        PlaySFX("CameraShutterSFX"); 
     }
 }
