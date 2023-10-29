@@ -137,18 +137,60 @@ public class RuneStoneSensor : MonoBehaviour
             {
                 if(blankType == BlankType.First)  //Shield
                 {
-                    noCodeManager.mission3FillBlank[0] = true;
+                    noCodeManager.mission3FillBlank[0] = true;  
 
                     if(filledObject.name == "BeginToPlay")
                     {
                         ChangeText("시작 시 한 번");
                         noCodeManager.mission3Answers[0] = false;
-                        noCodeManager.isRepeatEvent = false;
+                        noCodeManager.isRepeatEvent2 = false;
                     }
                     else if(filledObject.name == "TickEvent")
                     {
                         ChangeText("계속 반복해서"); 
                         noCodeManager.mission3Answers[0] = true;
+                        noCodeManager.isRepeatEvent2 = true; 
+                    }
+                    else
+                    {
+                        ChangeText("-Error-");
+                    }
+                }
+                else if (blankType == BlankType.Fourth)  //Shield 
+                {
+                    noCodeManager.mission3FillBlank[2] = true; 
+
+                    if (filledObject.name == "Shield")
+                    {
+                        ChangeText("쉴드를 생성한다");
+                        noCodeManager.mission3Answers[2] = true;
+                    }
+                    else if (filledObject.name == "Metheo")
+                    {
+                        ChangeText("메테오를 생성한다"); 
+                        noCodeManager.mission3Answers[2] = false;
+                        noCodeManager.errorText3(); 
+                    }
+                    else
+                    {
+                        ChangeText("-Error-");
+                        ChangeText("메테오는 한번만!!"); 
+                    } 
+                }
+                else if (blankType == BlankType.Second)  //Metheo
+                {
+                    noCodeManager.mission4FillBlank[0] = true;
+
+                    if (filledObject.name == "BeginToPlay")
+                    {
+                        ChangeText("시작 시 한 번");
+                        noCodeManager.mission4Answers[0] = true;
+                        noCodeManager.isRepeatEvent = false;
+                    }
+                    else if (filledObject.name == "TickEvent")
+                    {
+                        ChangeText("계속 반복해서");
+                        noCodeManager.mission4Answers[0] = false;
                         noCodeManager.isRepeatEvent = true;
                     }
                     else
@@ -156,21 +198,19 @@ public class RuneStoneSensor : MonoBehaviour
                         ChangeText("-Error-");
                     }
                 }
-                else if (blankType == BlankType.Second)  //Metheo
+                else if (blankType == BlankType.Fifth)   //Metheo
                 {
-                    noCodeManager.mission3FillBlank[1] = true;
+                    noCodeManager.mission4FillBlank[2] = true;
 
-                    if (filledObject.name == "BeginToPlay")
+                    if (filledObject.name == "Metheo")
                     {
-                        ChangeText("시작 시 한 번");
-                        noCodeManager.mission3Answers[1] = true;
-                        noCodeManager.isRepeatEvent = false;
+                        ChangeText("메테오를 생성한다"); 
+                        noCodeManager.mission4Answers[2] = true;
                     }
-                    else if (filledObject.name == "TickEvent")
+                    else if (filledObject.name == "Shield")
                     {
-                        ChangeText("계속 반복해서"); 
-                        noCodeManager.mission3Answers[1] = false;
-                        noCodeManager.isRepeatEvent = true;
+                        ChangeText("쉴드를 생성한다");
+                        noCodeManager.mission4Answers[2] = false;
                     }
                     else
                     {
@@ -179,51 +219,14 @@ public class RuneStoneSensor : MonoBehaviour
                 }
                 else if (blankType == BlankType.Third)  //Wizard
                 {
-                    noCodeManager.mission3FillBlank[2] = true; 
+                    noCodeManager.mission3FillBlank[1] = true; 
+                    noCodeManager.mission4FillBlank[1] = true;
 
-                    if (filledObject.name == "WiZard") 
+                    if (filledObject.name == "Wizard") 
                     {
                         ChangeText("마법사가");  
-                        noCodeManager.mission3Answers[2] = true;   
-                    }
-                    else
-                    {
-                        ChangeText("-Error-");
-                    }
-                }
-                else if (blankType == BlankType.Fourth)  //Shield
-                {
-                    noCodeManager.mission3FillBlank[3] = true; 
-
-                    if (filledObject.name == "Shield")
-                    {
-                        ChangeText("쉴드를 생성한다");
-                        noCodeManager.mission3Answers[3] = true;
-                    }
-                    else if (filledObject.name == "Metheo")
-                    {
-                        ChangeText("메테오를 생성한다"); 
-                        noCodeManager.mission3Answers[3] = false;
-                        noCodeManager.errorText3(); 
-                    }
-                    else
-                    {
-                        ChangeText("메테오는 한번만!!"); 
-                    } 
-                }
-                else if (blankType == BlankType.Fifth)   //Metheo
-                {
-                    noCodeManager.mission3FillBlank[4] = true;
-
-                    if (filledObject.name == "Metheo")
-                    {
-                        ChangeText("메테오를 생성한다"); 
-                        noCodeManager.mission3Answers[4] = true;
-                    }
-                    else if (filledObject.name == "Shield")
-                    {
-                        ChangeText("쉴드를 생성한다");
-                        noCodeManager.mission3Answers[4] = false;
+                        noCodeManager.mission3Answers[1] = true;   
+                        noCodeManager.mission4Answers[1] = true;  
                     }
                     else
                     {
@@ -276,16 +279,22 @@ public class RuneStoneSensor : MonoBehaviour
             noCodeManager.mission1Answers[0] = false;
             noCodeManager.mission2Answers[0] = false;
             noCodeManager.mission2Answers[1] = false;
-            noCodeManager.mission3Answers[0] = false;
+            
             noCodeManager.mission3Answers[1] = false;
             noCodeManager.mission3Answers[2] = false;
+            
+            noCodeManager.mission4Answers[1] = false;
+            noCodeManager.mission4Answers[2] = false;
 
-            noCodeManager.mission1FillBlank[0] = true;
-            noCodeManager.mission2FillBlank[0] = true;
-            noCodeManager.mission2FillBlank[1] = true;
-            noCodeManager.mission3FillBlank[0] = true;
-            noCodeManager.mission3FillBlank[1] = true;
-            noCodeManager.mission3FillBlank[2] = true;
+            noCodeManager.mission1FillBlank[0] = false;
+            noCodeManager.mission2FillBlank[0] = false;
+            noCodeManager.mission2FillBlank[1] = false;
+            
+            noCodeManager.mission3FillBlank[1] = false;
+            noCodeManager.mission3FillBlank[2] = false;
+            
+            noCodeManager.mission4FillBlank[1] = false;
+            noCodeManager.mission4FillBlank[2] = false;
 
             if(filledObject != null)
                 filledObject = null;

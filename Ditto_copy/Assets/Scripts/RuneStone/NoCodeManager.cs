@@ -10,15 +10,19 @@ public class NoCodeManager : MonoBehaviour
 
     public bool[] mission1Answers = new bool[] {false};
     public bool[] mission2Answers = new bool[] {false, false};
-    public bool[] mission3Answers = new bool[] {false, false, false, false, false};
+    public bool[] mission3Answers = new bool[] {true, false, false};
+    public bool[] mission4Answers = new bool[] {true, false, false};
 
     public bool[] mission1FillBlank = new bool[] { false };
     public bool[] mission2FillBlank = new bool[] { false, false };
-    public bool[] mission3FillBlank = new bool[] { true, false, false, false, false};
+    public bool[] mission3FillBlank = new bool[] { true, false, false};
+    public bool[] mission4FillBlank = new bool[] { true, false, false}; 
+
     public bool fullFillBlanks = false; 
 
     //Mission1
     [HideInInspector] public bool isRepeatEvent = false;
+    [HideInInspector] public bool isRepeatEvent2 = true;
     [SerializeField] private GameObject WatarSwordVFX;
 
     //Mission2
@@ -117,18 +121,18 @@ public class NoCodeManager : MonoBehaviour
                 gameManager.isNoCodeInExactPlace = false; 
             }
         }
-        else if (gameManager.CurrentMissionNum == 3)
+        else if (gameManager.CurrentMissionNum == 3) 
         {
-            if (ArrayIsAllTrue(mission3FillBlank))
+            if (ArrayIsAllTrue(mission3FillBlank) && ArrayIsAllTrue(mission4FillBlank))
             {
                 fullFillBlanks = true;
             }
-            else
+            else 
             {
                 fullFillBlanks = false;
             }
 
-            if (ArrayIsAllTrue(mission3Answers) && IsPlayButtonDown == true)
+            if (ArrayIsAllTrue(mission3Answers) && ArrayIsAllTrue(mission4Answers) && IsPlayButtonDown == true) 
             {
                 gameManager.isNoCodeInExactPlace = true;
             }
@@ -323,9 +327,6 @@ public class NoCodeManager : MonoBehaviour
         {
             yield return null;
         }
-
-        Metheo.transform.GetChild(0).gameObject.SetActive(false);
-        Metheo.SetActive(false);
         
         StopCoroutine(RuneStoneCoroutine);   
         RuneStoneCoroutine = null;  
@@ -341,18 +342,16 @@ public class NoCodeManager : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         Shield.transform.GetChild(2).gameObject.SetActive(true);
 
-        while (isRepeatEvent == true)  
+        while (true)  
         {
             yield return null; 
         }
 
-        Shield.transform.GetChild(2).gameObject.SetActive(false);
+        Shield.transform.GetChild(2).gameObject.SetActive(false); 
         yield return new WaitForSeconds(0.5f);
-        Shield.transform.GetChild(1).gameObject.SetActive(false);
+        Shield.transform.GetChild(1).gameObject.SetActive(false); 
         yield return new WaitForSeconds(0.5f);
-        Shield.transform.GetChild(0).gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(1.0f);
+        Shield.transform.GetChild(0).gameObject.SetActive(false); 
 
         StopCoroutine(RuneStoneCoroutine);
         RuneStoneCoroutine = null;

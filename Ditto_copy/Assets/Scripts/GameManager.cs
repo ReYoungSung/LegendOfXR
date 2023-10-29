@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private ObjectSystemManager objectSystemManager;
     private NoCodeManager noCodeManager;
 
-    [SerializeField] private GameObject[] MissionLogos;
+    [SerializeField] private GameObject[] MissionLogos; 
 
     [SerializeField] private GameObject[] RuneStonePlates;
 
@@ -141,6 +141,8 @@ public class GameManager : MonoBehaviour
         noCodeManager.StopRuneStone(); 
         noCodeManager.resetText(); 
         
+        noCodeManager.isRepeatEvent = false;
+        noCodeManager.isRepeatEvent2 = false;
         noCodeManager.IsPlayButtonDown = false;   
     } 
 
