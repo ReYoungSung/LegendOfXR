@@ -157,22 +157,22 @@ public class GameManager : MonoBehaviour
                && isNoCodeInExactPlace
                && getFinishCMButton) 
             {
-                isClearMission1 = true; 
+                isClearMission1 = true;  
             }
 
-            yield return null;
+            yield return null; 
         }
-        changeCamera();
-        yield return new WaitForSeconds(10);
+        changeCamera(); 
+        yield return new WaitForSeconds(10); 
         
         PlayerPrefs.SetInt("Mission1",1); 
 
-        mission1ClearImage.SetActive(true);
-        yield return new WaitForSeconds(3);
-        mission1ClearImage.SetActive(false);
+        mission1ClearImage.SetActive(true); 
+        yield return new WaitForSeconds(3); 
+        mission1ClearImage.SetActive(false); 
 
-        changeCamera();
-        FinishMission();
+        changeCamera(); 
+        FinishMission(); 
     }
 
     public IEnumerator Mission2EventFlow()
@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         mission2ClearImage.SetActive(false);
 
-        changeCamera();
+        changeCamera(); 
         FinishMission();
     }
 
