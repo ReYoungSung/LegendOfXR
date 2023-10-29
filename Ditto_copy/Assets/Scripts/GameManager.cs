@@ -95,34 +95,38 @@ public class GameManager : MonoBehaviour
 
     public void StartMission2()
     {
+        xrScreenManager.ActiveMission2Screen();  
+        RuneStonePlates[0].SetActive(false);
+        RuneStonePlates[1].SetActive(true);
+        RuneStonePlates[2].SetActive(false);
+        StartCoroutine(Mission2EventFlow());
+
         if (PlayerPrefs.GetInt("Mission1") == 1)
         {
-            xrScreenManager.ActiveMission2Screen();  
-            RuneStonePlates[0].SetActive(false);
-            RuneStonePlates[1].SetActive(true);
-            RuneStonePlates[2].SetActive(false);
-            StartCoroutine(Mission2EventFlow());
+            
         }
     }
 
     public void StartMission3()
     {
+        objectSystemManager.avatar3.SetActive(true); //Spawn Mage Avatar
+        objectSystemManager.WizardRuneStone.SetActive(true);
+
+        xrScreenManager.ActiveMission3Screen();
+        RuneStonePlates[0].SetActive(false);
+        RuneStonePlates[1].SetActive(false);
+        RuneStonePlates[2].SetActive(true);
+        StartCoroutine(Mission3EventFlow());
+
+        // WizardTimeline 실행
+        if (WizardTimeline != null)
+        {
+            WizardTimeline.Play();
+        }
+        
         if (PlayerPrefs.GetInt("Mission2") == 1 && PlayerPrefs.GetInt("Mission1") == 1)
         {
-            objectSystemManager.avatar3.SetActive(true); //Spawn Mage Avatar
-            objectSystemManager.WizardRuneStone.SetActive(true);
-
-            xrScreenManager.ActiveMission3Screen();
-            RuneStonePlates[0].SetActive(false);
-            RuneStonePlates[1].SetActive(false);
-            RuneStonePlates[2].SetActive(true);
-            StartCoroutine(Mission3EventFlow());
-
-            // WizardTimeline 실행
-            if (WizardTimeline != null)
-            {
-                WizardTimeline.Play();
-            }
+            
         }
     }
 
@@ -130,14 +134,17 @@ public class GameManager : MonoBehaviour
     {
         objectSystemManager.returnObjectsToOriginSpace();
         xrScreenManager.DeActiveAllMissionScreen();
-        isCharacterInExactPlace = false;
-        isCameraInExactPlace = false;
-        isNoCodeInExactPlace = false;
-        getFinishCMButton = false;
+        isCharacterInExactPlace = false; 
+        isCameraInExactPlace = false; 
+        isNoCodeInExactPlace = false; 
+        getFinishCMButton = false; 
         noCodeManager.StopRuneStone(); 
+        noCodeManager.resetText(); 
+        
+        noCodeManager.IsPlayButtonDown = false;   
     } 
 
-    public IEnumerator Mission1EventFlow() 
+    public IEnumerator Mission1EventFlow()  
     {
         CurrentMissionNum = 1;
         changeMissionLogo();
@@ -158,7 +165,7 @@ public class GameManager : MonoBehaviour
         changeCamera();
         yield return new WaitForSeconds(10);
         
-        PlayerPrefs.SetInt("Mission1",1);
+        PlayerPrefs.SetInt("Mission1",1); 
 
         mission1ClearImage.SetActive(true);
         yield return new WaitForSeconds(3);

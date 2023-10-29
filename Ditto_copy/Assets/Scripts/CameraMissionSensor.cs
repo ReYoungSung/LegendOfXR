@@ -51,16 +51,16 @@ public class CameraMissionSensor : MonoBehaviour
 
     private bool IsRotationWithinRange(Transform avatarTransform) 
     {
-        float rotationY = avatarTransform.eulerAngles.y; 
+        float rotationY = avatarTransform.rotation.eulerAngles.y;  
 
         switch (allowedRotation) 
         {
             case RotationRange.M1:
-                return (rotationY >= 315f && rotationY <= 360f);
+                return (rotationY >= 300f && rotationY <= 360f);
             case RotationRange.M2:
-                return (rotationY >= 0f && rotationY <= 45f); 
+                return (rotationY >= 0f && rotationY <= 60f); 
             case RotationRange.M3:
-                return (rotationY >= 0f && rotationY <= 90f); 
+                return (rotationY >= 0f && rotationY <= 60f); 
         }
 
         return false;

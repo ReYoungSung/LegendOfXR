@@ -14,7 +14,7 @@ public class NoCodeManager : MonoBehaviour
 
     public bool[] mission1FillBlank = new bool[] { false };
     public bool[] mission2FillBlank = new bool[] { false, false };
-    public bool[] mission3FillBlank = new bool[] { false, false, false, false, false};
+    public bool[] mission3FillBlank = new bool[] { true, false, false, false, false};
     public bool fullFillBlanks = false; 
 
     //Mission1
@@ -32,6 +32,12 @@ public class NoCodeManager : MonoBehaviour
     //Mission3
     [SerializeField] private GameObject Metheo;
     [SerializeField] private GameObject Shield; 
+    [SerializeField] private GameObject TickEvent;
+
+
+
+    [SerializeField] private GameObject PlayButton;  
+    [SerializeField] private GameObject PuaseButton;    
 
 
     [HideInInspector] public bool IsPlayButtonDown = false;
@@ -56,11 +62,22 @@ public class NoCodeManager : MonoBehaviour
     void Update()
     {
         CheckRuneSotnes();
+
+        if(IsPlayButtonDown == true)
+        {
+            PlayButton.SetActive(false);
+            PuaseButton.SetActive(true);
+        }
+        else 
+        {
+            PlayButton.SetActive(true);
+            PuaseButton.SetActive(false); 
+        }
     }
 
-    public void CheckRuneSotnes()
-    {
-        if (gameManager.CurrentMissionNum == 1)
+    public void CheckRuneSotnes() 
+    { 
+        if (gameManager.CurrentMissionNum == 1) 
         {
             if (ArrayIsAllTrue(mission1FillBlank))
             {
@@ -139,6 +156,11 @@ public class NoCodeManager : MonoBehaviour
     {     
         IsPlayButtonDown = true; 
 
+        Invoke("SupportToPlay", 2f);
+    }
+
+    public void SupportToPlay()
+    {
         if(RuneStoneCoroutine == null)
         {       
             if(gameManager.isNoCodeInExactPlace == true)
@@ -156,8 +178,11 @@ public class NoCodeManager : MonoBehaviour
                     RuneStoneCoroutine2 = StartCoroutine(Mission3RuneStoneFlow2());  
                 }
             }
-            else if(fullFillBlanks == true) 
+            else if(fullFillBlanks == true && gameManager.isNoCodeInExactPlace == false) 
             {
+                firstText.text = "틀렸다네"; 
+                secondText.text = "다시 해보게나";  
+
                 if (gameManager.CurrentMissionNum == 1)
                     RuneStoneCoroutine = StartCoroutine(Mission1RuneStoneFlow());  
                 else if (gameManager.CurrentMissionNum == 2)
@@ -167,9 +192,6 @@ public class NoCodeManager : MonoBehaviour
                     RuneStoneCoroutine = StartCoroutine(Mission3RuneStoneFlow1());  
                     RuneStoneCoroutine2 = StartCoroutine(Mission3RuneStoneFlow2());  
                 }
-
-                firstText.text = "틀렸다네"; 
-                secondText.text = "다시 해보게나";  
             }
             else
             {
@@ -179,9 +201,34 @@ public class NoCodeManager : MonoBehaviour
         }
     }
 
+    public void resetText()
+    {
+        firstText.text = "이걸 눌러야";  
+        secondText.text = "확인이 될걸세"; 
+    }
+
+    public void errorText1()
+    {
+        firstText.text = "물이 빠르게";  
+        secondText.text = "꺼지지 않을까?";  
+    }
+
+    public void errorText2()
+    {
+        firstText.text = "시간이 빠르게";  
+        secondText.text = "돌기만 할거야!";  
+    }
+
+    public void errorText3()
+    {
+        firstText.text = "메테오는";  
+        secondText.text = "한번만 쓰게!";  
+    }
+
     public void StopRuneStone()
     {
         IsPlayButtonDown = false;  
+        resetText();
 
         if (RuneStoneCoroutine != null)
         {
@@ -265,6 +312,7 @@ public class NoCodeManager : MonoBehaviour
     //Mission3
     private IEnumerator Mission3RuneStoneFlow1()
     {
+        TickEvent.SetActive(false);
         yield return new WaitForSeconds(2.0f);
 
         Metheo.SetActive(true);

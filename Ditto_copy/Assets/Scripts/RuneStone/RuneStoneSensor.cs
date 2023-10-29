@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +16,7 @@ public class RuneStoneSensor : MonoBehaviour
 
     private GameObject filledObject;
 
-    public TextMeshProUGUI textMeshPro; 
+    public TextMeshProUGUI textMeshPro;  
 
     private enum MissionType
     {
@@ -41,7 +43,7 @@ public class RuneStoneSensor : MonoBehaviour
     {
         noCodeManager = GameObject.Find("XRStudioSystemManager").GetComponent<NoCodeManager>(); 
 
-        textMeshPro = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();  
+        textMeshPro = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();   
     }
 
     void Update() 
@@ -57,15 +59,19 @@ public class RuneStoneSensor : MonoBehaviour
                     if (filledObject.name == "BeginToPlay")
                     {
                         ChangeText("시작 시 한 번");
+                        noCodeManager.errorText1();
                         noCodeManager.mission1Answers[0] = false; 
                         noCodeManager.isRepeatEvent = false;
                     }
-
-                    if(filledObject.name == "TickEvent")
+                    else if(filledObject.name == "TickEvent")
                     {
                         ChangeText("계속 반복해서");
                         noCodeManager.mission1Answers[0] = true; 
                         noCodeManager.isRepeatEvent = true; 
+                    }
+                    else
+                    {
+                        ChangeText("-Error-");
                     }
                 }
             }
@@ -81,12 +87,16 @@ public class RuneStoneSensor : MonoBehaviour
                         noCodeManager.mission2Answers[0] = true;
                         noCodeManager.isRepeatEvent = false;
                     }
-
-                    if(filledObject.name == "TickEvent")
+                    else if(filledObject.name == "TickEvent")
                     {
                         ChangeText("계속 반복해서");
+                        noCodeManager.errorText2();
                         noCodeManager.mission2Answers[0] = false;   
                         noCodeManager.isRepeatEvent = true;
+                    }
+                    else
+                    {
+                        ChangeText("-Error-");
                     }
                 }
                 else if (blankType == BlankType.Second)
@@ -99,28 +109,28 @@ public class RuneStoneSensor : MonoBehaviour
                         noCodeManager.mission2Answers[1] = true;
                         noCodeManager.TimeValue = 12;
                     }
-
-                    if (filledObject.name == "6HourChanger")
+                    else if (filledObject.name == "6HourChanger")
                     {
                         ChangeText("6시간 후로 돌린다");
                         noCodeManager.mission2Answers[1] = false;
                         noCodeManager.TimeValue = 6;
                     }
-
-                    if (filledObject.name == "18HourChanger")
+                    else if (filledObject.name == "18HourChanger")
                     {
                         ChangeText("18시간 후로 돌린다");
                         noCodeManager.mission2Answers[1] = false;
                         noCodeManager.TimeValue = 18;
                     }
-
-                    if (filledObject.name == "24HourChanger")
+                    else if (filledObject.name == "24HourChanger")
                     {
                         ChangeText("24시간 후로 돌린다");
                         noCodeManager.mission2Answers[1] = false; 
                         noCodeManager.TimeValue = 24;
                     }
-
+                    else
+                    {
+                        ChangeText("-Error-");
+                    }
                 }
             }
             else if (missionType == MissionType.Mission3)
@@ -135,12 +145,15 @@ public class RuneStoneSensor : MonoBehaviour
                         noCodeManager.mission3Answers[0] = false;
                         noCodeManager.isRepeatEvent = false;
                     }
-
-                    if(filledObject.name == "TickEvent")
+                    else if(filledObject.name == "TickEvent")
                     {
                         ChangeText("계속 반복해서"); 
                         noCodeManager.mission3Answers[0] = true;
                         noCodeManager.isRepeatEvent = true;
+                    }
+                    else
+                    {
+                        ChangeText("-Error-");
                     }
                 }
                 else if (blankType == BlankType.Second)  //Metheo
@@ -153,34 +166,50 @@ public class RuneStoneSensor : MonoBehaviour
                         noCodeManager.mission3Answers[1] = true;
                         noCodeManager.isRepeatEvent = false;
                     }
-
-                    if (filledObject.name == "TickEvent")
+                    else if (filledObject.name == "TickEvent")
                     {
                         ChangeText("계속 반복해서"); 
                         noCodeManager.mission3Answers[1] = false;
                         noCodeManager.isRepeatEvent = true;
                     }
+                    else
+                    {
+                        ChangeText("-Error-");
+                    }
                 }
                 else if (blankType == BlankType.Third)  //Wizard
                 {
-                    noCodeManager.mission3FillBlank[2] = true;
+                    noCodeManager.mission3FillBlank[2] = true; 
 
                     if (filledObject.name == "WiZard") 
                     {
-                        ChangeText("마법사가"); 
-                        noCodeManager.mission3Answers[2] = true;  
+                        ChangeText("마법사가");  
+                        noCodeManager.mission3Answers[2] = true;   
+                    }
+                    else
+                    {
+                        ChangeText("-Error-");
                     }
                 }
                 else if (blankType == BlankType.Fourth)  //Shield
                 {
-                    noCodeManager.mission3FillBlank[3] = true;
+                    noCodeManager.mission3FillBlank[3] = true; 
 
                     if (filledObject.name == "Shield")
                     {
                         ChangeText("쉴드를 생성한다");
                         noCodeManager.mission3Answers[3] = true;
                     }
-
+                    else if (filledObject.name == "Metheo")
+                    {
+                        ChangeText("메테오를 생성한다"); 
+                        noCodeManager.mission3Answers[3] = false;
+                        noCodeManager.errorText3(); 
+                    }
+                    else
+                    {
+                        ChangeText("메테오는 한번만!!"); 
+                    } 
                 }
                 else if (blankType == BlankType.Fifth)   //Metheo
                 {
@@ -190,6 +219,15 @@ public class RuneStoneSensor : MonoBehaviour
                     {
                         ChangeText("메테오를 생성한다"); 
                         noCodeManager.mission3Answers[4] = true;
+                    }
+                    else if (filledObject.name == "Shield")
+                    {
+                        ChangeText("쉴드를 생성한다");
+                        noCodeManager.mission3Answers[4] = false;
+                    }
+                    else
+                    {
+                        ChangeText("-Error-");
                     }
                 }
             }
@@ -219,7 +257,7 @@ public class RuneStoneSensor : MonoBehaviour
                             break;
 
                         case RuneStoneGrabInteracterble.RuneType.Triangle:
-                            filledObject.transform.localEulerAngles = new Vector3(-17, 180, 0);
+                            filledObject.transform.localEulerAngles = new Vector3(-170, 0, 0);
                             break;
 
                         case RuneStoneGrabInteracterble.RuneType.Circle:
@@ -252,7 +290,8 @@ public class RuneStoneSensor : MonoBehaviour
             if(filledObject != null)
                 filledObject = null;
 
-            ChangeText("???");
+            ChangeText("???"); 
+            noCodeManager.resetText();  
         }
     }
 
