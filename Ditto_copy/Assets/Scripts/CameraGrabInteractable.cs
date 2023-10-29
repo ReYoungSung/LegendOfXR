@@ -8,6 +8,9 @@ public class CameraGrabInteractable : XRGrabInteractable
     public Camera firstPersonCamera;
     public Camera XRCamera;
 
+    public Transform left_grab_transform;
+    public Transform right_grab_transform;
+
     public AudioClip clip;
     public GameObject XRCameraUI;
 
@@ -18,6 +21,16 @@ public class CameraGrabInteractable : XRGrabInteractable
         XRCamera.enabled = false;
         // Close UI beforehand;
         XRCameraUI.SetActive(false);
+        
+    }
+
+    protected override void OnSelectEntered(XRBaseInteractor interactor)
+    {
+
+    }
+
+    protected override void OnSelectExited(XRBaseInteractor interactor)
+    {
         
     }
 
@@ -41,9 +54,8 @@ public class CameraGrabInteractable : XRGrabInteractable
 		    AudioSource.PlayClipAtPoint(clip,Vector3.zero); 
         }
 
-        Debug.Log("바꿨다!!");
         firstPersonCamera.enabled = false;
-        XRCamera.enabled = true;
+          XRCamera.enabled = true;
     }
 
     public void ChangeViewToFirstPersonCM()
