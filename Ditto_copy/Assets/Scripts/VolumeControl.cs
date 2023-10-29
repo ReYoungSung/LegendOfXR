@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class VolumeControl : MonoBehaviour
 {
     public Scrollbar BGMScrollbar;
+
     public float currentVolume = 0.5f; // The current volume level
 
     private void Start()
