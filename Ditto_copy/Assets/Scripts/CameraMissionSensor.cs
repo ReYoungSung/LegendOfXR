@@ -30,6 +30,9 @@ public class CameraMissionSensor : MonoBehaviour
     {
         if (other.CompareTag("XRCamera"))
         {
+            gameManager.isCameraInExactPlace = true;
+
+            /*
             if (IsRotationWithinRange(other.gameObject.transform)) 
             {
                 gameManager.isCameraInExactPlace = true;
@@ -38,6 +41,7 @@ public class CameraMissionSensor : MonoBehaviour
             {
                 gameManager.isCameraInExactPlace = false; 
             }
+            */
         }
     }
 
@@ -56,13 +60,13 @@ public class CameraMissionSensor : MonoBehaviour
         switch (allowedRotation) 
         {
             case RotationRange.M1:
-                return (rotationY >= 300f && rotationY <= 360f);
+                return (rotationY >= 300f && rotationY <= 360f); 
             case RotationRange.M2:
-                return (rotationY >= 0f && rotationY <= 60f); 
+                return (rotationY >= 0f && rotationY <= 60f);  
             case RotationRange.M3:
-                return (rotationY >= 0f && rotationY <= 60f); 
-        }
-
+                return (rotationY >= 0f && rotationY <= 60f);  
+        } 
+         
         return false;
     }
 }
