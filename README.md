@@ -23,4 +23,4 @@ XR스튜디오 교육 및 실습을 위한 교육 게임 VR콘텐츠
 ## Required Tools
 
 1. VR devices with Controllers
-2. unity 2021.2.1f1 
+2. unity 2021.3.21f1
