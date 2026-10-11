@@ -56,3 +56,25 @@ git clone --branch MainBranch https://github.com/ReYoungSung/LegendOfXR.git
 | OpenXR Plugin | 1.7.0 |
 
 전체 의존성은 `Packages/manifest.json`을 기준으로 복원합니다. 개별 패키지를 최신 버전으로 교체하기 전에 프로젝트 호환성을 확인합니다.
+
+## 사용법
+
+### 교육 콘텐츠 진행
+
+1. VR 헤드셋과 양손 컨트롤러를 연결한 뒤 시작 씬을 실행합니다.
+2. 시작 화면의 안내와 튜토리얼을 따라 XR 스튜디오 씬으로 진행합니다.
+3. 메뉴에서 이동할 안내 대상을 선택하고 내비게이션 화살표가 가리키는 목표를 확인합니다.
+4. 실습 장비와 상호작용하며 화면에 표시되는 미션을 수행합니다. 카메라 실습에서는 장비를 선택한 뒤 활성화 입력으로 카메라 시점과 UI를 표시하고, 활성화를 해제하면 기본 시점으로 돌아옵니다.
+5. 각 미션의 완료 표시를 확인하며 다음 안내를 진행합니다.
+
+| 기능 | 조작 |
+| --- | --- |
+| 메뉴 표시·숨기기 | `GameMenuManager.showButton`에 연결된 입력 |
+| 안내 목표 선택 | 내비게이션 UI에서 목표 선택 |
+| 카메라 실습 시점 전환 | 장비의 Activate 입력; Deactivate 시 기본 시점 복귀 |
+
+메뉴는 머리 앞쪽에 나타나도록 배치됩니다. 메뉴 버튼과 장비 활성화 버튼은 씬의 Input Action 바인딩에 따라 달라집니다. 특정 A/B 버튼이나 트리거를 고정값으로 가정하지 말고 해당 씬의 설정과 기기 안내를 확인합니다.
+
+장비 선택이 안 되면 컨트롤러 추적과 XR Interactor/Interactable 연결을 확인합니다. 화살표가 보이지 않으면 안내 기능의 표시 상태와 선택한 목표를 확인합니다. Editor 체험 종료는 Play를 끄면 됩니다.
+
+동작 기준: [GameMenuManager.cs](Ditto_copy/Assets/Scripts/GameMenuManager.cs) · [NavSystem.cs](Ditto_copy/Assets/Scripts/NavSystem.cs) · [CameraGrabInteractable.cs](Ditto_copy/Assets/Scripts/CameraGrabInteractable.cs)
